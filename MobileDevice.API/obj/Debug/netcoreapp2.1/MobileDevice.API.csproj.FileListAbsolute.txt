@@ -1,0 +1,14 @@
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\bin\Debug\netcoreapp2.1\MobileDevice.API.deps.json
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\bin\Debug\netcoreapp2.1\MobileDevice.API.runtimeconfig.json
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\bin\Debug\netcoreapp2.1\MobileDevice.API.runtimeconfig.dev.json
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\bin\Debug\netcoreapp2.1\MobileDevice.API.dll
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\bin\Debug\netcoreapp2.1\MobileDevice.API.pdb
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.csprojAssemblyReference.cache
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.csproj.CoreCompileInputs.cache
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.RazorAssemblyInfo.cache
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.RazorAssemblyInfo.cs
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.AssemblyInfoInputs.cache
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.AssemblyInfo.cs
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.RazorTargetAssemblyInfo.cache
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.dll
+C:\Users\bwalrod\Documents\Development\Angular-Core\IT\MobileDevice\MobileDevice.API\obj\Debug\netcoreapp2.1\MobileDevice.API.pdb
