@@ -1,7 +1,12 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MobileDevice.API.Extensions;
 using MobileDevice.API.Models;
+using MobileDevice.API.Models.Query;
 
 namespace MobileDevice.API.Data
 {
@@ -47,6 +52,38 @@ namespace MobileDevice.API.Data
             .IgnoreQueryFilters()
             .ToListAsync();
             return assignees;
+        }
+
+        public async Task<IEnumerable<MdaDeviceAssignee>> GetAssignees(MdaAssigneeQuery queryObj)
+        {
+            var query = _context.MdaDeviceAssignee
+            .Include(d => d.Department)
+            .Include(a => a.MdaDeviceAssignments).ThenInclude(d => d.Device)
+            .ThenInclude(s => s.Sim)            
+            .IgnoreQueryFilters()
+            .AsQueryable();
+
+            if (!String.IsNullOrEmpty(queryObj.FirstName))
+                //query = query.Where(f => f.FirstName == queryObj.FirstName);
+                query = query.Where(f => f.FirstName.Contains(queryObj.FirstName));
+            if (!String.IsNullOrEmpty(queryObj.LastName))
+                // query = query.Where(l => l.LastName == queryObj.LastName);
+                query = query.Where(l => l.LastName.Contains(queryObj.LastName));
+            if (queryObj.DepartmentId.HasValue)
+                query = query.Where(d => d.DepartmentId == queryObj.DepartmentId);
+            
+            var columnsMap = new Dictionary<string, Expression<Func<MdaDeviceAssignee, object>>>
+            {
+                ["firstname"] = a => a.FirstName,
+                ["lastname"] = a => a.LastName,
+                ["department"] = a => a.Department
+            };
+
+            query = query.ApplyOrdering(queryObj, columnsMap);
+
+            query = query.ApplyPaging(queryObj);
+
+            return await query.ToListAsync();
         }
 
         public async Task<bool> SaveAll()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MobileDevice.API.Models;
+using MobileDevice.API.Models.Query;
 
 namespace MobileDevice.API.Data
 {
@@ -12,6 +13,8 @@ namespace MobileDevice.API.Data
 
          Task<bool> SaveAll();
          Task<IEnumerable<MdaDeviceAssignee>> GetAssignees();
+
+         Task<IEnumerable<MdaDeviceAssignee>> GetAssignees(MdaAssigneeQuery filter);
          
          Task<MdaDeviceAssignee> GetAssignee(int id);         
     }
