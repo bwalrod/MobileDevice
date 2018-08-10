@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace MobileDevice.API
 {
@@ -19,6 +20,11 @@ namespace MobileDevice.API
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+                .UseHttpSys(options => {
+                    options.Authentication.Schemes =
+                    AuthenticationSchemes.NTLM | AuthenticationSchemes.Negotiate;
+                    options.Authentication.AllowAnonymous = false;
+                });
     }
 }

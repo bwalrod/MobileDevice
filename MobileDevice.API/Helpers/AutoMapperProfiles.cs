@@ -11,6 +11,8 @@ namespace MobileDevice.API.Helpers
             CreateMap<AssigneeQueryResource, MdaAssigneeQuery>();
 
             CreateMap<DeviceQueryResource, MdaDeviceQuery>();
+            
+            CreateMap<AppUserQueryResource, MdaAppUserQuery>();
         }
     }
 }

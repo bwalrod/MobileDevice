@@ -32,6 +32,8 @@ namespace MobileDevice.API.Models
         public virtual DbSet<MdaProductType> MdaProductType { get; set; }
         public virtual DbSet<MdaSimCard> MdaSimCard { get; set; }
 
+        public virtual DbSet<MdaAppUser> MdaAppUser { get; set; }
+
 //         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 //         {
 //             if (!optionsBuilder.IsConfigured)
@@ -712,6 +714,49 @@ namespace MobileDevice.API.Models
                     .IsRequired()
                     .HasMaxLength(50);
             });
+
+            modelBuilder.Entity<MdaAppUser>(entity =>
+            {
+                entity.ToTable("MDA_App_User", "dbo");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AccessLevel).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.Active).HasDefaultValueSql("((1))");
+
+                entity.Property(e => e.CreatedBy)
+                    .IsRequired()
+                    .HasColumnName("Created_By")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CreatedDate)
+                    .HasColumnName("Created_Date")
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.Login)
+                    .IsRequired()
+                    .HasMaxLength(50);
+
+                entity.Property(e => e.ModifiedBy)
+                    .HasColumnName("Modified_By")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.ModifiedDate)
+                    .HasColumnName("Modified_Date")
+                    .HasColumnType("datetime");
+            });            
         }
     }
 }
