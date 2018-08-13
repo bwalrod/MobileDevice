@@ -1,9 +1,11 @@
+using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MobileDevice.API.Controllers.Resources;
 using MobileDevice.API.Data;
 using MobileDevice.API.Helpers;
+using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
 namespace MobileDevice.API.Controllers
@@ -50,6 +52,60 @@ namespace MobileDevice.API.Controllers
 
             var device = await _repo.GetDevice(id);
             return Ok(device);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddDevice([FromBody] DeviceAddResource deviceAddResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var device = _mapper.Map<MdaDevice>(deviceAddResource);
+            device.CreatedBy = User.Identity.Name;
+
+            _repo.Add(device);
+
+            if (await _repo.SaveAll())
+                return Ok(device);
+
+            return BadRequest("Failed to add device");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateDevice(int id, [FromBody] DeviceUpdateResource deviceUpdateResource)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var deviceFromRepo = await _repo.GetDevice(id);
+
+            if (deviceFromRepo == null)
+                return BadRequest($"DeviceId {id} could not be found");            
+
+            _mapper.Map(deviceUpdateResource, deviceFromRepo);
+            deviceFromRepo.ModifiedBy = User.Identity.Name;
+            deviceFromRepo.ModifiedDate = DateTime.Now;
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Failed to update device");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDevice(int id)
+        {
+            var deviceFromRepo = await _repo.GetDevice(id);
+
+            if (deviceFromRepo == null)
+                return BadRequest($"DeviceId {id} could not be found");
+
+            _repo.Delete(deviceFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete device");
         }
     }
 }

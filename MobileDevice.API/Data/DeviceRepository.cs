@@ -55,8 +55,16 @@ namespace MobileDevice.API.Data
 
             if (queryObj.ProductId.HasValue)
                 query = query.Where(p => p.ProductId == queryObj.ProductId);
+            if (queryObj.SimId.HasValue)
+                query = query.Where(s => s.SimId == queryObj.SimId);
             if (!String.IsNullOrEmpty(queryObj.SerialNumber))
                 query = query.Where(s => s.SerialNumber.Contains(queryObj.SerialNumber));
+            if (!String.IsNullOrEmpty(queryObj.Esn))
+                query = query.Where(e => e.Esn.Contains(queryObj.Esn));
+            if (!String.IsNullOrEmpty(queryObj.Os))
+                query = query.Where(o => o.Os.Contains(queryObj.Os));
+            if (queryObj.DeviceStatusId.HasValue)
+                query = query.Where(s => s.DeviceStatusId == queryObj.DeviceStatusId);                
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaDevice, object>>>
             {
