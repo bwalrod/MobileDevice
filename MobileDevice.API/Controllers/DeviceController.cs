@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -82,9 +83,18 @@ namespace MobileDevice.API.Controllers
             if (deviceFromRepo == null)
                 return BadRequest($"DeviceId {id} could not be found");            
 
-            _mapper.Map(deviceUpdateResource, deviceFromRepo);
+            _mapper.Map<DeviceUpdateResource, MdaDevice>(deviceUpdateResource, deviceFromRepo);
             deviceFromRepo.ModifiedBy = User.Identity.Name;
             deviceFromRepo.ModifiedDate = DateTime.Now;
+
+            foreach (var date in deviceUpdateResource.MdaDeviceDate)
+            {
+                var device = deviceFromRepo.MdaDeviceDate.FirstOrDefault(x => x.Id == date.Id);
+                device.DateValue = date.DateValue;
+                device.DateTypeId = date.DateTypeId;
+                device.ModifiedBy = User.Identity.Name;
+                device.ModifiedDate = DateTime.Now;
+            }
 
             if(await _repo.SaveAll())
                 return NoContent();

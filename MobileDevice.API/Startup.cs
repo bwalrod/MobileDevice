@@ -36,7 +36,7 @@ namespace MobileDevice.API
         public void ConfigureServices(IServiceCollection services)
         {
             // services.AddDbContext<DataContext>
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>(e => e.EnableSensitiveDataLogging().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(opt => {
                     opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -47,6 +47,7 @@ namespace MobileDevice.API
             services.AddScoped<IAssigneeRepository, AssigneeRepository>();
             services.AddScoped<IAppUserRepository, AppUserRepository>();
             services.AddScoped<IAuthority, Authority>();
+            services.AddScoped<IDeviceNoteRepository, DeviceNoteRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
