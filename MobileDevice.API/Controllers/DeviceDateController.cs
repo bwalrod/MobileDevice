@@ -2,7 +2,7 @@ using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using MobileDevice.API.Controllers.Resources;
+using MobileDevice.API.Controllers.Resources.DeviceDate;
 using MobileDevice.API.Data;
 using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;

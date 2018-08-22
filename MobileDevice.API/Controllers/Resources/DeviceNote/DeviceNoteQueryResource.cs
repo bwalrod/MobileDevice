@@ -1,4 +1,4 @@
-namespace MobileDevice.API.Controllers.Resources
+namespace MobileDevice.API.Controllers.Resources.DeviceNote
 {
     public class DeviceNoteQueryResource
     {

@@ -1,8 +1,12 @@
 using AutoMapper;
 using System.Linq;
-using MobileDevice.API.Controllers.Resources;
+using MobileDevice.API.Controllers.Resources.Assignee;
+using MobileDevice.API.Controllers.Resources.AppUser;
+using MobileDevice.API.Controllers.Resources.Device;
+using MobileDevice.API.Controllers.Resources.DeviceDate;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
+using MobileDevice.API.Controllers.Resources.DeviceAttribute;
 
 namespace MobileDevice.API.Helpers
 {
@@ -38,6 +42,10 @@ namespace MobileDevice.API.Helpers
             CreateMap<DeviceDateQueryResource, MdaDeviceDateQuery>();
 
             CreateMap<DeviceDateSaveResource, MdaDeviceDate>();
+
+            CreateMap<DeviceAttributeQueryResource, MdaDeviceAttributeQuery>();
+
+            CreateMap<DeviceAttributeSaveResource, MdaDeviceAttribute>();
         }
 
         private void AddOrUpdateDate(DeviceUpdateResource dto, MdaDevice device)

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using MobileDevice.API.Models;
 
-namespace MobileDevice.API.Controllers.Resources
+namespace MobileDevice.API.Controllers.Resources.Device
 {
     public class DeviceAddResource
     {

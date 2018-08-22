@@ -1,6 +1,6 @@
 using System;
 
-namespace MobileDevice.API.Controllers.Resources
+namespace MobileDevice.API.Controllers.Resources.DeviceDate
 {
     public class DeviceDateSaveResource
     {
