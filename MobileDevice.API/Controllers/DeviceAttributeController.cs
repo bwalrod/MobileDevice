@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -60,7 +61,7 @@ namespace MobileDevice.API.Controllers
                 DeviceAttributeTypeId = deviceAttribute.DeviceAttributeTypeId
             };
             var deviceAttributeFromRepo = await _repo.GetDeviceAttributes(query);
-            if (deviceAttributeFromRepo != null)
+            if (deviceAttributeFromRepo.Any())
                 return BadRequest("This attribute type already exists for the specified device");
 
             deviceAttribute.CreatedBy = User.Identity.Name;

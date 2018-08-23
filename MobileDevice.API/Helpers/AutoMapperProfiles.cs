@@ -7,6 +7,9 @@ using MobileDevice.API.Controllers.Resources.DeviceDate;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 using MobileDevice.API.Controllers.Resources.DeviceAttribute;
+using MobileDevice.API.Controllers.Resources.DeviceDateType;
+using MobileDevice.API.Controllers.Resources.DeviceAttributeType;
+using MobileDevice.API.Controllers.Resources.DeviceStatus;
 
 namespace MobileDevice.API.Helpers
 {
@@ -46,6 +49,18 @@ namespace MobileDevice.API.Helpers
             CreateMap<DeviceAttributeQueryResource, MdaDeviceAttributeQuery>();
 
             CreateMap<DeviceAttributeSaveResource, MdaDeviceAttribute>();
+
+            CreateMap<DeviceDateTypeSaveResource, MdaDeviceDateType>();
+
+            CreateMap<DeviceDateTypeQueryResource, MdaDeviceDateTypeQuery>();
+
+            CreateMap<DeviceAttributeTypeQueryResource, MdaDeviceAttributeTypeQuery>();
+
+            CreateMap<DeviceAttributeTypeSaveResource, MdaDeviceAttributeType>();
+
+            CreateMap<DeviceStatusQueryResource, MdaDeviceStatusQuery>();
+
+            CreateMap<DeviceStatusSaveResource, MdaDeviceStatus>();
         }
 
         private void AddOrUpdateDate(DeviceUpdateResource dto, MdaDevice device)

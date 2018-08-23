@@ -50,6 +50,8 @@ namespace MobileDevice.API
             services.AddScoped<IDeviceNoteRepository, DeviceNoteRepository>();
             services.AddScoped<IDeviceDateRepository, DeviceDateRepository>();
             services.AddScoped<IDeviceAttributeRepository, DeviceAttributeRepository>();
+            services.AddScoped<IDeviceDateTypeRepository, DeviceDateTypeRepository>();
+            services.AddScoped<IDeviceAttributeTypeRepository, DeviceAttributeTypeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
