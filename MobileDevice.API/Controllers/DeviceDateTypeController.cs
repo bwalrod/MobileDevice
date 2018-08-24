@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MobileDevice.API.Controllers.Resources.DeviceDateType;
-using MobileDevice.API.Data;
+using MobileDevice.API.Data.DeviceDateType;
 using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
@@ -52,6 +52,9 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDeviceDateType([FromBody] DeviceDateTypeSaveResource deviceDateTypeSaveResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -74,6 +77,9 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceDateType(int id, [FromBody] DeviceDateTypeSaveResource deviceDateTypeSaveResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -100,6 +106,9 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDeviceDateType(int id)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             var deviceDateTypeFromRepo = await _repo.GetDeviceDateType(id);
 
             if (deviceDateTypeFromRepo == null)

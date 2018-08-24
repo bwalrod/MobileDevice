@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MobileDevice.API.Controllers.Resources.Device;
-using MobileDevice.API.Data;
+using MobileDevice.API.Data.Device;
 using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
@@ -58,6 +58,9 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDevice([FromBody] DeviceAddResource deviceAddResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -75,6 +78,9 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDevice(int id, [FromBody] DeviceUpdateResource deviceUpdateResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -105,6 +111,9 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDevice(int id)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             var deviceFromRepo = await _repo.GetDevice(id);
 
             if (deviceFromRepo == null)

@@ -4,7 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MobileDevice.API.Controllers.Resources;
 using MobileDevice.API.Controllers.Resources.AppUser;
-using MobileDevice.API.Data;
+using MobileDevice.API.Data.AppUser;
 using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;

@@ -19,7 +19,22 @@ using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Models;
 using MobileDevice.API.Data;
 using MobileDevice.API.Helpers;
-
+using MobileDevice.API.Data.Department;
+using MobileDevice.API.Data.SimCard;
+using MobileDevice.API.Data.AppUser;
+using MobileDevice.API.Data.Assignee;
+using MobileDevice.API.Data.Device;
+using MobileDevice.API.Data.DeviceAttribute;
+using MobileDevice.API.Data.DeviceAttributeType;
+using MobileDevice.API.Data.DeviceDate;
+using MobileDevice.API.Data.DeviceDateType;
+using MobileDevice.API.Data.DeviceNote;
+using MobileDevice.API.Data.DeviceStatus;
+using MobileDevice.API.Data.Product;
+using MobileDevice.API.Data.ProductCapacity;
+using MobileDevice.API.Data.ProductManufacturer;
+using MobileDevice.API.Data.ProductModel;
+using MobileDevice.API.Data.ProductType;
 
 namespace MobileDevice.API
 {
@@ -52,6 +67,15 @@ namespace MobileDevice.API
             services.AddScoped<IDeviceAttributeRepository, DeviceAttributeRepository>();
             services.AddScoped<IDeviceDateTypeRepository, DeviceDateTypeRepository>();
             services.AddScoped<IDeviceAttributeTypeRepository, DeviceAttributeTypeRepository>();
+            services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+            services.AddScoped<ISimCardRepository, SimCardRepository>();
+            services.AddScoped<IDeviceStatusRepository, DeviceStatusRepository>();
+            services.AddScoped<IProductTypeRepository, ProductTypeRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductCapacityRepository, ProductCapacityRepository>();
+            services.AddScoped<IProductManufacturerRepository, ProductManufacturerRepository>();
+            services.AddScoped<IProductModelRepository, ProductModelRepository>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

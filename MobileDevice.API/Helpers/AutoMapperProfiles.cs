@@ -10,6 +10,13 @@ using MobileDevice.API.Controllers.Resources.DeviceAttribute;
 using MobileDevice.API.Controllers.Resources.DeviceDateType;
 using MobileDevice.API.Controllers.Resources.DeviceAttributeType;
 using MobileDevice.API.Controllers.Resources.DeviceStatus;
+using MobileDevice.API.Controllers.Resources.Department;
+using MobileDevice.API.Controllers.Resources.SimCard;
+using MobileDevice.API.Controllers.Resources.Product;
+using MobileDevice.API.Controllers.Resources.ProductCapacity;
+using MobileDevice.API.Controllers.Resources.ProductManufacturer;
+using MobileDevice.API.Controllers.Resources.ProductModel;
+using MobileDevice.API.Controllers.Resources.ProductType;
 
 namespace MobileDevice.API.Helpers
 {
@@ -61,6 +68,28 @@ namespace MobileDevice.API.Helpers
             CreateMap<DeviceStatusQueryResource, MdaDeviceStatusQuery>();
 
             CreateMap<DeviceStatusSaveResource, MdaDeviceStatus>();
+
+            CreateMap<DepartmentQueryResource, MdaDepartmentQuery>();
+
+            CreateMap<DepartmentSaveResource, MdaDepartment>();
+
+            CreateMap<SimCardQueryResource, MdaSimCardQuery>();
+
+            CreateMap<SimCardSaveResource, MdaSimCard>();
+
+            CreateMap<ProductTypeQueryResource, MdaProductTypeQuery>();
+
+            CreateMap<ProductTypeSaveResource, MdaProductType>();
+
+            CreateMap<ProductQueryResource, MdaProductQuery>();
+            CreateMap<ProductSaveResource, MdaProduct>();
+            CreateMap<ProductCapacityQueryResource, MdaProductCapacityQuery>();
+            CreateMap<ProductCapacitySaveResource, MdaProductCapacity>();
+            CreateMap<ProductManufacturerQueryResource, MdaProductManufacturerQuery>();
+            CreateMap<ProductManufacturerSaveResource, MdaProductManufacturer>();
+            CreateMap<ProductModelQueryResource, MdaProductModelQuery>();
+            CreateMap<ProductModelSaveResource, MdaProductModel>();
+
         }
 
         private void AddOrUpdateDate(DeviceUpdateResource dto, MdaDevice device)

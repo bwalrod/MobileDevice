@@ -1,5 +1,5 @@
 using System.Security.Claims;
-using MobileDevice.API.Data;
+using MobileDevice.API.Data.AppUser;
 using MobileDevice.API.Models.Query;
 
 namespace MobileDevice.API.Helpers

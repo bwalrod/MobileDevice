@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MobileDevice.API.Controllers.Resources.Assignee;
-using MobileDevice.API.Data;
+using MobileDevice.API.Data.Assignee;
 using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;

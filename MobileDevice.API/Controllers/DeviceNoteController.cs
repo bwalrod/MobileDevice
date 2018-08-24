@@ -4,7 +4,7 @@ using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using MobileDevice.API.Controllers.Resources.DeviceDate;
 using MobileDevice.API.Controllers.Resources.DeviceNote;
-using MobileDevice.API.Data;
+using MobileDevice.API.Data.DeviceNote;
 using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
@@ -52,6 +52,9 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDeviceNote([FromBody] DeviceDateSaveResource deviceNoteSaveResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -69,6 +72,9 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceNote(int id, [FromBody] DeviceNoteSaveResource deviceNoteSaveResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -90,6 +96,9 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDeviceNote(int id)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
             var deviceNoteFromRepo = await _repo.GetDeviceNote(id);
 
             if (deviceNoteFromRepo == null)
