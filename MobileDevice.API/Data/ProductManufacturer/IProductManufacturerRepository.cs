@@ -12,10 +12,10 @@ namespace MobileDevice.API.Data.ProductManufacturer
          void Delete<T>(T entity) where T: class;
 
          Task<bool> SaveAll();
-         Task<IEnumerable<MdaProduct>> GetProducts();
+         Task<IEnumerable<MdaProductManufacturer>> GetProductManufacturers();
 
-         Task<IEnumerable<MdaProduct>> GetProducts(MdaProductQuery filter);
+         Task<IEnumerable<MdaProductManufacturer>> GetProductManufacturers(MdaProductManufacturerQuery filter);
          
-         Task<MdaProduct> GetProduct(int id);            
+         Task<MdaProductManufacturer> GetProductManufacturer(int id);            
     }
 }

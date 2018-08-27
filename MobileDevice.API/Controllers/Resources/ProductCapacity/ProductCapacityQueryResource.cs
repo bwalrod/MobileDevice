@@ -8,7 +8,7 @@ namespace MobileDevice.API.Controllers.Resources.ProductCapacity
     public class ProductCapacityQueryResource
     {
         public string Name { get; set; }
-        public int ProductModelId { get; set; }   
+        public int? ProductModelId { get; set; }   
         public string SortBy { get; set; }
         public bool IsSortAscending { get; set; }
         public int Page { get; set; }
