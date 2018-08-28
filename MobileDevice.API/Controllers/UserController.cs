@@ -48,7 +48,7 @@ namespace MobileDevice.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddUser([FromBody] AppUserAddResource appUserResource)
+        public async Task<IActionResult> AddUser([FromBody] AppUserSaveResource appUserResource)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -83,7 +83,7 @@ namespace MobileDevice.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, AppUserUpdateResource appUserUpdateResource)
+        public async Task<IActionResult> UpdateUser(int id, AppUserSaveResource appUserUpdateResource)
         {
             var userFromRepo = await _repo.GetAppUser(id);
 

@@ -17,6 +17,7 @@ using MobileDevice.API.Controllers.Resources.ProductCapacity;
 using MobileDevice.API.Controllers.Resources.ProductManufacturer;
 using MobileDevice.API.Controllers.Resources.ProductModel;
 using MobileDevice.API.Controllers.Resources.ProductType;
+using MobileDevice.API.Controllers.Resources.DeviceAssignment;
 
 namespace MobileDevice.API.Helpers
 {
@@ -30,24 +31,24 @@ namespace MobileDevice.API.Helpers
             
             CreateMap<AppUserQueryResource, MdaAppUserQuery>();
 
-            CreateMap<AppUserAddResource, MdaAppUser>();
+            CreateMap<AppUserSaveResource, MdaAppUser>();
 
             CreateMap<MdaAppUser, AppUserForReturnResource>();
 
-            CreateMap<AppUserUpdateResource, MdaAppUser>();
-
-            CreateMap<DeviceAddResource, MdaDevice>();
+            // CreateMap<DeviceAddResource, MdaDevice>();
 
             // CreateMap<MdaDeviceDate, MdaDeviceDate>();
 
-            CreateMap<DeviceUpdateResource, MdaDevice>()
+            CreateMap<DeviceSaveResource, MdaDevice>()
             .ForMember(d => d.MdaDeviceDate, opt => opt.Ignore())
             // .AfterMap((dr, d) => AddOrUpdateDate(dr,d))
             ;
 
-            CreateMap<AssigneeUpdateResource, MdaDeviceAssignee>();
+            CreateMap<AssigneeSaveResource, MdaDeviceAssignee>();
 
-            CreateMap<AssigneeAddResource, MdaDeviceAssignee>();
+            CreateMap<DeviceAssignmentQueryResource, MdaAssignmentQuery>();
+
+            CreateMap<DeviceAssignmentSaveResource, MdaDeviceAssignment>();
 
             CreateMap<DeviceDateQueryResource, MdaDeviceDateQuery>();
 
@@ -92,7 +93,7 @@ namespace MobileDevice.API.Helpers
 
         }
 
-        private void AddOrUpdateDate(DeviceUpdateResource dto, MdaDevice device)
+        private void AddOrUpdateDate(DeviceSaveResource dto, MdaDevice device)
         {
               foreach (var dateDTO in dto.MdaDeviceDate)  
               {

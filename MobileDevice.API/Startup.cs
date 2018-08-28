@@ -35,6 +35,7 @@ using MobileDevice.API.Data.ProductCapacity;
 using MobileDevice.API.Data.ProductManufacturer;
 using MobileDevice.API.Data.ProductModel;
 using MobileDevice.API.Data.ProductType;
+using MobileDevice.API.Data.Assignment;
 
 namespace MobileDevice.API
 {
@@ -60,6 +61,7 @@ namespace MobileDevice.API
             services.AddAutoMapper();
             services.AddScoped<IDeviceRepository, DeviceRepository>();
             services.AddScoped<IAssigneeRepository, AssigneeRepository>();
+            services.AddScoped<IAssignmentRepository, AssignmentRepository>();
             services.AddScoped<IAppUserRepository, AppUserRepository>();
             services.AddScoped<IAuthority, Authority>();
             services.AddScoped<IDeviceNoteRepository, DeviceNoteRepository>();

@@ -56,7 +56,7 @@ namespace MobileDevice.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddAssignee([FromBody] AssigneeAddResource assigneeAddResource)
+        public async Task<IActionResult> AddAssignee([FromBody] AssigneeSaveResource assigneeAddResource)
         {
             if(!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -77,7 +77,7 @@ namespace MobileDevice.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateAssignee(int id, AssigneeUpdateResource assigneeUpdateResource)
+        public async Task<IActionResult> UpdateAssignee(int id, AssigneeSaveResource assigneeUpdateResource)
         {
             if(!_auth.IsValidUser(User))
                 return NoContent();

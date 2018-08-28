@@ -119,6 +119,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to update Product Manufacturer.");
         }
 
-        
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProductManufacturer(int id)
+        {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
+            var productManufacturerFromRepo = await _repo.GetProductManufacturer(id);
+
+            if (productManufacturerFromRepo == null)
+                return BadRequest($"Product Manufacturer {id} could not be found.");
+
+            _repo.Delete(productManufacturerFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete product manufacturer.");
+        }
     }
 }

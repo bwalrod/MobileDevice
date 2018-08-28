@@ -1,13 +1,13 @@
 using System;
 
-namespace MobileDevice.API.Controllers.Resources
+namespace MobileDevice.API.Controllers.Resources.DeviceAssignment
 {
     public class DeviceAssignmentQueryResource
     {
-        public int DeviceId { get; set; }
-        public int AssignmentType { get; set; }
-        public int AssigneeId { get; set; }
-        public DateTime StartDate { get; set; }
+        public int? DeviceId { get; set; }
+        public int? AssignmentType { get; set; }
+        public int? AssigneeId { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public byte Active { get; set; }        
         public string SortBy { get; set; }

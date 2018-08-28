@@ -56,7 +56,7 @@ namespace MobileDevice.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddDevice([FromBody] DeviceAddResource deviceAddResource)
+        public async Task<IActionResult> AddDevice([FromBody] DeviceSaveResource deviceAddResource)
         {
             if(!_auth.IsValidUser(User))
                 return NoContent();
@@ -76,7 +76,7 @@ namespace MobileDevice.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateDevice(int id, [FromBody] DeviceUpdateResource deviceUpdateResource)
+        public async Task<IActionResult> UpdateDevice(int id, [FromBody] DeviceSaveResource deviceUpdateResource)
         {
             if(!_auth.IsValidUser(User))
                 return NoContent();
@@ -89,7 +89,7 @@ namespace MobileDevice.API.Controllers
             if (deviceFromRepo == null)
                 return BadRequest($"DeviceId {id} could not be found");            
 
-            _mapper.Map<DeviceUpdateResource, MdaDevice>(deviceUpdateResource, deviceFromRepo);
+            _mapper.Map<DeviceSaveResource, MdaDevice>(deviceUpdateResource, deviceFromRepo);
             deviceFromRepo.ModifiedBy = User.Identity.Name;
             deviceFromRepo.ModifiedDate = DateTime.Now;
 

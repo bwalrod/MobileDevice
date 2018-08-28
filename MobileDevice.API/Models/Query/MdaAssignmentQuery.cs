@@ -1,13 +1,14 @@
 using System;
+using MobileDevice.API.Extensions;
 
 namespace MobileDevice.API.Models.Query
 {
-    public class MdaAssignmentQuery
+    public class MdaAssignmentQuery : IQueryObject
     {
-        public int DeviceId { get; set; }
-        public int AssignmentType { get; set; }
-        public int AssigneeId { get; set; }
-        public DateTime StartDate { get; set; }
+        public int? DeviceId { get; set; }
+        public int? AssignmentType { get; set; }
+        public int? AssigneeId { get; set; }
+        public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public byte Active { get; set; }        
         public string SortBy { get; set; }
