@@ -41,7 +41,11 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<AssigneeQueryResource, MdaAssigneeQuery>(filterResource);
+
             var assignees = await _repo.GetAssignees(filter);
+
+            Response.AddPagination(assignees.CurrentPage, assignees.PageSize, assignees.TotalCount, assignees.TotalPages);
+
             return Ok(assignees);
         }
 

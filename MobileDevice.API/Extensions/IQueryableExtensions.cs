@@ -25,7 +25,7 @@ namespace MobileDevice.API.Extensions
             if (queryObj.Page <= 0)
                 queryObj.Page = 1;
             if (queryObj.PageSize <= 0)
-                queryObj.Page = 10;
+                queryObj.PageSize = 10;
             return query.Skip((queryObj.Page - 1) * queryObj.PageSize).Take(queryObj.PageSize);
         }
     }

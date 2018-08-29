@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -48,13 +49,17 @@ namespace MobileDevice.API.Data.Device
             return devices;
         }
 
-        public async Task<IEnumerable<MdaDevice>> GetDevices(MdaDeviceQuery queryObj)
+        public async Task<PagedList<MdaDevice>> GetDevices(MdaDeviceQuery queryObj)
         {
             var query = _context.MdaDevice
+            .Include(d => d.Product)
+            .ThenInclude(p => p.ProductModel)
+            .Include(d => d.Product)
+            .ThenInclude(c => c.ProductCapacity)
             .AsQueryable();
 
-            if (queryObj.PageSize == 0)
-                queryObj.PageSize = 10;            
+            // if (queryObj.PageSize == 0)
+            //     queryObj.PageSize = 10;            
 
             if (queryObj.ProductId.HasValue)
                 query = query.Where(p => p.ProductId == queryObj.ProductId);
@@ -76,9 +81,11 @@ namespace MobileDevice.API.Data.Device
 
             query = query.ApplyOrdering(queryObj, columnsMap);
 
-            query = query.ApplyPaging(queryObj);
+            // query = query.ApplyPaging(queryObj);
 
-            return await query.ToListAsync();
+            // return await query.ToListAsync();
+
+            return await PagedList<MdaDevice>.CreateAsync(query, queryObj.Page, queryObj.PageSize);
         }
 
         public async Task<bool> SaveAll()

@@ -11,12 +11,6 @@ namespace MobileDevice.API.Models.Query
         public string SortBy { get; set; }
         public bool IsSortAscending { get; set; }
         public int Page { get; set; }
-        public int PageSize { get; set; }        
-
-        public MdaDeviceDateQuery()
-        {
-            Page = 1;
-            PageSize = 5;
-        }
+        public int PageSize { get; set; }
     }
 }

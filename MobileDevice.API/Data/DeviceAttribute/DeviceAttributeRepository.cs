@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -40,12 +41,15 @@ namespace MobileDevice.API.Data.DeviceAttribute
             return deviceAttribute;
         }
 
-        public async Task<IEnumerable<MdaDeviceAttribute>> GetDeviceAttributes(MdaDeviceAttributeQuery filter)
+        public async Task<PagedList<MdaDeviceAttribute>> GetDeviceAttributes(MdaDeviceAttributeQuery filter)
         {
-            var query = _context.MdaDeviceAttribute.AsQueryable();
+            var query = _context.MdaDeviceAttribute
+                    .Include(d => d.DeviceAttributeType)
+                    .Include(d => d.Device).ThenInclude(dv => dv.Product).ThenInclude(p => p.ProductModel)
+                    .AsQueryable();
 
-            if (filter.PageSize == 0)
-                filter.PageSize = 10;
+            // if (filter.PageSize == 0)
+            //     filter.PageSize = 10;
 
             if (filter.DeviceId.HasValue)
                 query = query.Where(a => a.DeviceId == filter.DeviceId);
@@ -59,11 +63,13 @@ namespace MobileDevice.API.Data.DeviceAttribute
 
             };
 
-            // query = query.ApplyOrdering(filter, columnsMap);
+            query = query.ApplyOrdering(filter, columnsMap);
 
-            query = query.ApplyPaging(filter);
+            // query = query.ApplyPaging(filter);
 
-            return await query.ToListAsync();       
+            // return await query.ToListAsync();       
+
+            return await PagedList<MdaDeviceAttribute>.CreateAsync(query, filter.Page, filter.PageSize);
 
         }
 

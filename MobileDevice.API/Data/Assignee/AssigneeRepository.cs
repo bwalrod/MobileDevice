@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -54,7 +55,7 @@ namespace MobileDevice.API.Data.Assignee
             return assignees;
         }
 
-        public async Task<IEnumerable<MdaDeviceAssignee>> GetAssignees(MdaAssigneeQuery queryObj)
+        public async Task<PagedList<MdaDeviceAssignee>> GetAssignees(MdaAssigneeQuery queryObj)
         {
             var query = _context.MdaDeviceAssignee
             .Include(d => d.Department)
@@ -84,9 +85,10 @@ namespace MobileDevice.API.Data.Assignee
 
             query = query.ApplyOrdering(queryObj, columnsMap);
 
-            query = query.ApplyPaging(queryObj);
+            // query = query.ApplyPaging(queryObj);
 
-            return await query.ToListAsync();
+            // return await query.ToListAsync();
+            return await PagedList<MdaDeviceAssignee>.CreateAsync(query, queryObj.Page, queryObj.PageSize);
         }
 
         public async Task<bool> SaveAll()

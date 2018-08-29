@@ -35,7 +35,11 @@ namespace MobileDevice.API.Controllers
             // if(!Helpers.Extensions.IdentifyUser(User))
             //     return NoContent();
             var filter = _mapper.Map<DeviceQueryResource, MdaDeviceQuery>(filterResource);
+
             var devices = await _repo.GetDevices(filter);
+
+            Response.AddPagination(devices.CurrentPage, devices.PageSize, devices.TotalCount, devices.TotalPages);
+
             return Ok(devices);
         }
         // public async Task<IActionResult> GetDevices()

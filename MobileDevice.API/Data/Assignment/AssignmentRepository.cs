@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -52,7 +53,7 @@ namespace MobileDevice.API.Data.Assignment
             return assignments;
         }
 
-        public async Task<IEnumerable<MdaDeviceAssignment>> GetAssignments(MdaAssignmentQuery filter)
+        public async Task<PagedList<MdaDeviceAssignment>> GetAssignments(MdaAssignmentQuery filter)
         {
             var query = _context.MdaDeviceAssignment
                 .Include(dv => dv.Device)
@@ -96,8 +97,9 @@ namespace MobileDevice.API.Data.Assignment
             };
 
             query = query.ApplyOrdering(filter, columnsMap);
-            query = query.ApplyPaging(filter);
-            return await query.ToListAsync();             
+            // query = query.ApplyPaging(filter);
+            // return await query.ToListAsync(); 
+            return await PagedList<MdaDeviceAssignment>.CreateAsync(query, filter.Page, filter.PageSize);            
         }
 
         public async Task<bool> SaveAll()

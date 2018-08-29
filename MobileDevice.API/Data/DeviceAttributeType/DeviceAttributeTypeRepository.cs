@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -40,26 +41,28 @@ namespace MobileDevice.API.Data.DeviceAttributeType
             return deviceAttributeTypes;
         }
 
-        public async Task<IEnumerable<MdaDeviceAttributeType>> GetDeviceAttributeTypes(MdaDeviceAttributeTypeQuery filter)
+        public async Task<PagedList<MdaDeviceAttributeType>> GetDeviceAttributeTypes(MdaDeviceAttributeTypeQuery filter)
         {
             var query = _context.MdaDeviceAttributeType.AsQueryable();
 
-            if (filter.PageSize == 0)
-                filter.PageSize = 10;
+            // if (filter.PageSize == 0)
+            //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(t => t.Name.Contains(filter.Name));
 
-            var columnsMap = new Dictionary<string, Expression<Func<MdaDevice, object>>>
+            var columnsMap = new Dictionary<string, Expression<Func<MdaDeviceAttributeType, object>>>
             {
 
             };
 
-            // query = query.ApplyOrdering(filter, columnsMap);
+            query = query.ApplyOrdering(filter, columnsMap);
 
-            query = query.ApplyPaging(filter);
+            // query = query.ApplyPaging(filter);
 
-            return await query.ToListAsync();            
+            // return await query.ToListAsync();            
+
+            return await PagedList<MdaDeviceAttributeType>.CreateAsync(query, filter.Page, filter.PageSize);
         }
 
         public async Task<bool> SaveAll()

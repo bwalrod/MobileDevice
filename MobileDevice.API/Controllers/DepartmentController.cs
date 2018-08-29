@@ -33,7 +33,11 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<DepartmentQueryResource, MdaDepartmentQuery>(filterResource);
+
             var departments = await _repo.GetDepartments(filter);
+
+            Response.AddPagination(departments.CurrentPage, departments.PageSize, departments.TotalCount, departments.TotalPages);
+
             return Ok(departments);
         }
 

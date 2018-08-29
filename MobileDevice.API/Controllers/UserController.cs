@@ -33,7 +33,11 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<AppUserQueryResource, MdaAppUserQuery>(filterResource);
+            
             var users = await _repo.GetAppUsers(filter);
+
+            Response.AddPagination(users.CurrentPage, users.PageSize, users.TotalCount, users.TotalPages);
+
             return Ok(users);
         }
 

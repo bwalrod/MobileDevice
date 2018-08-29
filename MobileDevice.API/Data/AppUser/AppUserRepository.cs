@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -43,12 +44,14 @@ namespace MobileDevice.API.Data.AppUser
             return users;
         }
 
-        public async Task<IEnumerable<MdaAppUser>> GetAppUsers(MdaAppUserQuery queryObj)
+        public async Task<PagedList<MdaAppUser>> GetAppUsers(MdaAppUserQuery queryObj)
         {
             var query = _context.MdaAppUser.AsQueryable();
 
-            if (queryObj.PageSize == 0)
-                queryObj.PageSize = 10;            
+            // if (queryObj.PageSize == 0)
+            //     queryObj.PageSize = 10;            
+            // if (queryObj.Page == 0)
+            //     queryObj.Page = 1;
 
             if (!String.IsNullOrEmpty(queryObj.FirstName))
                 //query = query.Where(f => f.FirstName == queryObj.FirstName);
@@ -70,9 +73,10 @@ namespace MobileDevice.API.Data.AppUser
 
             query = query.ApplyOrdering(queryObj, columnsMap);
 
-            query = query.ApplyPaging(queryObj);
+            // query = query.ApplyPaging(queryObj);
 
-            return await query.ToListAsync();            
+            // return await query.ToListAsync();            
+            return await PagedList<MdaAppUser>.CreateAsync(query, queryObj.Page, queryObj.PageSize);
         }
 
         public async Task<bool> SaveAll()
