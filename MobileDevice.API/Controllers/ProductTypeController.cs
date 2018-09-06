@@ -32,12 +32,16 @@ namespace MobileDevice.API.Controllers
             if(!_auth.IsValidUser(User))
                 return NoContent();
 
-            if (filterResource.PageSize == 0)
-                filterResource.PageSize = 10;
+            // if (filterResource.PageSize == 0)
+            //     filterResource.PageSize = 10;
 
 
             var filter = _mapper.Map<ProductTypeQueryResource, MdaProductTypeQuery>(filterResource);
+
             var productTypes = await _repo.GetProductTypes(filter);
+
+            Response.AddPagination(productTypes.CurrentPage, productTypes.PageSize, 
+                    productTypes.TotalCount, productTypes.TotalPages);             
 
             return Ok(productTypes);
         }

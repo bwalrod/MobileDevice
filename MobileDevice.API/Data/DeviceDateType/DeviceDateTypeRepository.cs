@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -40,12 +41,12 @@ namespace MobileDevice.API.Data.DeviceDateType
             return deviceDateTypes;
         }
 
-        public async Task<IEnumerable<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter)
+        public async Task<PagedList<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter)
         {
             var query = _context.MdaDeviceDateType.AsQueryable();
 
-            if (filter.PageSize == 0)
-                filter.PageSize = 10;
+            // if (filter.PageSize == 0)
+            //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(t => t.Name.Contains(filter.Name));
@@ -57,9 +58,11 @@ namespace MobileDevice.API.Data.DeviceDateType
 
             // query = query.ApplyOrdering(filter, columnsMap);
 
-            query = query.ApplyPaging(filter);
+            // query = query.ApplyPaging(filter);
 
-            return await query.ToListAsync();            
+            // return await query.ToListAsync(); 
+
+            return await PagedList<MdaDeviceDateType>.CreateAsync(query, filter.Page, filter.PageSize);           
         }
 
         public async Task<bool> SaveAll()

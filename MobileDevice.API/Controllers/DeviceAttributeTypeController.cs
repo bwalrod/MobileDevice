@@ -34,7 +34,13 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<DeviceAttributeTypeQueryResource, MdaDeviceAttributeTypeQuery>(filterResource);
+
             var deviceAttributeTypes = await _repo.GetDeviceAttributeTypes(filter);
+
+            Response.AddPagination(deviceAttributeTypes.CurrentPage,
+                    deviceAttributeTypes.PageSize,
+                    deviceAttributeTypes.TotalCount, deviceAttributeTypes.TotalPages);
+
             return Ok(deviceAttributeTypes);
         }
 

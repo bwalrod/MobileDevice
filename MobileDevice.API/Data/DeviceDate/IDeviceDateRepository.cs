@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -14,7 +15,7 @@ namespace MobileDevice.API.Data.DeviceDate
          Task<bool> SaveAll();
          Task<IEnumerable<MdaDeviceDate>> GetDeviceDates();
 
-         Task<IEnumerable<MdaDeviceDate>> GetDeviceDates(MdaDeviceDateQuery filter);
+         Task<PagedList<MdaDeviceDate>> GetDeviceDates(MdaDeviceDateQuery filter);
          
          Task<MdaDeviceDate> GetDeviceDate(int id);        
     }

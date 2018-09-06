@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -14,7 +15,7 @@ namespace MobileDevice.API.Data.DeviceNote
          Task<bool> SaveAll();
          Task<IEnumerable<MdaDeviceNote>> GetDeviceNotes();
 
-         Task<IEnumerable<MdaDeviceNote>> GetDeviceNotes(MdaDeviceNoteQuery filter);
+         Task<PagedList<MdaDeviceNote>> GetDeviceNotes(MdaDeviceNoteQuery filter);
          
          Task<MdaDeviceNote> GetDeviceNote(int id);              
     }

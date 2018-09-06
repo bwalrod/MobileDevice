@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -14,7 +15,7 @@ namespace MobileDevice.API.Data.ProductModel
          Task<bool> SaveAll();
          Task<IEnumerable<MdaProductModel>> GetProductModels();
 
-         Task<IEnumerable<MdaProductModel>> GetProductModels(MdaProductModelQuery filter);
+         Task<PagedList<MdaProductModel>> GetProductModels(MdaProductModelQuery filter);
          
          Task<MdaProductModel> GetProductModel(int id);            
     }

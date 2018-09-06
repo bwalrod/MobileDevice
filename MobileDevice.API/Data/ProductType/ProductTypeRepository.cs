@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -40,12 +41,12 @@ namespace MobileDevice.API.Data.ProductType
             return productTypes;
         }
 
-        public async Task<IEnumerable<MdaProductType>> GetProductTypes(MdaProductTypeQuery filter)
+        public async Task<PagedList<MdaProductType>> GetProductTypes(MdaProductTypeQuery filter)
         {
             var query = _context.MdaProductType.AsQueryable();
 
-            if (filter.PageSize == 0)
-                filter.PageSize = 10;
+            // if (filter.PageSize == 0)
+            //     filter.PageSize = 10;
             
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(pt => pt.Name.Contains(filter.Name));
@@ -56,8 +57,9 @@ namespace MobileDevice.API.Data.ProductType
             };
 
             query = query.ApplyOrdering(filter, columnsMap);
-            query = query.ApplyPaging(filter);
-            return await query.ToListAsync();
+            // query = query.ApplyPaging(filter);
+            // return await query.ToListAsync();
+            return await PagedList<MdaProductType>.CreateAsync(query, filter.Page, filter.PageSize);            
         }
 
         public async Task<bool> SaveAll()

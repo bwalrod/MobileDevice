@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -46,7 +47,9 @@ namespace MobileDevice.API.Controllers
 
             Response.AddPagination(assignees.CurrentPage, assignees.PageSize, assignees.TotalCount, assignees.TotalPages);
 
-            return Ok(assignees);
+            var assigneesList = _mapper.Map<IEnumerable<AssigneeForList>>(assignees);
+
+            return Ok(assigneesList);
         }
 
         [HttpGet("{id}")]

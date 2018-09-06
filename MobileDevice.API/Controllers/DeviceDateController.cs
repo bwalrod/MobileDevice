@@ -33,7 +33,12 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<DeviceDateQueryResource, MdaDeviceDateQuery>(filterResource);
+
             var devices = await _repo.GetDeviceDates(filter);
+
+            Response.AddPagination(devices.CurrentPage,
+                            devices.PageSize, devices.TotalCount, devices.TotalPages);
+
             return Ok(devices);
         }
 

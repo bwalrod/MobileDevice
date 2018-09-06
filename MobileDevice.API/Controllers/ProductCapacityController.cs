@@ -36,7 +36,11 @@ namespace MobileDevice.API.Controllers
                 filterResource.PageSize = 10;
 
             var filter = _mapper.Map<ProductCapacityQueryResource, MdaProductCapacityQuery>(filterResource);
+
             var productCapacity = await _repo.GetProductCapacities(filter);
+
+            Response.AddPagination(productCapacity.CurrentPage, productCapacity.PageSize, 
+                    productCapacity.TotalCount, productCapacity.TotalPages);            
 
             return Ok(productCapacity);
         }

@@ -33,7 +33,12 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<SimCardQueryResource, MdaSimCardQuery>(filterResource);
+
             var simCards = await _repo.GetSimCards(filter);
+
+            Response.AddPagination(simCards.CurrentPage, simCards.PageSize, 
+                    simCards.TotalCount, simCards.TotalPages);             
+
             return Ok(simCards);
         }
 

@@ -46,9 +46,14 @@ namespace MobileDevice.API.Helpers
 
             CreateMap<AssigneeSaveResource, MdaDeviceAssignee>();
 
+            CreateMap<MdaDeviceAssignee, AssigneeForList>();
+
             CreateMap<DeviceAssignmentQueryResource, MdaAssignmentQuery>();
 
             CreateMap<DeviceAssignmentSaveResource, MdaDeviceAssignment>();
+
+            CreateMap<MdaDeviceAssignment, DeviceAssignmentForList>()
+                .ForMember(a => a.DeviceId, opt => opt.MapFrom(d => d.Device.FirstOrDefault()));
 
             CreateMap<DeviceDateQueryResource, MdaDeviceDateQuery>();
 
@@ -88,8 +93,12 @@ namespace MobileDevice.API.Helpers
             CreateMap<ProductCapacitySaveResource, MdaProductCapacity>();
             CreateMap<ProductManufacturerQueryResource, MdaProductManufacturerQuery>();
             CreateMap<ProductManufacturerSaveResource, MdaProductManufacturer>();
+
             CreateMap<ProductModelQueryResource, MdaProductModelQuery>();
+
             CreateMap<ProductModelSaveResource, MdaProductModel>();
+
+            CreateMap<MdaProductModel, ProductModelForList>();
 
         }
 

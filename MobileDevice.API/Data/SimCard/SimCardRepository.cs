@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -40,12 +41,12 @@ namespace MobileDevice.API.Data.SimCard
             return simCards;
         }
 
-        public async Task<IEnumerable<MdaSimCard>> GetSimCards(MdaSimCardQuery filter)
+        public async Task<PagedList<MdaSimCard>> GetSimCards(MdaSimCardQuery filter)
         {
             var query = _context.MdaSimCard.AsQueryable();
 
-            if (filter.PageSize == 0)
-                filter.PageSize = 10;
+            // if (filter.PageSize == 0)
+            //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Iccid))
                 query = query.Where(sc => sc.Iccid.Contains(filter.Iccid));
@@ -61,9 +62,10 @@ namespace MobileDevice.API.Data.SimCard
 
             query = query.ApplyOrdering(filter, columnsMap);
 
-            query = query.ApplyPaging(filter);
+            // query = query.ApplyPaging(filter);
 
-            return await query.ToListAsync();
+            // return await query.ToListAsync();
+            return await PagedList<MdaSimCard>.CreateAsync(query, filter.Page, filter.PageSize);            
         }
 
         public async Task<bool> SaveAll()

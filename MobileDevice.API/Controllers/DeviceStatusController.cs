@@ -33,7 +33,12 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<DeviceStatusQueryResource, MdaDeviceStatusQuery>(filterResource);
+
             var statuses = await _repo.GetDeviceStatuses(filter);
+
+            Response.AddPagination(statuses.CurrentPage, statuses.PageSize, 
+                    statuses.TotalCount, statuses.TotalPages);
+
             return Ok(statuses);
         }
 

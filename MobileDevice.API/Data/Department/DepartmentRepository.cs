@@ -43,7 +43,9 @@ namespace MobileDevice.API.Data.Department
 
         public async Task<PagedList<MdaDepartment>> GetDepartments(MdaDepartmentQuery filter)
         {
-            var query = _context.MdaDepartment.AsQueryable();
+            var query = _context.MdaDepartment
+            .Include(da => da.MdaDeviceAssignee)
+            .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;            

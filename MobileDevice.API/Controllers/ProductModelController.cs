@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -36,9 +37,15 @@ namespace MobileDevice.API.Controllers
                 filterResource.PageSize = 10;
 
             var filter = _mapper.Map<ProductModelQueryResource, MdaProductModelQuery>(filterResource);
+
             var productModels = await _repo.GetProductModels(filter);
 
-            return Ok(productModels);
+            Response.AddPagination(productModels.CurrentPage, productModels.PageSize, 
+                    productModels.TotalCount, productModels.TotalPages); 
+
+            var productModelsList = _mapper.Map<IEnumerable<ProductModelForList>>(productModels);
+
+            return Ok(productModelsList);
         }
 
         [HttpGet("{id}")]

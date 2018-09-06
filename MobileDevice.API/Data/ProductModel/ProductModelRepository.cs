@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MobileDevice.API.Extensions;
+using MobileDevice.API.Helpers;
 using MobileDevice.API.Models;
 using MobileDevice.API.Models.Query;
 
@@ -38,12 +39,16 @@ namespace MobileDevice.API.Data.ProductModel
             return await _context.MdaProductModel.ToListAsync();
         }
 
-        public async Task<IEnumerable<MdaProductModel>> GetProductModels(MdaProductModelQuery filter)
+        public async Task<PagedList<MdaProductModel>> GetProductModels(MdaProductModelQuery filter)
         {
-            var query = _context.MdaProductModel.AsQueryable();
+            var query = _context.MdaProductModel
+            .Include(m => m.ProductManufacturer)
+            .Include(t => t.ProductType)
+            .IgnoreQueryFilters()
+            .AsQueryable();
 
-            if (filter.PageSize == 0)
-                filter.PageSize = 10;
+            // if (filter.PageSize == 0)
+            //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(pm => pm.Name.Contains(filter.Name));
@@ -60,9 +65,9 @@ namespace MobileDevice.API.Data.ProductModel
             };
 
             query = query.ApplyOrdering(filter, columnsMap);
-            query = query.ApplyPaging(filter);
-            return await query.ToListAsync();              
-            
+            // query = query.ApplyPaging(filter);
+            // return await query.ToListAsync();              
+            return await PagedList<MdaProductModel>.CreateAsync(query, filter.Page, filter.PageSize);
         }
 
         public async Task<bool> SaveAll()

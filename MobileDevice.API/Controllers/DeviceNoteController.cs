@@ -34,8 +34,13 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var filter = _mapper.Map<DeviceNoteQueryResource, MdaDeviceNoteQuery>(filterResource);
-            var devices = await _repo.GetDeviceNotes(filter);
-            return Ok(devices);
+
+            var deviceNotes = await _repo.GetDeviceNotes(filter);
+
+            Response.AddPagination(deviceNotes.CurrentPage, deviceNotes.PageSize, 
+                    deviceNotes.TotalCount, deviceNotes.TotalPages);
+
+            return Ok(deviceNotes);
         }
 
 
