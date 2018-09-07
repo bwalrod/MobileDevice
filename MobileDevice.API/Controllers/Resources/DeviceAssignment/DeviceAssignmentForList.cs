@@ -1,4 +1,5 @@
 using System;
+using MobileDevice.API.Models;
 
 namespace MobileDevice.API.Controllers.Resources.DeviceAssignment
 {
@@ -8,18 +9,22 @@ namespace MobileDevice.API.Controllers.Resources.DeviceAssignment
         public int DeviceId { get; set; }
         public int AssignmentType { get; set; }
         public int AssigneeId { get; set; }
+        public string AssingeeLastName { get; set; }
+        public string AssigneeFirstName { get; set; }
+        public string AssigneeDepartmentName { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }        
-        public string AssignmentTypeName { get; set; }
-        public int ProductId { get; set; }
-        public string ProductModelName { get; set; }
-        public string ProductCapacityName { get; set; }
-        public string ProductManufacturerName { get; set; }
+        public int DeviceProductId { get; set; }
+        public int DeviceProductModelId { get; set; }
+        public string DeviceProductModelName { get; set; }
+        public string DeviceProductCapacityName { get; set; }
+        public string DeviceProductManufacturerName { get; set; }
         public string DeviceSerialNumber { get; set; }
         public string DeviceEsn { get; set; }
         public string DeviceOs { get; set; }
-        public string SimIccid { get; set; }
-        public string SimCarrier { get; set; }
-        public string SimPhoneNumber { get; set; }
+        public int DeviceSimId { get; set; }
+        public string DeviceSimIccid { get; set; }
+        public string DeviceSimCarrier { get; set; }
+        public string DeviceSimPhoneNumber { get; set; }
     }
 }

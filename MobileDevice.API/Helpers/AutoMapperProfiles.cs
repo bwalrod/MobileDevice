@@ -44,6 +44,10 @@ namespace MobileDevice.API.Helpers
             // .AfterMap((dr, d) => AddOrUpdateDate(dr,d))
             ;
 
+            CreateMap<MdaDevice, DeviceForList>()
+                // .ForMember()
+            ;
+
             CreateMap<AssigneeSaveResource, MdaDeviceAssignee>();
 
             CreateMap<MdaDeviceAssignee, AssigneeForList>();
@@ -53,7 +57,15 @@ namespace MobileDevice.API.Helpers
             CreateMap<DeviceAssignmentSaveResource, MdaDeviceAssignment>();
 
             CreateMap<MdaDeviceAssignment, DeviceAssignmentForList>()
-                .ForMember(a => a.DeviceId, opt => opt.MapFrom(d => d.Device.FirstOrDefault()));
+                // .ForMember(l => l.SimCard, opt => opt.MapFrom(s => s.Device.Sim))
+                .ForMember(l => l.DeviceProductModelId, opt => opt.MapFrom(s => s.Device.Product.ProductModelId))
+                .ForMember(l => l.DeviceProductModelName, opt => opt.MapFrom(s => s.Device.Product.ProductModel.Name))
+                .ForMember(l => l.DeviceProductCapacityName, opt => opt.MapFrom(s => s.Device.Product.ProductCapacity.Name))
+                .ForMember(l => l.DeviceProductManufacturerName, opt => opt.MapFrom(s => s.Device.Product.ProductModel.ProductManufacturer.Name))
+                .ForMember(l => l.AssingeeLastName, opt => opt.MapFrom(s => s.MdaDeviceAssignee.LastName))
+                .ForMember(l => l.AssigneeFirstName, opt => opt.MapFrom(s => s.MdaDeviceAssignee.FirstName))
+                .ForMember(l => l.AssigneeDepartmentName, opt => opt.MapFrom(s => s.MdaDeviceAssignee.Department.Name))
+                ;
 
             CreateMap<DeviceDateQueryResource, MdaDeviceDateQuery>();
 
@@ -78,6 +90,9 @@ namespace MobileDevice.API.Helpers
             CreateMap<DepartmentQueryResource, MdaDepartmentQuery>();
 
             CreateMap<DepartmentSaveResource, MdaDepartment>();
+
+            CreateMap<MdaDepartment, DepartmentForList>()
+                .ForMember(l => l.AssigneeCount, opt => opt.MapFrom(s => s.MdaDeviceAssignee.Count()));
 
             CreateMap<SimCardQueryResource, MdaSimCardQuery>();
 

@@ -65,7 +65,7 @@ namespace MobileDevice.API.Data.Assignment
                         .ThenInclude(pc => pc.ProductCapacity).IgnoreQueryFilters()                            
                 .Include(dv => dv.Device)
                     .ThenInclude(s => s.Sim).IgnoreQueryFilters()
-                .Include(da => da.MdaDeviceAssignee).IgnoreQueryFilters()
+                .Include(da => da.MdaDeviceAssignee).ThenInclude(d => d.Department).IgnoreQueryFilters()
                 .AsQueryable();
 
             if (filter.PageSize == 0)
