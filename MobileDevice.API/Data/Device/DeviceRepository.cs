@@ -53,9 +53,13 @@ namespace MobileDevice.API.Data.Device
         {
             var query = _context.MdaDevice
             .Include(d => d.Product)
-            .ThenInclude(p => p.ProductModel)
+            .ThenInclude(p => p.ProductModel).ThenInclude(m => m.ProductManufacturer)
             .Include(d => d.Product)
             .ThenInclude(c => c.ProductCapacity)
+            .Include(assignment => assignment.MdaDeviceAssignment).ThenInclude(assignee => assignee.MdaDeviceAssignee)
+            .ThenInclude(d => d.Department).IgnoreQueryFilters()
+            .Include(sim => sim.Sim)
+            .Include(status => status.DeviceStatus)
             .AsQueryable();
 
             // if (queryObj.PageSize == 0)

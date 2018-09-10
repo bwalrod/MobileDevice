@@ -9,6 +9,7 @@ using MobileDevice.API.Models.Query;
 using MobileDevice.API.Controllers.Resources.DeviceAttribute;
 using MobileDevice.API.Controllers.Resources.DeviceDateType;
 using MobileDevice.API.Controllers.Resources.DeviceAttributeType;
+using MobileDevice.API.Controllers.Resources.DeviceNote;
 using MobileDevice.API.Controllers.Resources.DeviceStatus;
 using MobileDevice.API.Controllers.Resources.Department;
 using MobileDevice.API.Controllers.Resources.SimCard;
@@ -45,7 +46,19 @@ namespace MobileDevice.API.Helpers
             ;
 
             CreateMap<MdaDevice, DeviceForList>()
-                // .ForMember()
+                .ForMember(l => l.ProductModelId, opt => opt.MapFrom(s => s.Product.ProductModelId))
+                .ForMember(l => l.ProductModelName, opt => opt.MapFrom(s => s.Product.ProductModel.Name))
+                .ForMember(l => l.ProductCapacityName, opt => opt.MapFrom(s => s.Product.ProductCapacity.Name))
+                .ForMember(l => l.ProductManufacturerName, opt => opt.MapFrom(s => s.Product.ProductModel.ProductManufacturer.Name))
+                .ForMember(l => l.AssignmentType, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active ==1).AssignmentType))
+                .ForMember(l => l.AssigneeId, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active ==1).AssigneeId))
+                .ForMember(l => l.AssingeeLastName, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).MdaDeviceAssignee.LastName))
+                .ForMember(l => l.AssigneeFirstName, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).MdaDeviceAssignee.FirstName))
+                .ForMember(l => l.AssigneeDepartmentName, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).MdaDeviceAssignee.Department.Name))
+                .ForMember(l => l.SimId, opt => opt.MapFrom(s => s.SimId))
+                .ForMember(l => l.SimIccid, opt => opt.MapFrom(s => s.Sim.Iccid))
+                .ForMember(l => l.SimPhoneNumber, opt => opt.MapFrom(s => s.Sim.PhoneNumber))
+                .ForMember(l => l.SimCarrier, opt => opt.MapFrom(s => s.Sim.Carrier))                
             ;
 
             CreateMap<AssigneeSaveResource, MdaDeviceAssignee>();
@@ -114,6 +127,8 @@ namespace MobileDevice.API.Helpers
             CreateMap<ProductModelSaveResource, MdaProductModel>();
 
             CreateMap<MdaProductModel, ProductModelForList>();
+
+            CreateMap<MdaDeviceNote, DeviceNoteForList>();
 
         }
 
