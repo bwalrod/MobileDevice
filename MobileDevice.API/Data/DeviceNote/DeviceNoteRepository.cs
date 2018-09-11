@@ -46,7 +46,11 @@ namespace MobileDevice.API.Data.DeviceNote
             var query = _context.MdaDeviceNote
                 .Include(d => d.Device).ThenInclude(s => s.Sim)
                 .Include(d => d.Device).ThenInclude(p => p.Product).ThenInclude(m => m.ProductModel)
+                .ThenInclude(m => m.ProductManufacturer)
+                .Include(d => d.Device).ThenInclude(p => p.Product)
+                .ThenInclude(c => c.ProductCapacity)                
                 .Include(d => d.Device).ThenInclude(a => a.MdaDeviceAssignment).ThenInclude(a => a.MdaDeviceAssignee)
+                .ThenInclude(d => d.Department).IgnoreQueryFilters()
                 .IgnoreQueryFilters()
                 .AsQueryable();
 

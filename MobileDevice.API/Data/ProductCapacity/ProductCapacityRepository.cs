@@ -31,7 +31,9 @@ namespace MobileDevice.API.Data.ProductCapacity
 
         public async Task<MdaProductCapacity> GetProductCapacity(int id)
         {
-            var productCapacity = await _context.MdaProductCapacity.FindAsync(id);
+            var productCapacity = await _context.MdaProductCapacity
+            .Include(m => m.ProductModel).ThenInclude(m => m.ProductManufacturer)
+            .FirstOrDefaultAsync(pc => pc.Id == id);
             return productCapacity;
         }
 
@@ -44,7 +46,7 @@ namespace MobileDevice.API.Data.ProductCapacity
         public async Task<PagedList<MdaProductCapacity>> GetProductCapacities(MdaProductCapacityQuery filter)
         {
             var query = _context.MdaProductCapacity
-            .Include(m => m.ProductModel)
+            .Include(m => m.ProductModel).ThenInclude(m => m.ProductManufacturer)
             .IgnoreQueryFilters()
             .AsQueryable();
 

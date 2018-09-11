@@ -58,7 +58,7 @@ namespace MobileDevice.API.Controllers
         }        
 
         [HttpPost]
-        public async Task<IActionResult> AddDeviceNote([FromBody] DeviceDateSaveResource deviceNoteSaveResource)
+        public async Task<IActionResult> AddDeviceNote([FromBody] DeviceNoteSaveResource deviceNoteSaveResource)
         {
             if(!_auth.IsValidUser(User))
                 return NoContent();

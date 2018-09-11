@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -37,9 +38,11 @@ namespace MobileDevice.API.Controllers
             var simCards = await _repo.GetSimCards(filter);
 
             Response.AddPagination(simCards.CurrentPage, simCards.PageSize, 
-                    simCards.TotalCount, simCards.TotalPages);             
+                    simCards.TotalCount, simCards.TotalPages);     
 
-            return Ok(simCards);
+            var simCardsList = _mapper.Map<IEnumerable<SimCardForList>>(simCards);
+
+            return Ok(simCardsList);
         }
 
         [HttpGet("{id}")]

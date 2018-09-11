@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -42,7 +43,9 @@ namespace MobileDevice.API.Controllers
             Response.AddPagination(products.CurrentPage, products.PageSize, 
                     products.TotalCount, products.TotalPages);
 
-            return Ok(products);
+            var productsList = _mapper.Map<IEnumerable<ProductForList>>(products);
+
+            return Ok(productsList);
         }
 
         [HttpGet("{id}")]

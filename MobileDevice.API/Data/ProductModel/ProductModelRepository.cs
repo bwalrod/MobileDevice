@@ -31,7 +31,11 @@ namespace MobileDevice.API.Data.ProductModel
 
         public async Task<MdaProductModel> GetProductModel(int id)
         {
-            return await _context.MdaProductModel.FindAsync(id);
+            return await _context.MdaProductModel
+                        .Include(m => m.ProductManufacturer)
+                        .Include(t => t.ProductType)
+                        .IgnoreQueryFilters()
+                        .FirstOrDefaultAsync(pm => pm.Id == id);
         }
 
         public async Task<IEnumerable<MdaProductModel>> GetProductModels()

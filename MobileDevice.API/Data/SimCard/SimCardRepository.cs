@@ -31,7 +31,11 @@ namespace MobileDevice.API.Data.SimCard
 
         public async Task<MdaSimCard> GetSimCard(int id)
         {
-            var simCard = await _context.MdaSimCard.FindAsync(id);
+            var simCard = await _context.MdaSimCard
+            .Include(s => s.MdaDevice).ThenInclude(d => d.Product)
+            .ThenInclude(p => p.ProductModel)
+            .ThenInclude(pm => pm.ProductManufacturer)
+            .FirstOrDefaultAsync(s => s.Id == id);
             return simCard;
         }
 
@@ -43,7 +47,13 @@ namespace MobileDevice.API.Data.SimCard
 
         public async Task<PagedList<MdaSimCard>> GetSimCards(MdaSimCardQuery filter)
         {
-            var query = _context.MdaSimCard.AsQueryable();
+            var query = _context.MdaSimCard
+                .Include(s => s.MdaDevice).ThenInclude(d => d.Product).ThenInclude(p => p.ProductModel)
+                .ThenInclude(pm => pm.ProductManufacturer)
+                .Include(s => s.MdaDevice).ThenInclude(d => d.Product).ThenInclude(p => p.ProductCapacity)
+                .Include(s => s.MdaDevice).ThenInclude(d => d.MdaDeviceAssignment).ThenInclude(a => a.MdaDeviceAssignee)
+                .ThenInclude(mda => mda.Department).IgnoreQueryFilters()
+                .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;

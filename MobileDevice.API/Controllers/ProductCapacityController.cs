@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -40,9 +41,11 @@ namespace MobileDevice.API.Controllers
             var productCapacity = await _repo.GetProductCapacities(filter);
 
             Response.AddPagination(productCapacity.CurrentPage, productCapacity.PageSize, 
-                    productCapacity.TotalCount, productCapacity.TotalPages);            
+                    productCapacity.TotalCount, productCapacity.TotalPages);        
 
-            return Ok(productCapacity);
+            var productCapacityList = _mapper.Map<IEnumerable<ProductCapacityForList>>(productCapacity);
+
+            return Ok(productCapacityList);
         }
 
         [HttpGet("{id}")]
