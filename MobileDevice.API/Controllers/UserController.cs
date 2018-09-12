@@ -70,6 +70,20 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Could not add user");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateUser(int id)
+        {
+            var user = await _repo.GetAppUser(id);
+
+            user.Active = 0;
+            user.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            user.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

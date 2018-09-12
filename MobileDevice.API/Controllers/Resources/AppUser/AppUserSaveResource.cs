@@ -11,11 +11,11 @@ namespace MobileDevice.API.Controllers.Resources.AppUser
         public string Login { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Za-z]+$", ErrorMessage = "Only Letters are allowed.")]
+        [RegularExpression("^[A-Za-z\\s]+$", ErrorMessage = "Only Letters are allowed.")]
         public string LastName { get; set; }
 
         [Required]
-        [RegularExpression("^[A-Za-z]+$", ErrorMessage = "Only Letters are allowed.")]
+        [RegularExpression("^[A-Za-z\\s]+$", ErrorMessage = "Only Letters are allowed.")]
         public string FirstName { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage ="Access Level is required.")]

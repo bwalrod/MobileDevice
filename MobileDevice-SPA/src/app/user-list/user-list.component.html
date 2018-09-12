@@ -1,0 +1,21 @@
+<div class="text-center mt-5">
+  <h2>Users</h2>
+    <div class="container">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Id</th>
+        <th>Login</th>
+        <th>Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td><a [routerLink]="['/users/edit/', user.id]" >{{user.id}}</a></td>
+        <td>{{user.login}}</td>
+        <td>{{user.firstName + ' ' + user.lastName}}</td>
+      </tr>
+    </tbody>
+    </table>
+  </div>
+</div>
