@@ -13,6 +13,12 @@ namespace MobileDevice.API.Helpers
             _repo = repo;
         }
 
+        public bool IsAdmin(ClaimsPrincipal user)
+        {
+            var appUser = _repo.GetMdaAppUserByLogin(user.FindFirstValue(ClaimTypes.Name));
+            return appUser.AccessLevel == 10;
+        }
+
         public bool IsValidUser(ClaimsPrincipal user) {
             var userName = user.FindFirstValue(ClaimTypes.Name); 
             return _repo.GetAppUserByLogin(userName) > 0;

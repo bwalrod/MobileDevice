@@ -4,7 +4,6 @@ namespace MobileDevice.API.Controllers.Resources.AppUser
 {
     public class AppUserSaveResource
     {
-        public int Id { get; set; }
 
         [Required]
         [RegularExpression("^[A-Za-z]{2,4}\\\\[A-Za-z]+$", ErrorMessage = "Invalid Login.")]

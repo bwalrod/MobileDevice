@@ -88,5 +88,11 @@ namespace MobileDevice.API.Data.AppUser
             var user = _context.MdaAppUser.Where(l => l.Login == login).Where(a => a.Active == 1);
             return user.Count();
         }
+
+        public MdaAppUser GetMdaAppUserByLogin(string login)
+        {
+            var user = _context.MdaAppUser.Where(l => l.Login == login).Where(a => a.Active == 1);
+            return user.FirstOrDefault();
+        }
     }
 }

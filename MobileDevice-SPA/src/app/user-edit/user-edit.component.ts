@@ -38,6 +38,7 @@ export class UserEditComponent implements OnInit {
   // }
 
   updateUser() {
+    if (this.editForm.dirty) {
     this.userService.updateUser(this.user)
       .subscribe(next => {
         this.alertify.success('User updated successfully');
@@ -46,16 +47,21 @@ export class UserEditComponent implements OnInit {
       }, error => {
         this.alertify.error(error);
       });
+    }
   }
 
   deactivateUser(id: number) {
     this.alertify.confirm('Are you sure you want to delete this user?', () => {
       this.userService.deactivateUser(id)
       .subscribe(() => {
-        this.router.navigate(['/user']);
+        this.router.navigate(['/users']);
       }, error => {
         this.alertify.error('Failed to delete user');
       });
     });
+  }
+
+  returnToList() {
+    this.router.navigate(['/users']);
   }
 }

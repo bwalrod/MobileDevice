@@ -29,7 +29,7 @@ namespace MobileDevice.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetUsers([FromQuery] AppUserQueryResource filterResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             var filter = _mapper.Map<AppUserQueryResource, MdaAppUserQuery>(filterResource);
@@ -44,7 +44,7 @@ namespace MobileDevice.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetUser(int id)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             var user = await _repo.GetAppUser(id);
@@ -54,6 +54,9 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] AppUserSaveResource appUserResource)
         {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -73,6 +76,9 @@ namespace MobileDevice.API.Controllers
         [HttpPost("{id}/deactivate")]
         public async Task<IActionResult> DeactivateUser(int id)
         {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
             var user = await _repo.GetAppUser(id);
 
             user.Active = 0;
@@ -87,6 +93,9 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
             var user = await _repo.GetAppUser(id);
 
             if (user == null)
@@ -103,6 +112,9 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, AppUserSaveResource appUserUpdateResource)
         {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
             var userFromRepo = await _repo.GetAppUser(id);
 
             if (userFromRepo == null)

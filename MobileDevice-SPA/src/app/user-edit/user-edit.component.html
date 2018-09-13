@@ -26,7 +26,8 @@
       </div>
       <div class="row">
         <button class="btn btn-success" form="editForm" [disabled]="!editForm.dirty">Update</button>
-        <button class="btn btn-danger" (click)="$event.stopPropigation()" (click)="deactivateUser(user.id)">Delete</button>
+        <button class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deactivateUser(user.id)">Delete</button>
+        <button class="btn btn-default" (click)="$event.stopPropagation()" (click)="returnToList()">Return to List</button>
       </div>
     </form> 
   </div>

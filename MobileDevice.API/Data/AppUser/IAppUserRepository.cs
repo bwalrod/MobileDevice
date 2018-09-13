@@ -19,6 +19,8 @@ namespace MobileDevice.API.Data.AppUser
          
          Task<MdaAppUser> GetAppUser(int id);
 
-         int GetAppUserByLogin(string login);             
+         int GetAppUserByLogin(string login); 
+
+         MdaAppUser GetMdaAppUserByLogin(string login);            
     }
 }
