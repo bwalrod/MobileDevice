@@ -18,6 +18,7 @@ namespace MobileDevice.API.Controllers.Resources.AppUser
         public string FirstName { get; set; }
 
         [Range(1, int.MaxValue, ErrorMessage ="Access Level is required.")]
-        public int AccessLevel { get; set; }           
+        public int AccessLevel { get; set; }      
+        public bool Active { get; set; }     
     }
 }
