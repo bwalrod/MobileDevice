@@ -1,14 +1,15 @@
 <div class="container mt-5 pt-5 col-lg-8 col-lg-offset-2" >
     <div class="row" >
     <div class="col text-center" >
-      <h4>Edit User: {{ department.name }}</h4>
+      <h4 *ngIf="department.id > 0">Edit Department: {{ department.name }}</h4>
+      <h4 *ngIf="department.id == 0">Add Department</h4>
     </div>
     </div>
     <div class="row">
       <div class="col col-lg-3"></div>
     <div class="col col-lg-6" >
-      <form #editForm="ngForm" id="editForm" (ngSubmit)="updateDepartment()" >
-        <div class="row mb-1">
+      <form #editForm="ngForm" id="editForm" (ngSubmit)="submitForm()" >
+        <div *ngIf="department.id > 0" class="row mb-1">
           <div class="col col-3"><label>Id</label></div>
           <div class="col col-9"><label>{{ department.id }}</label></div>
         </div>
@@ -18,13 +19,13 @@
         </div>
         <div class="row">
           <div class="col col-3"><label for="active">Active</label></div>
-          <div class="col col-1 checkbox"><input type="checkbox" class="form-control ml-2" name="active" [(ngModel)]="department.active"></div>
+          <div class="col col-1 checkbox"><input type="checkbox" [disabled]="department.id == 0" class="form-control ml-2" name="active" [(ngModel)]="department.active"></div>
         </div>
         <div class="row mt-3">
           <div class="col text-center">
-          <button class="btn btn-success" form="editForm" [disabled]="!editForm.dirty">Update</button>
-          <button class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deactivateDepartment(department.id)">Delete</button>
-          <button class="btn btn-default" (click)="$event.stopPropagation()" (click)="returnToList()">Return to List</button>
+          <button class="btn btn-success" form="editForm" [disabled]="!editForm.dirty">{{ department.id > 0 ? 'Update' : 'Add' }}</button>
+          <button *ngIf="department.id > 0" class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deactivateDepartment(department.id)">Delete</button>
+          <button class="btn btn-default" (click)="$event.stopPropagation()" (click)="returnToList()">{{ department.id > 0 ? 'Return to List' : 'Cancel'}}</button>
           </div>
         </div>
       </form> 

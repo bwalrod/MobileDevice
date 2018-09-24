@@ -53,4 +53,8 @@ export class DepartmentService {
     return this.http.post(this.baseUrl + 'department/' + id + '/deactivate', {});
   }
 
+  addDepartment(department: Department) {
+    return this.http.post(this.baseUrl + 'department/', department);
+  }
+
 }

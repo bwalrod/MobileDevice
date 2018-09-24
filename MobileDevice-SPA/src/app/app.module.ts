@@ -50,7 +50,7 @@ import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
    providers: [
       AlertifyService,
       WinAuthInterceptorProvider,
-      // ErrorInterceptorProvider,
+      ErrorInterceptorProvider,
       UserEditResolver,
       UserListResolver,
       DepartmentListResolver,

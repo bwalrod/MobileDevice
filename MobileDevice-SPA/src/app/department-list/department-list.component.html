@@ -1,18 +1,18 @@
-<div class="text-center mt-5 pt-5">
-  <h2>Departments</h2>
+<div class="mt-5 pt-5">
+  <h2 class="text-center">Departments</h2>
     <div class="container">
-      <table class="table table-striped">
+      <table class="table table-condensed table-striped">
         <thead>
           <tr>
-            <th>Id</th>
-            <th>Name <input type="text" name="filter" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
-            <th>Active</th>
+            <th scope="col"><button class="btn btn-link" [routerLink]="['/departments/edit/0']" routerLinkActive="router-link-active" >Add</button></th>
+            <th scope="col">Name<input type="text" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
+            <th scope="col">Active</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let d of departments">
-            <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.id }}</a></td>
-            <td>{{ d.name }}</td>
+            <th scope="row"></th>
+            <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.name }}</a></td>
             <td><i [ngClass]="(d.active == true)?'fa fa-check':''"></i></td>
           </tr>
         </tbody>

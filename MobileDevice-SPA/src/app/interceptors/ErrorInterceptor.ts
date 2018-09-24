@@ -35,6 +35,6 @@ export class ErrorInterceptor implements HttpInterceptor {
 
 export const ErrorInterceptorProvider = {
     provide: HTTP_INTERCEPTORS,
-    userClass: ErrorInterceptor,
+    useClass: ErrorInterceptor,
     multi: true
 };
