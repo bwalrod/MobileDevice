@@ -10,11 +10,12 @@ import { Department } from '../_models/department';
 export class DepartmentListResolver implements Resolve<Department[]> {
     pageNumber = 1;
     pageSize = 5;
+    status = 1;
 
     constructor(private departmentService: DepartmentService, private route: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Department[]> {
-        return this.departmentService.getDepartments(this.pageNumber, this.pageSize).pipe(
+        return this.departmentService.getDepartments(this.pageNumber, this.pageSize, null , this.status).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.route.navigate(['/home']);

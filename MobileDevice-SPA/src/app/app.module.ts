@@ -8,7 +8,7 @@ import { WinAuthInterceptorProvider } from './interceptors/WinAuthInterceptor';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BsDropdownModule, PaginationModule } from 'ngx-bootstrap';
+import { BsDropdownModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
 
 import { appRoutes } from './routes';
 
@@ -45,6 +45,7 @@ import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
       FormsModule,
       PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
+      ButtonsModule.forRoot(),
       RouterModule.forRoot(appRoutes)
    ],
    providers: [

@@ -79,6 +79,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add department");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateDepartment(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var dept = await _repo.GetDepartment(id);
+
+            dept.Active = 0;
+            dept.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            dept.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDepartment(int id, [FromBody] DepartmentSaveResource departmentSaveResource)
         {

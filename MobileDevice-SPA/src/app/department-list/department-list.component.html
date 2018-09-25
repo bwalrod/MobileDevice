@@ -4,14 +4,22 @@
       <table class="table table-condensed table-striped">
         <thead>
           <tr>
-            <th scope="col"><button class="btn btn-link" [routerLink]="['/departments/edit/0']" routerLinkActive="router-link-active" >Add</button></th>
+            <th scope="col"><button class="btn btn-link" [routerLink]="['/departments/edit/0']" >Add</button></th>
             <th scope="col">Name<input type="text" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
-            <th scope="col">Active</th>
+            <th scope="col">
+              <div class="row">
+                <div class="btn-group">
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="loadDepartments()">Active</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="loadDepartments()">Inactive</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="loadDepartments()">All</button>
+                </div>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let d of departments">
-            <th scope="row"></th>
+            <th scope="row"><i class="fa fa-trash" (click)="deactivateDepartment(d.id)"></i></th>
             <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.name }}</a></td>
             <td><i [ngClass]="(d.active == true)?'fa fa-check':''"></i></td>
           </tr>

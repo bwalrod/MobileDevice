@@ -15,18 +15,22 @@ export class DepartmentService {
 
   constructor(private http: HttpClient) { }
 
-  getDepartments(page?, itemsPerPage?, filter?): Observable<PaginatedResult<Department []>> {
+  getDepartments(page?: number, itemsPerPage?: number, filter?: string, status?: number): Observable<PaginatedResult<Department []>> {
     const paginatedResult: PaginatedResult<Department []> = new PaginatedResult<Department []>();
 
     let params = new HttpParams();
 
     if (page != null && itemsPerPage != null) {
-      params = params.append('page', page);
-      params = params.append('pageSize', itemsPerPage);
+      params = params.append('page', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
     }
 
     if (filter != null) {
       params = params.append('name', filter);
+    }
+
+    if (status != null) {
+      params = params.append('active', status.toString());
     }
 
     return this.http.get<Department[]>(this.baseUrl + 'department', { observe: 'response', params})

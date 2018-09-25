@@ -58,6 +58,7 @@ export class DepartmentEditComponent implements OnInit {
         this.alertify.success('Department added successfully');
         this.department = department;
         this.editForm.reset(this.department);
+        this.router.navigate(['/departments/edit/' + this.department.id]);
       }, error => {
         this.alertify.error(error);
       });
