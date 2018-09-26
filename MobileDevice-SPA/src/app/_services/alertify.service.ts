@@ -13,6 +13,10 @@ declare let alertify: any;
             if (e) {
                 okCallback();
             } else {}
+        })
+        .setting({
+            'title': 'Mobile Devices',
+            'labels': {ok: 'Yes', cancel: 'No'}
         });
     }
 

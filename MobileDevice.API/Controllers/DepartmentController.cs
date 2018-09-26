@@ -64,7 +64,7 @@ namespace MobileDevice.API.Controllers
                 return BadRequest(ModelState);
 
             /* Test for prexistence */
-            var departmentFromRepo = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name});
+            var departmentFromRepo = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name, Active = departmentSaveResource.Active});
             if (departmentFromRepo.Any())
                 return BadRequest($"Department {departmentSaveResource.Name} already exists");
 
@@ -106,7 +106,7 @@ namespace MobileDevice.API.Controllers
                 return BadRequest(ModelState);
 
             /* Test for prexistence */
-            var departmentFromRepoExisting = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name});
+            var departmentFromRepoExisting = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name, Active = departmentSaveResource.Active});
             if (departmentFromRepoExisting.Any())
                 return BadRequest($"Department {departmentSaveResource.Name} already exists");
 

@@ -16,7 +16,8 @@ export class DepartmentEditComponent implements OnInit {
   newDepartment: Department = {
     id: 0,
     name: '',
-    active: true
+    active: true,
+    assigneeCount: 0
   };
 
   constructor(private deptService: DepartmentService, private router: Router,
@@ -43,6 +44,8 @@ export class DepartmentEditComponent implements OnInit {
   }
 
   updateDepartment() {
+    alert(this.department.active);
+    return;
     this.deptService.updateDepartment(this.department)
       .subscribe(next => {
         this.editForm.reset(this.department);

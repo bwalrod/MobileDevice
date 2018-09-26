@@ -1,12 +1,13 @@
 <div class="mt-5 pt-5">
   <h2 class="text-center">Departments</h2>
-    <div class="container">
+    <div class="container" style="width:60%;">
       <table class="table table-condensed table-striped">
         <thead>
           <tr>
-            <th scope="col"><button class="btn btn-link" [routerLink]="['/departments/edit/0']" >Add</button></th>
-            <th scope="col">Name<input type="text" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
-            <th scope="col">
+            <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/departments/edit/0']" >Add</button></th>
+            <th scope="col">Name<input type="text" size="40" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
+            <th scope="col">Members</th>
+            <th scope="col" class="w-20">
               <div class="row">
                 <div class="btn-group">
                   <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="loadDepartments()">Active</button>
@@ -19,18 +20,16 @@
         </thead>
         <tbody>
           <tr *ngFor="let d of departments">
-            <th scope="row"><i class="fa fa-trash" (click)="deactivateDepartment(d.id)"></i></th>
+            <th scope="row"><i class="fa fa-trash tip" (click)="deactivateDepartment(d.id)" 
+              [ngClass]="{'invisible':d.active != true, 'warning':d.assigneeCount > 0}">
+              <span class="tooltiptext" *ngIf="d.assigneeCount > 0">You shouldn't delete a department with members.</span>
+            </i></th>
             <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.name }}</a></td>
+            <td>{{ d.assigneeCount }}</td>
             <td><i [ngClass]="(d.active == true)?'fa fa-check':''"></i></td>
           </tr>
         </tbody>
       </table>
-      <!-- <div class="row">
-        <div class="col">
-          <label for="filter">Filter List</label>
-          <input type="text" name="filter" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table">
-        </div>
-      </div> -->
     </div>
 </div>
 
