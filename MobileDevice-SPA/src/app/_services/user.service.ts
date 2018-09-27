@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class UserService {
     baseUrl = environment.apiUrl;
+    currentUser: User;
 
     constructor(private http: HttpClient) { }
 
@@ -50,5 +51,18 @@ export class UserService {
 
     deactivateUser(id: number) {
         return this.http.post(this.baseUrl + 'user/' + id + '/deactivate', {});
+    }
+
+    identifyUser() {
+        return this.http.get(this.baseUrl + 'user/identify')
+        .pipe(
+            map((response: any) => {
+                const user = response;
+                if (user) {
+                    localStorage.setItem('user', JSON.stringify(user));
+                    this.currentUser = user;
+                }
+            })
+        );
     }
 }

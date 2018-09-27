@@ -16,7 +16,7 @@ export class DepartmentEditComponent implements OnInit {
   newDepartment: Department = {
     id: 0,
     name: '',
-    active: true,
+    active: 1,
     assigneeCount: 0
   };
 
@@ -44,8 +44,8 @@ export class DepartmentEditComponent implements OnInit {
   }
 
   updateDepartment() {
-    alert(this.department.active);
-    return;
+    const iActive = this.editForm.controls['active'].value === true ? 1 : 0;
+    this.department.active = iActive;
     this.deptService.updateDepartment(this.department)
       .subscribe(next => {
         this.editForm.reset(this.department);

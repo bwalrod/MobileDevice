@@ -51,6 +51,20 @@ namespace MobileDevice.API.Controllers
             return Ok(user);
         }
 
+        [HttpGet("identify")]
+        public async Task<IActionResult> IdentifyUser()
+        {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
+            var userId = _repo.GetAppUserByLogin(User.Identity.Name);
+
+            var user = await _repo.GetAppUser(userId);
+
+            // var user = _repo.GetMdaAppUserByLogin(User.Identity.Name);
+            return Ok(user);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddUser([FromBody] AppUserSaveResource appUserResource)
         {

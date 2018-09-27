@@ -16,11 +16,13 @@ export class DepartmentListComponent implements OnInit {
   pagination: Pagination;
   filter = '';
   status = 'Active';
+  $: any;
 
   constructor(private departmentService: DepartmentService, private alertify: AlertifyService
     , private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    localStorage.setItem('departmentActiveFilter', this.status);
     this.route.data.subscribe(data => {
       this.departments = data['departments'].result;
       this.pagination = data['departments'].pagination;
@@ -28,6 +30,7 @@ export class DepartmentListComponent implements OnInit {
       // this.status = 1;
     });
   }
+
 
   pageChanged(event: any): void {
     this.pagination.currentPage = event.page;

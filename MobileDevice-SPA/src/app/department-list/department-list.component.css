@@ -27,43 +27,16 @@ th.w-20 {
     zoom: 125%;
 }
 
-.warning {
-    color: red;
+.badge-warning {
+    color: black;
 }
 
-.tip .tooltiptext {
-    visibility: hidden;
-    width: 250px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    font-size: 8pt;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    /* bottom: 50%; */
-    left: 22%;
-    margin-left: -125px;
-    margin-top: -26px;
-    opacity: 0;
-    transition: opacity 0.3s;
+.tooltip.offsetToolTip .tooltip-inner {
+    background-color: red;
+    margin-left: 50px;
 }
 
-.tip .tooltiptext::after {
-    content: "";
-    position: absolute;
-    /* top: 100%; */
-    left: 50%;
-    margin-left: -5px;
-    margin-top: 15px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
+.tooltip-inner {
+    background-color: blue;
 }
 
-.tip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}

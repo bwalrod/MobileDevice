@@ -20,13 +20,12 @@
         </thead>
         <tbody>
           <tr *ngFor="let d of departments">
-            <th scope="row"><i class="fa fa-trash tip" (click)="deactivateDepartment(d.id)" 
-              [ngClass]="{'invisible':d.active != true, 'warning':d.assigneeCount > 0}">
-              <span class="tooltiptext" *ngIf="d.assigneeCount > 0">You shouldn't delete a department with members.</span>
-            </i></th>
+            <th scope="row"><i class="fa fa-trash" (click)="deactivateDepartment(d.id)" 
+              [ngClass]="{'invisible':d.active != 1, 'badge badge-warning':d.assigneeCount > 0}"
+              tooltip="{{(d.assigneeCount > 0) ? 'You shouldn\'t delete a department with members.': '' }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.name }}</a></td>
             <td>{{ d.assigneeCount }}</td>
-            <td><i [ngClass]="(d.active == true)?'fa fa-check':''"></i></td>
+            <td><i [ngClass]="(d.active == 1)?'fa fa-check':''"></i></td>
           </tr>
         </tbody>
       </table>
@@ -42,3 +41,4 @@
       previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
     </pagination>
   </div>
+

@@ -12787,11 +12787,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\bwalrod\\Documents\\Development\\Angular-Core\\IT\\MobileDevice\\MobileDevice.API\\MobileDevice.API.csproj",
+      "projectUniqueName": "C:\\Users\\bwalrod\\Documents\\Development\\Angular-Core\\IT\\MobileDevice\\MobileDevice.API\\MobileDevice.API.csproj",
       "projectName": "MobileDevice.API",
-      "projectPath": "c:\\Users\\bwalrod\\Documents\\Development\\Angular-Core\\IT\\MobileDevice\\MobileDevice.API\\MobileDevice.API.csproj",
+      "projectPath": "C:\\Users\\bwalrod\\Documents\\Development\\Angular-Core\\IT\\MobileDevice\\MobileDevice.API\\MobileDevice.API.csproj",
       "packagesPath": "C:\\Users\\bwalrod\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\bwalrod\\Documents\\Development\\Angular-Core\\IT\\MobileDevice\\MobileDevice.API\\obj\\",
+      "outputPath": "C:\\Users\\bwalrod\\Documents\\Development\\Angular-Core\\IT\\MobileDevice\\MobileDevice.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

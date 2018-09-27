@@ -8,7 +8,7 @@ import { WinAuthInterceptorProvider } from './interceptors/WinAuthInterceptor';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BsDropdownModule, PaginationModule, ButtonsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, PaginationModule, ButtonsModule, TooltipModule } from 'ngx-bootstrap';
 
 import { appRoutes } from './routes';
 
@@ -46,7 +46,8 @@ import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
       PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
       ButtonsModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      TooltipModule.forRoot()
    ],
    providers: [
       AlertifyService,
