@@ -4,18 +4,36 @@
     <table class="table table-striped">
       <thead>
       <tr>
+        <th>Filter</th>
+        <th><input type="text" name="fLogin" id=""></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
         <th>Id</th>
         <th>Login</th>
-        <th>Name</th>
+        <th>First Name</th>
+        <th>Last Name</th>
         <th>Access Level</th>
-        <th>Active</th>
+        <th>
+          <div class="row">
+            <div class="btn-group">
+              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="loadUsers()">Active</button>
+              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="loadUsers()">Inactive</button>
+              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="loadUsers()">All</button>
+            </div>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
         <td><a [routerLink]="['/users/edit/', user.id]" >{{user.id}}</a></td>
         <td>{{user.login}}</td>
-        <td>{{user.firstName + ' ' + user.lastName}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
         <td>{{ user.accessLevel }}</td>
         <td><i [ngClass]="(user.active == true)?'fa fa-check':''"></i></td>
       </tr>

@@ -14,6 +14,8 @@ export class UserListComponent implements OnInit {
 
   users: User[];
   pagination: Pagination;
+  userParams: any = {};
+  status = 'Active';
 
   constructor(private userService: UserService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
