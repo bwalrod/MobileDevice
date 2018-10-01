@@ -1,0 +1,5 @@
+export class Manufacturer {
+    id: number;
+    name: string;
+    active: boolean;
+}

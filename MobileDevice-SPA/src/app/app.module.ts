@@ -25,6 +25,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { DepartmentListResolver } from './_resolvers/department-list.resolver';
 import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
+import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 
 
 
@@ -37,7 +38,8 @@ import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
       UserListComponent,
       UserEditComponent,
       DepartmentListComponent,
-      DepartmentEditComponent
+      DepartmentEditComponent,
+      ManufacturerListComponent
    ],
    imports: [
       BrowserModule,

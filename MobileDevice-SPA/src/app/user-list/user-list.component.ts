@@ -25,6 +25,11 @@ export class UserListComponent implements OnInit {
       this.users = data['users'].result;
       this.pagination = data['users'].pagination;
     });
+
+    this.userParams.login = '';
+    this.userParams.firstname = '';
+    this.userParams.lastname = '';
+    this.userParams.accesslevel = '';
   }
 
   pageChanged(event: any): void {
@@ -33,7 +38,14 @@ export class UserListComponent implements OnInit {
   }
 
   loadUsers() {
-    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage)
+    let activeStatus = 2;
+    if (this.status === 'Active') {
+      activeStatus = 1;
+    }
+    if (this.status === 'Inactive') {
+      activeStatus = 0;
+    }
+    this.userService.getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.userParams, activeStatus)
       .subscribe((res: PaginatedResult<User[]>) => {
         this.users = res.result;
         this.pagination = res.pagination;
@@ -44,6 +56,23 @@ export class UserListComponent implements OnInit {
     // },
     error => {
       this.alertify.error(error);
+    });
+  }
+
+  filterTable() {
+    this.pagination.currentPage = 1;
+    this.pagination.itemsPerPage = 5;
+    this.loadUsers();
+  }
+
+  deactivateUser(id: number) {
+    this.alertify.confirm('Are you sure you want to delete this user?', () => {
+      this.userService.deactivateUser(id)
+        .subscribe(() => {
+          this.loadUsers();
+        }, error => {
+          this.alertify.error('Failed to delete user');
+        });
     });
   }
 

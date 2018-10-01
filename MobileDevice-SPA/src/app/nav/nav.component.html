@@ -12,12 +12,12 @@
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" [routerLink]="['/users']">Users</a>
+        <a class="nav-link" *ngIf="user.accessLevel==10" [routerLink]="['/users']">Users</a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
       </li> -->
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown" *ngIf="user.accessLevel>=5">
           <div class="btn-group" dropdown>
               <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
                       aria-controls="dropdown-basic">
@@ -26,7 +26,7 @@
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                   role="menu" aria-labelledby="button-basic">
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/departments']" routerLinkActive="router-link-active" >Departments</a></li>
-                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users']">Users</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users']" *ngIf="user.accessLevel==10">Users</a></li>
                 <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
                 <li class="divider dropdown-divider"></li>
                 <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>

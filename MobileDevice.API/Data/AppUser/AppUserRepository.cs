@@ -63,6 +63,8 @@ namespace MobileDevice.API.Data.AppUser
                 query = query.Where(lg => lg.Login == queryObj.Login);
             if (queryObj.AccessLevel.HasValue)
                 query = query.Where(a => a.AccessLevel == queryObj.AccessLevel);
+            if (queryObj.Active == 1 || queryObj.Active == 0)
+                query = query.Where(ac => ac.Active == queryObj.Active);
             
             var columnsMap = new Dictionary<string, Expression<Func<MdaAppUser, object>>>
             {

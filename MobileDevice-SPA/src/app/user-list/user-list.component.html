@@ -4,25 +4,25 @@
     <table class="table table-striped">
       <thead>
       <tr>
-        <th>Filter</th>
-        <th><input type="text" name="fLogin" id=""></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
-      <tr>
-        <th>Id</th>
+        <th><button class="btn btn-link" [routerLink]="['/users/edit/0']" >Add</button></th>
         <th>Login</th>
         <th>First Name</th>
         <th>Last Name</th>
         <th>Access Level</th>
+        <th></th>
+      </tr>
+      <tr>
+        <th>Filter</th>
+        <th><input type="text" name="fLogin" [(ngModel)]="userParams.login" (keyup)="filterTable()"></th>
+        <th><input type="text" name="fFName" [(ngModel)]="userParams.firstname" (keyup)="filterTable()"></th>
+        <th><input type="text" name="fLName" [(ngModel)]="userParams.lastname" (keyup)="filterTable()"></th>
+        <th><input type="text" name="fAccessLevel" [(ngModel)]="userParams.accesslevel" (keyup)="filterTable()"></th>
         <th>
           <div class="row">
             <div class="btn-group">
-              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="loadUsers()">Active</button>
-              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="loadUsers()">Inactive</button>
-              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="loadUsers()">All</button>
+              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
+              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="filterTable()">Inactive</button>
+              <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="filterTable()">All</button>
             </div>
           </div>
         </th>
@@ -30,8 +30,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td><a [routerLink]="['/users/edit/', user.id]" >{{user.id}}</a></td>
-        <td>{{user.login}}</td>
+        <!-- <td><a [routerLink]="['/users/edit/', user.id]" >{{user.id}}</a></td> -->
+        <th scope="row"><i class="fa fa-trash" (click)="deactivateUser(user.id)"
+          [ngClass]="{'invisible': user.active != 1}" title="Delete User"></i></th>
+        <td><a [routerLink]="['/users/edit/', user.id]">{{user.login}}</a></td>
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{ user.accessLevel }}</td>

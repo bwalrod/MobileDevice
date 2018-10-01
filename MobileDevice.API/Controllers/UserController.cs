@@ -81,7 +81,8 @@ namespace MobileDevice.API.Controllers
             {
                 // var userToReturn = _mapper.Map<AppUserForReturnResource>(user);
                 // return CreatedAtRoute("GetUser", new { id = user.Id}, userToReturn);
-                return NoContent();
+                // return NoContent();
+                return Ok(user);
             }
 
             return BadRequest("Could not add user");

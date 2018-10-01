@@ -10,9 +10,9 @@
             <th scope="col" class="w-20">
               <div class="row">
                 <div class="btn-group">
-                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="loadDepartments()">Active</button>
-                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="loadDepartments()">Inactive</button>
-                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="loadDepartments()">All</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="filterTable()">Inactive</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="filterTable()">All</button>
                 </div>
               </div>
             </th>

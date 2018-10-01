@@ -1,0 +1,16 @@
+tbody>tr:hover>th>i {
+    visibility: visible;
+}
+
+tbody>tr>th>i {
+    visibility: hidden;
+}
+
+.fa { 
+    color: blue;
+}
+
+.fa-trash {
+    cursor: pointer;
+    zoom: 125%;
+}
