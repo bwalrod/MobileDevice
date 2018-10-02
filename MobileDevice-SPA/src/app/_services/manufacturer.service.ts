@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { PaginatedResult } from '../_models/pagination';
 import { Manufacturer } from '../_models/manufacturer';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,37 @@ export class ManufacturerService {
       params = params.append('name', filter);
     }
 
+    if (status != null) {
+      params = params.append('active', status.toString());
+    }
+
+    return this.http.get<Manufacturer[]>(this.baseUrl + 'productmanufacturer', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        paginatedResult.result = response.body;
+        if (response.headers.get('Pagination') != null) {
+          paginatedResult.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return paginatedResult;
+      })
+    );
+
+  }
+
+  getManufacturer(id) {
+    return this.http.get(this.baseUrl + 'productmanufacturer/' + id);
+  }
+
+  updateManufacturer(manu: Manufacturer) {
+    return this.http.put(this.baseUrl + 'productmanufacturer/' + manu.id, manu, {withCredentials: true});
+  }
+
+  deactivateManufacturer(id: number) {
+    return this.http.post(this.baseUrl + 'productmanufacturer/' + id + '/deactivate', {});
+  }
+
+  addManufacturer(manu: Manufacturer) {
+    return this.http.post(this.baseUrl + 'productmanufacturer/', manu);
   }
 
 }

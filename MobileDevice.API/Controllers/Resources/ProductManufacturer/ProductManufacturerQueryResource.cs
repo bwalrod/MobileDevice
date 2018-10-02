@@ -8,6 +8,7 @@ namespace MobileDevice.API.Controllers.Resources.ProductManufacturer
     public class ProductManufacturerQueryResource
     {
         public string Name { get; set; }        
+        public byte Active { get; set; }
         public string SortBy { get; set; }
         public bool IsSortAscending { get; set; }
         public int Page { get; set; }

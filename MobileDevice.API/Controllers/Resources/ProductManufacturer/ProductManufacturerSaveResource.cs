@@ -6,5 +6,7 @@ namespace MobileDevice.API.Controllers.Resources.ProductManufacturer
     {
         [Required]
         public string Name { get; set; }
+
+        public bool Active { get; set; }
     }
 }

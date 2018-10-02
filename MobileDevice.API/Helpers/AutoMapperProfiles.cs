@@ -164,6 +164,9 @@ namespace MobileDevice.API.Helpers
 
             CreateMap<ProductManufacturerSaveResource, MdaProductManufacturer>();
 
+            CreateMap<MdaProductManufacturer, ProductManufacturerForList>()
+                .ForMember(l => l.ProductCount, opt => opt.MapFrom(s => s.MdaProductModel.Count()));
+
             /*  MdaProductModel */
 
             CreateMap<ProductModelQueryResource, MdaProductModelQuery>();

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -42,7 +43,9 @@ namespace MobileDevice.API.Controllers
             Response.AddPagination(productManufacturers.CurrentPage, productManufacturers.PageSize, 
                     productManufacturers.TotalCount, productManufacturers.TotalPages);
 
-            return Ok(productManufacturers);
+            var productManufacturerList = _mapper.Map<IEnumerable<ProductManufacturerForList>>(productManufacturers);
+
+            return Ok(productManufacturerList);
         }
 
         [HttpGet("{id}")]
@@ -82,6 +85,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add product manufacturer.");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateManufacturer(int id)
+        {
+            if (!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var manu = await _repo.GetProductManufacturer(id);
+
+            manu.Active = 0;
+            manu.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            manu.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductManufacturer(int id, [FromBody] ProductManufacturerSaveResource saveResource)
         {
@@ -97,7 +117,8 @@ namespace MobileDevice.API.Controllers
                 return BadRequest($"Product Manufacturer {id} could not be found.");
 
             var filter = new MdaProductManufacturerQuery() {
-                Name = saveResource.Name
+                Name = saveResource.Name,
+                Active = Convert.ToByte(saveResource.Active == true ? 1 : 0)
             };
 
             var productManufacturersFromRepoExisting = await _repo.GetProductManufacturers(filter);

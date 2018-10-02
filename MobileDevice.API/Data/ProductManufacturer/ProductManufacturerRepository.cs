@@ -43,13 +43,18 @@ namespace MobileDevice.API.Data.ProductManufacturer
 
         public async Task<PagedList<MdaProductManufacturer>> GetProductManufacturers(MdaProductManufacturerQuery filter)
         {
-            var query = _context.MdaProductManufacturer.AsQueryable();
+            var query = _context.MdaProductManufacturer
+            .Include(pm => pm.MdaProductModel)
+            .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(pm => pm.Name.Contains(filter.Name));
+
+            if (filter.Active == 0 || filter.Active ==1) 
+                query = query.Where(pm => pm.Active == filter.Active);
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaProductManufacturer, object>>>
             {

@@ -1,0 +1,34 @@
+<div class="container mt-5 pt-5 col-lg-8 col-lg-offset-2" >
+  <div class="row" >
+  <div class="col text-center" >
+    <h4 *ngIf="manufacturer.id > 0">Edit Manufacturer: {{ manufacturer.name }}</h4>
+    <h4 *ngIf="manufacturer.id == 0">Add Manufacturer</h4>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col col-lg-3"></div>
+  <div class="col col-lg-6" >
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="submitForm()" >
+      <div *ngIf="manufacturer.id > 0" class="row mb-1">
+        <div class="col col-3"><label>Id</label></div>
+        <div class="col col-9"><label>{{ manufacturer.id }}</label></div>
+      </div>
+      <div class="row mb-1">
+        <div class="col col-3"><label for="firstName">Name</label></div>
+        <div class="col col-9"><input type="text" class="form-control ml-2" name="firstName" [(ngModel)]="manufacturer.name"></div>
+      </div>
+      <div class="row">
+        <div class="col col-3"><label for="active">Active</label></div>
+        <div class="col col-1 checkbox"><input type="checkbox" [disabled]="manufacturer.id == 0" class="form-control ml-2" name="active" [(ngModel)]="manufacturer.active"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col text-center">
+        <button class="btn btn-success" form="editForm" [disabled]="!editForm.dirty">{{ manufacturer.id > 0 ? 'Update' : 'Add' }}</button>
+        <button *ngIf="manufacturer.id > 0" class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deactivateManufacturer(manufacturer.id)">Delete</button>
+        <button class="btn btn-default" (click)="$event.stopPropagation()" (click)="returnToList()">{{ manufacturer.id > 0 ? 'Return to List' : 'Cancel'}}</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+</div>

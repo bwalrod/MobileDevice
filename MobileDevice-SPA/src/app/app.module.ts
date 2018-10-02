@@ -1,5 +1,6 @@
 
 
+
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { AlertifyService } from './_services/alertify.service';
@@ -18,15 +19,17 @@ import { HomeComponent } from './home/home.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { DepartmentEditComponent } from './department-edit/department-edit.component';
-
 import { DepartmentListComponent } from './department-list/department-list.component';
+import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { DepartmentListResolver } from './_resolvers/department-list.resolver';
 import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
-import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 
+import { ManufacturerListResolver } from './_resolvers/manufacturer-list.resolver';
+import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit.component';
+import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolver';
 
 
 
@@ -39,7 +42,8 @@ import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list
       UserEditComponent,
       DepartmentListComponent,
       DepartmentEditComponent,
-      ManufacturerListComponent
+      ManufacturerListComponent,
+      ManufacturerEditComponent
    ],
    imports: [
       BrowserModule,
@@ -58,7 +62,9 @@ import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list
       UserEditResolver,
       UserListResolver,
       DepartmentListResolver,
-      DepartmentEditResolver
+      DepartmentEditResolver,
+      ManufacturerListResolver,
+      ManufacturerEditResolver
    ],
    bootstrap: [
       AppComponent

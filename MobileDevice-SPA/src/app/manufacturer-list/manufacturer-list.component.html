@@ -1,3 +1,47 @@
-<p>
-  manufacturer-list works!
-</p>
+<div class="mt-5 pt-5">
+  <h2 class="text-center">Manufacturers</h2>
+    <div class="container" style="width:60%;">
+      <table class="table table-condensed table-striped">
+        <thead>
+          <tr>
+            <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/manufacturers/edit/0']" >Add</button></th>
+            <th scope="col">Name<input type="text" size="40" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
+            <th scope="col">Products</th>
+            <th scope="col" class="w-20">
+              <div class="row">
+                <div class="btn-group">
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="filterTable()">Inactive</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="filterTable()">All</button>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let m of manufacturers">
+            <th scope="row"><i class="fa fa-trash" (click)="deactivateManufacturer(m.id)" 
+              [ngClass]="{'invisible':m.active != true, 'badge badge-warning':m.productCount > 0}" 
+              title="{{(m.productCount == 0) ? 'Delete Manufacturer' : ''}}"
+              tooltip="{{(m.productCount > 0) ? 'You shouldn\'t delete a manufacturer with products.': ''}}"
+              container="" placement=""
+              ><span></span></i></th>
+            <td><a [routerLink]="['/manufacturers/edit/', m.id]">{{ m.name }}</a></td>
+            <td>{{ m.productCount }}</td>
+            <td><i [ngClass]="(m.active == true)?'fa fa-check':''"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+  </div>
+
