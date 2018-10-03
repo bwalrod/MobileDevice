@@ -51,6 +51,12 @@ namespace MobileDevice.API.Data.DeviceStatus
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(t => t.Name.Contains(filter.Name));
 
+            if (filter.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(d => d.Active == 1);                  
+
             var columnsMap = new Dictionary<string, Expression<Func<MdaDevice, object>>>
             {
 

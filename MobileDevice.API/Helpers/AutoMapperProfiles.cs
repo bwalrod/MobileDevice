@@ -140,6 +140,9 @@ namespace MobileDevice.API.Helpers
 
             CreateMap<DeviceStatusSaveResource, MdaDeviceStatus>();
 
+            CreateMap<MdaDeviceStatus, DeviceStatusForList>()
+                .ForMember(l => l.DeviceCount, opt => opt.MapFrom(s => s.MdaDevice.Count()));
+
             /*  MdaProduct */
 
             CreateMap<ProductQueryResource, MdaProductQuery>();
@@ -180,6 +183,9 @@ namespace MobileDevice.API.Helpers
             CreateMap<ProductTypeQueryResource, MdaProductTypeQuery>();
 
             CreateMap<ProductTypeSaveResource, MdaProductType>();
+
+            CreateMap<MdaProductType, ProductTypeForList>()
+                .ForMember(l => l.ProductModelCount, opt => opt.MapFrom(s => s.MdaProductModel.Count()));
 
             /*  MdaSimCard */
 

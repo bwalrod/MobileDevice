@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -39,7 +40,9 @@ namespace MobileDevice.API.Controllers
             Response.AddPagination(statuses.CurrentPage, statuses.PageSize, 
                     statuses.TotalCount, statuses.TotalPages);
 
-            return Ok(statuses);
+            var statusesList = _mapper.Map<IEnumerable<DeviceStatusForList>>(statuses);
+
+            return Ok(statusesList);
         }
 
         [HttpGet("{id}")]
@@ -80,6 +83,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add device status");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateDeviceStatus(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var ds = await _repo.GetDeviceStatus(id);
+
+            ds.Active = 0;
+            ds.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            ds.ModifiedDate = DateTime.Now;
+        
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceStatus(int id, [FromBody] DeviceStatusSaveResource deviceStatusSaveResource)
         {
@@ -91,7 +111,8 @@ namespace MobileDevice.API.Controllers
 
             /* Prexistence Test */
             var filter = new MdaDeviceStatusQuery(){
-                Name = deviceStatusSaveResource.Name
+                Name = deviceStatusSaveResource.Name,
+                Active = Convert.ToByte(deviceStatusSaveResource.Active == true ? 1 : 0)
             };
             var deviceStatusFromRepoExisting = await _repo.GetDeviceStatuses(filter);
             if (deviceStatusFromRepoExisting.Any())

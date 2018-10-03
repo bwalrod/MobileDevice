@@ -26,12 +26,11 @@
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                   role="menu" aria-labelledby="button-basic">
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/departments']" routerLinkActive="router-link-active" >Departments</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/devicestatuses']" >Device Statuses</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/manufacturers']" >Manufacturers</a></li>
-                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users']" *ngIf="user.accessLevel==10">Users</a></li>
-                <li role="menuitem"><a class="dropdown-item" href="#">Something else here</a></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/producttypes']" >Product Types</a></li>
                 <li class="divider dropdown-divider"></li>
-                <li role="menuitem"><a class="dropdown-item" href="#">Separated link</a>
-                </li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users']" *ngIf="user.accessLevel==10">Users</a></li>
               </ul>
             </div>
       </li>

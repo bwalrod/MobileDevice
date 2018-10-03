@@ -1,6 +1,5 @@
 
 
-
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { AlertifyService } from './_services/alertify.service';
@@ -21,15 +20,21 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { DepartmentEditComponent } from './department-edit/department-edit.component';
 import { DepartmentListComponent } from './department-list/department-list.component';
 import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
+import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit.component';
 
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { DepartmentListResolver } from './_resolvers/department-list.resolver';
 import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
-
 import { ManufacturerListResolver } from './_resolvers/manufacturer-list.resolver';
-import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit.component';
 import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolver';
+import { ProductTypeListResolver } from './_resolvers/producttype-list.resolver';
+import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
+import { ProducttypeListComponent } from './producttype-list/producttype-list.component';
+import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
+import { DeviceStatusEditResolver } from './_resolvers/devicestatus-edit.resolver';
+import { DeviceStatusListResolver } from './_resolvers/devicestatus-list.resolver';
+import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list.component';
 
 
 
@@ -43,7 +48,10 @@ import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolve
       DepartmentListComponent,
       DepartmentEditComponent,
       ManufacturerListComponent,
-      ManufacturerEditComponent
+      ManufacturerEditComponent,
+      ProducttypeListComponent,
+      ProducttypeEditComponent,
+      DevicestatusListComponent
    ],
    imports: [
       BrowserModule,
@@ -63,8 +71,12 @@ import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolve
       UserListResolver,
       DepartmentListResolver,
       DepartmentEditResolver,
+      DeviceStatusListResolver,
+      DeviceStatusEditResolver,
       ManufacturerListResolver,
-      ManufacturerEditResolver
+      ManufacturerEditResolver,
+      ProductTypeListResolver,
+      ProductTypeEditResolver
    ],
    bootstrap: [
       AppComponent

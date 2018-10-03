@@ -43,13 +43,21 @@ namespace MobileDevice.API.Data.ProductType
 
         public async Task<PagedList<MdaProductType>> GetProductTypes(MdaProductTypeQuery filter)
         {
-            var query = _context.MdaProductType.AsQueryable();
+            var query = _context.MdaProductType
+            .Include(pm => pm.MdaProductModel)
+            .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;
             
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(pt => pt.Name.Contains(filter.Name));
+
+            if (filter.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(d => d.Active == 1);                
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaProductType, object>>>
             {

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -41,9 +42,11 @@ namespace MobileDevice.API.Controllers
             var productTypes = await _repo.GetProductTypes(filter);
 
             Response.AddPagination(productTypes.CurrentPage, productTypes.PageSize, 
-                    productTypes.TotalCount, productTypes.TotalPages);             
+                    productTypes.TotalCount, productTypes.TotalPages);     
 
-            return Ok(productTypes);
+            var productTypesList = _mapper.Map<IEnumerable<ProductTypeForList>>(productTypes);
+
+            return Ok(productTypesList);
         }
 
         [HttpGet("{id}")]
@@ -84,6 +87,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add product type.");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateProductType(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var pt = await _repo.GetProductType(id);
+
+            pt.Active = 0;
+            pt.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            pt.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductType(int id, [FromBody] ProductTypeSaveResource saveResource)
         {
@@ -95,7 +115,8 @@ namespace MobileDevice.API.Controllers
 
             /* Pre-existence Test */
             var filter = new MdaProductTypeQuery() {
-                Name = saveResource.Name
+                Name = saveResource.Name,
+                Active = Convert.ToByte(saveResource.Active == true ? 1 : 0)
             };
             var productTypeFromRepoExisting = await _repo.GetProductTypes(filter);
             if (productTypeFromRepoExisting.Any())

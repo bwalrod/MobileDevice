@@ -49,7 +49,7 @@ export class ManufacturerEditComponent implements OnInit {
         this.alertify.success('Manufacturer added successfully');
         this.manufacturer = manufacturer;
         this.editForm.reset(this.manufacturer);
-        this.router.navigate(['/manufactures/edit/' + this.manufacturer.id]);
+        this.router.navigate(['/manufacturers/edit/' + this.manufacturer.id]);
       }, error => {
         this.alertify.error(error);
       });
