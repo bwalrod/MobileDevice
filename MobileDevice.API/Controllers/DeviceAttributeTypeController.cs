@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -41,7 +42,9 @@ namespace MobileDevice.API.Controllers
                     deviceAttributeTypes.PageSize,
                     deviceAttributeTypes.TotalCount, deviceAttributeTypes.TotalPages);
 
-            return Ok(deviceAttributeTypes);
+            var deviceAttributeTypesList = _mapper.Map<IEnumerable<DeviceAttributeTypeForList>>(deviceAttributeTypes);
+
+            return Ok(deviceAttributeTypesList);
         }
 
 
@@ -58,6 +61,9 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDeviceAttributeType([FromBody] DeviceAttributeTypeSaveResource deviceAttributeTypeSaveResource)
         {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+                            
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -75,6 +81,23 @@ namespace MobileDevice.API.Controllers
                 return Ok(deviceAttributeType);
 
             return BadRequest("Failed to add device date");
+        }
+
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateDeviceAttributeType(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var dat = await _repo.GetDeviceAttributeType(id);
+
+            dat.Active = 0;
+            dat.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            dat.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
         }
 
         [HttpPut("{id}")]

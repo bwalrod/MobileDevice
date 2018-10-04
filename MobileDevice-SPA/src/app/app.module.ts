@@ -35,6 +35,12 @@ import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.co
 import { DeviceStatusEditResolver } from './_resolvers/devicestatus-edit.resolver';
 import { DeviceStatusListResolver } from './_resolvers/devicestatus-list.resolver';
 import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list.component';
+import { DevicestatusEditComponent } from './devicestatus-edit/devicestatus-edit.component';
+import { DeviceAttributeTypeEditResolver } from './_resolvers/deviceattributetype-edit.resolver';
+import { DeviceAttributeTypeListResolver } from './_resolvers/deviceattributetype-list.resolver';
+import { DeviceattributetypeListComponent } from './deviceattributetype-list/deviceattributetype-list.component';
+import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/deviceattributetype-edit.component';
+
 
 
 
@@ -51,7 +57,10 @@ import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list
       ManufacturerEditComponent,
       ProducttypeListComponent,
       ProducttypeEditComponent,
-      DevicestatusListComponent
+      DevicestatusListComponent,
+      DevicestatusEditComponent,
+      DeviceattributetypeListComponent,
+      DeviceattributetypeEditComponent
    ],
    imports: [
       BrowserModule,
@@ -71,6 +80,8 @@ import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list
       UserListResolver,
       DepartmentListResolver,
       DepartmentEditResolver,
+      DeviceAttributeTypeListResolver,
+      DeviceAttributeTypeEditResolver,
       DeviceStatusListResolver,
       DeviceStatusEditResolver,
       ManufacturerListResolver,

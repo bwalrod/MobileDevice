@@ -43,7 +43,9 @@ namespace MobileDevice.API.Data.DeviceStatus
 
         public async Task<PagedList<MdaDeviceStatus>> GetDeviceStatuses(MdaDeviceStatusQuery filter)
         {
-            var query = _context.MdaDeviceStatus.AsQueryable();
+            var query = _context.MdaDeviceStatus
+            .Include(d => d.MdaDevice)
+            .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;

@@ -96,7 +96,10 @@ namespace MobileDevice.API.Helpers
 
             CreateMap<DeviceAttributeTypeQueryResource, MdaDeviceAttributeTypeQuery>();
 
-            CreateMap<DeviceAttributeTypeSaveResource, MdaDeviceAttributeType>();            
+            CreateMap<DeviceAttributeTypeSaveResource, MdaDeviceAttributeType>(); 
+
+            CreateMap<MdaDeviceAttributeType, DeviceAttributeTypeForList>()
+                .ForMember(l => l.DeviceAttributeCount, opt => opt.MapFrom(s => s.MdaDeviceAttribute.Count()));           
 
             /*  MdaDeviceDate */
 

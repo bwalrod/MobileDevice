@@ -43,13 +43,21 @@ namespace MobileDevice.API.Data.DeviceAttributeType
 
         public async Task<PagedList<MdaDeviceAttributeType>> GetDeviceAttributeTypes(MdaDeviceAttributeTypeQuery filter)
         {
-            var query = _context.MdaDeviceAttributeType.AsQueryable();
+            var query = _context.MdaDeviceAttributeType
+            .Include(da => da.MdaDeviceAttribute)
+            .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(t => t.Name.Contains(filter.Name));
+
+            if (filter.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(d => d.Active == 1);                    
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaDeviceAttributeType, object>>>
             {

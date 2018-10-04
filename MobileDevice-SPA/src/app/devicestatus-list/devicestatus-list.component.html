@@ -1,7 +1,7 @@
 <div class="mt-5 pt-5">
   <h2 class="text-center">{{ pageLabel }}</h2>
     <div class="container" style="width:60%;">
-      <table class="table table-condensed table-striped">
+      <table class="table table-condensed table-striped table-sm">
         <thead>
           <tr>
             <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/' + pageRoute + '/edit/0']" >Add</button></th>
@@ -21,7 +21,7 @@
         <tbody>
           <tr *ngFor="let el of list">
             <th scope="row"><i class="fa fa-trash" (click)="deactivateElement(el.id)" 
-              [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.productModelCount > 0}"
+              [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.deviceCount > 0}"
               tooltip="{{(el.deviceCount > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with members.': '' }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.name }}</a></td>
             <td>{{ el.deviceCount }}</td>

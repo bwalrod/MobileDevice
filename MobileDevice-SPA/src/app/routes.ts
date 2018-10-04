@@ -1,3 +1,8 @@
+import { DeviceAttributeTypeEditResolver } from './_resolvers/deviceattributetype-edit.resolver';
+import { DeviceAttributeTypeListResolver } from './_resolvers/deviceattributetype-list.resolver';
+import { DeviceattributetypeListComponent } from './deviceattributetype-list/deviceattributetype-list.component';
+import { DeviceStatusEditResolver } from './_resolvers/devicestatus-edit.resolver';
+import { DevicestatusEditComponent } from './devicestatus-edit/devicestatus-edit.component';
 import { DeviceStatusListResolver } from './_resolvers/devicestatus-list.resolver';
 import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
 import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
@@ -28,7 +33,12 @@ export const appRoutes: Routes = [
             { path: 'users/edit/:id', component: UserEditComponent, resolve: {user: UserEditResolver}},
             { path: 'departments', component: DepartmentListComponent, resolve: {departments: DepartmentListResolver}},
             { path: 'departments/edit/:id', component: DepartmentEditComponent, resolve: {department: DepartmentEditResolver}},
+            // tslint:disable-next-line:max-line-length
+            { path: 'deviceattributetypes', component: DeviceattributetypeListComponent, resolve: {deviceattributetypes: DeviceAttributeTypeListResolver}},
+            // tslint:disable-next-line:max-line-length
+            { path: 'deviceattributetypes/edit/:id', component: DevicestatusEditComponent, resolve: {deviceattributetype: DeviceAttributeTypeEditResolver}},
             { path: 'devicestatuses', component: DevicestatusListComponent, resolve: {devicestatuses: DeviceStatusListResolver}},
+            { path: 'devicestatuses/edit/:id', component: DevicestatusEditComponent, resolve: {devicestatus: DeviceStatusEditResolver}},
             { path: 'manufacturers', component: ManufacturerListComponent, resolve: {manufacturers: ManufacturerListResolver}},
             { path: 'manufacturers/edit/:id', component: ManufacturerEditComponent, resolve: {manufacturer: ManufacturerEditResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},

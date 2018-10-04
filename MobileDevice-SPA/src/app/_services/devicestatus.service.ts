@@ -22,7 +22,7 @@ export class DeviceStatusService {
     status?: number
   ): Observable<PaginatedResult<DeviceStatus[]>> {
     const paginatedResult: PaginatedResult<
-      DeviceStatus[]
+    DeviceStatus[]
     > = new PaginatedResult<DeviceStatus[]>();
 
     let params = new HttpParams();
