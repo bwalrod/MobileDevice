@@ -107,7 +107,7 @@ namespace MobileDevice.API.Controllers
                 return BadRequest(ModelState);
 
             /* Test for prexistence */                
-            var deviceAttributeTypeFromRepoExisting = await _repo.GetDeviceAttributeTypes(new MdaDeviceAttributeTypeQuery(){Name = deviceAttributeTypeSaveResource.Name});
+            var deviceAttributeTypeFromRepoExisting = await _repo.GetDeviceAttributeTypes(new MdaDeviceAttributeTypeQuery(){Name = deviceAttributeTypeSaveResource.Name, Active = Convert.ToByte(deviceAttributeTypeSaveResource.Active == true ? 1 : 0)});
             if(deviceAttributeTypeFromRepoExisting.Any())
                 return BadRequest($"AttributeType {deviceAttributeTypeSaveResource.Name} already exists");                                
 

@@ -14,7 +14,7 @@ export class DeviceAttributeTypeEditResolver implements Resolve<DeviceAttributeT
         private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<DeviceAttributeType> {
-        return this.service.getDeviceAttributeTypes(route.params['id']).pipe(
+        return this.service.getDeviceAttributeType(route.params['id']).pipe(
             catchError(() => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/devicestatuses']);

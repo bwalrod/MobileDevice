@@ -1,5 +1,4 @@
 
-
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { AlertifyService } from './_services/alertify.service';
@@ -40,6 +39,7 @@ import { DeviceAttributeTypeEditResolver } from './_resolvers/deviceattributetyp
 import { DeviceAttributeTypeListResolver } from './_resolvers/deviceattributetype-list.resolver';
 import { DeviceattributetypeListComponent } from './deviceattributetype-list/deviceattributetype-list.component';
 import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/deviceattributetype-edit.component';
+import { DeviceDateTypeListResolver } from './_resolvers/devicedatetype-list.resolver';
 
 
 
@@ -82,6 +82,7 @@ import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/dev
       DepartmentEditResolver,
       DeviceAttributeTypeListResolver,
       DeviceAttributeTypeEditResolver,
+      DeviceDateTypeListResolver,
       DeviceStatusListResolver,
       DeviceStatusEditResolver,
       ManufacturerListResolver,

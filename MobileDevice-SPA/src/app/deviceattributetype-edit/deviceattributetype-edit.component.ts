@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceAttributeTypeService } from './../_services/deviceattributetype.service';
-import { DeviceAttributeType } from './../_models/deviceattributetype';
+import { DeviceAttributeType } from '../_models/deviceattributetype';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AlertifyService } from '../_services/alertify.service';
@@ -28,8 +28,8 @@ export class DeviceattributetypeEditComponent implements OnInit {
 
   ngOnInit() {
     this.element = this.newElement;
-
     this.route.data.subscribe(data => {
+      console.log(data['deviceattributetype']);
       if (data['deviceattributetype']) {
         this.element = data['deviceattributetype'];
       }

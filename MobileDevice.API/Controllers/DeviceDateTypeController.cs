@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -35,12 +37,14 @@ namespace MobileDevice.API.Controllers
 
             var filter = _mapper.Map<DeviceDateTypeQueryResource, MdaDeviceDateTypeQuery>(filterResource);
 
-            var devicesDateTypes = await _repo.GetDeviceDateTypes(filter);
+            var deviceDateTypes = await _repo.GetDeviceDateTypes(filter);
 
-            Response.AddPagination(devicesDateTypes.CurrentPage, 
-                devicesDateTypes.PageSize, devicesDateTypes.TotalCount, devicesDateTypes.TotalPages);
+            Response.AddPagination(deviceDateTypes.CurrentPage, 
+                deviceDateTypes.PageSize, deviceDateTypes.TotalCount, deviceDateTypes.TotalPages);
 
-            return Ok(devicesDateTypes);
+            var deviceDateTypesList = _mapper.Map<IEnumerable<DeviceDateTypeForList>>(deviceDateTypes);
+
+            return Ok(deviceDateTypesList);
         }
 
 
@@ -79,6 +83,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add device date");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateDeviceDateType(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var ddt = await _repo.GetDeviceDateType(id);
+
+            ddt.Active = 0;
+            ddt.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            ddt.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceDateType(int id, [FromBody] DeviceDateTypeSaveResource deviceDateTypeSaveResource)
         {
@@ -89,7 +110,11 @@ namespace MobileDevice.API.Controllers
                 return BadRequest(ModelState);
 
             /* Test for prexistence */                
-            var deviceDateTypeFromRepoExisting = await _repo.GetDeviceDateTypes(new MdaDeviceDateTypeQuery(){Name = deviceDateTypeSaveResource.Name});
+            var filter = new MdaDeviceDateTypeQuery() {
+                Name = deviceDateTypeSaveResource.Name,
+                Active = Convert.ToByte(deviceDateTypeSaveResource.Active == true ? 1 : 0)
+            };
+            var deviceDateTypeFromRepoExisting = await _repo.GetDeviceDateTypes(filter);
             if(deviceDateTypeFromRepoExisting.Any())
                 return BadRequest($"DateType {deviceDateTypeSaveResource.Name} already exists");                
 
