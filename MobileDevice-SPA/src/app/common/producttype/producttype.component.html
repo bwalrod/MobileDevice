@@ -1,0 +1,4 @@
+<select (change)="optionSelected($event.target.value)">
+  <option value="0">.: Any :.</option>
+  <option *ngFor="let item of list" [value]="item.id" [selected]="(item.id == selectedProductType)">{{ item.name }}</option>
+</select>

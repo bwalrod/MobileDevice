@@ -41,7 +41,7 @@ namespace MobileDevice.API.Data.DeviceDateType
             return deviceDateTypes;
         }
 
-        public async Task<PagedList<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter)
+        public async Task<PagedList<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter, bool exactMatch = false)
         {
             var query = _context.MdaDeviceDateType
             .Include(dd => dd.MdaDeviceDate)
@@ -50,8 +50,15 @@ namespace MobileDevice.API.Data.DeviceDateType
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;
 
-            if (!string.IsNullOrEmpty(filter.Name))
-                query = query.Where(t => t.Name.Contains(filter.Name));
+            if (!string.IsNullOrEmpty(filter.Name)){
+                if (exactMatch){
+                    query = query.Where(t => t.Name.Equals(filter.Name));
+                }
+                else {
+                    query = query.Where(t => t.Name.Contains(filter.Name));                    
+                }
+            }
+                
 
             if (filter.Active == 0)
                 query = query.Where(d => d.Active == 0);

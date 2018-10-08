@@ -6,6 +6,7 @@ namespace MobileDevice.API.Models.Query
     {
         public string Name { get; set; }
         public int? ProductModelId { get; set; }
+        public int? ProductManufacturerId { get; set; }
         public byte Active { get; set; }        
         public string SortBy { get; set; }
         public bool IsSortAscending { get; set; }

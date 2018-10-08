@@ -5,8 +5,10 @@ namespace MobileDevice.API.Controllers.Resources.ProductModel
         public int Id { get; set; }
         public int ProductTypeId { get; set; }
         public string Name { get; set; }
+        public byte Active { get; set; }
         public int ProductManufacturerId { get; set; }            
         public string ProductManufacturerName { get; set; }
         public string ProductTypeName { get; set; }
+        public int ProductCount { get; set; }
     }
 }

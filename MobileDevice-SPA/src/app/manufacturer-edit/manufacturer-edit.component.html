@@ -23,8 +23,8 @@
       </div>
       <div class="row mt-3">
         <div class="col text-center">
-        <button class="btn btn-success" form="editForm" [disabled]="!editForm.dirty">{{ manufacturer.id > 0 ? 'Update' : 'Add' }}</button>
-        <button *ngIf="manufacturer.id > 0" class="btn btn-danger" (click)="$event.stopPropagation()" (click)="deactivateManufacturer(manufacturer.id)">Delete</button>
+        <button class="btn btn-success mr-1" form="editForm" [disabled]="!editForm.dirty">{{ manufacturer.id > 0 ? 'Update' : 'Add' }}</button>
+        <button *ngIf="manufacturer.id > 0" class="btn btn-danger mr-1" (click)="$event.stopPropagation()" (click)="deactivateManufacturer(manufacturer.id)">Delete</button>
         <button class="btn btn-default" (click)="$event.stopPropagation()" (click)="returnToList()">{{ manufacturer.id > 0 ? 'Return to List' : 'Cancel'}}</button>
         </div>
       </div>

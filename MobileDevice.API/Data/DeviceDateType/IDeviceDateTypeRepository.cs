@@ -15,7 +15,7 @@ namespace MobileDevice.API.Data.DeviceDateType
          Task<bool> SaveAll();
          Task<IEnumerable<MdaDeviceDateType>> GetDeviceDateTypes();
 
-         Task<PagedList<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter);
+         Task<PagedList<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter, bool exactMatch);
          
          Task<MdaDeviceDateType> GetDeviceDateType(int id);        
     }

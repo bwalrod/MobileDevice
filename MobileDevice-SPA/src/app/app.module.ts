@@ -1,3 +1,6 @@
+import { ProducttypeComponent } from './common/producttype/producttype.component';
+
+
 
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
@@ -29,6 +32,7 @@ import { ManufacturerListResolver } from './_resolvers/manufacturer-list.resolve
 import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolver';
 import { ProductTypeListResolver } from './_resolvers/producttype-list.resolver';
 import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
+import { ProductModelListResolver } from './_resolvers/productmodel-list.resolver';
 import { ProducttypeListComponent } from './producttype-list/producttype-list.component';
 import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
 import { DeviceStatusEditResolver } from './_resolvers/devicestatus-edit.resolver';
@@ -40,6 +44,10 @@ import { DeviceAttributeTypeListResolver } from './_resolvers/deviceattributetyp
 import { DeviceattributetypeListComponent } from './deviceattributetype-list/deviceattributetype-list.component';
 import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/deviceattributetype-edit.component';
 import { DeviceDateTypeListResolver } from './_resolvers/devicedatetype-list.resolver';
+import { DeviceDateTypeEditResolver } from './_resolvers/devicedatetype-edit.resolver';
+import { DevicedatetypeListComponent } from './devicedatetype-list/devicedatetype-list.component';
+import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
+import { ProductmodelListComponent } from './productmodel-list/productmodel-list.component';
 
 
 
@@ -60,7 +68,11 @@ import { DeviceDateTypeListResolver } from './_resolvers/devicedatetype-list.res
       DevicestatusListComponent,
       DevicestatusEditComponent,
       DeviceattributetypeListComponent,
-      DeviceattributetypeEditComponent
+      DeviceattributetypeEditComponent,
+      DevicedatetypeListComponent,
+      DevicedatetypeEditComponent,
+      ProductmodelListComponent,
+      ProducttypeComponent
    ],
    imports: [
       BrowserModule,
@@ -83,10 +95,12 @@ import { DeviceDateTypeListResolver } from './_resolvers/devicedatetype-list.res
       DeviceAttributeTypeListResolver,
       DeviceAttributeTypeEditResolver,
       DeviceDateTypeListResolver,
+      DeviceDateTypeEditResolver,
       DeviceStatusListResolver,
       DeviceStatusEditResolver,
       ManufacturerListResolver,
       ManufacturerEditResolver,
+      ProductModelListResolver,
       ProductTypeListResolver,
       ProductTypeEditResolver
    ],

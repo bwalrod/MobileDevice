@@ -1,3 +1,8 @@
+import { ProductModelListResolver } from './_resolvers/productmodel-list.resolver';
+import { ProductmodelListComponent } from './productmodel-list/productmodel-list.component';
+import { DeviceDateTypeEditResolver } from './_resolvers/devicedatetype-edit.resolver';
+
+
 
 import { HomeComponent } from './home/home.component';
 import { Routes } from '@angular/router';
@@ -9,6 +14,7 @@ import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list
 import { DevicestatusEditComponent } from './devicestatus-edit/devicestatus-edit.component';
 import { DeviceattributetypeListComponent } from './deviceattributetype-list/deviceattributetype-list.component';
 import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/deviceattributetype-edit.component';
+import { DevicedatetypeListComponent } from './devicedatetype-list/devicedatetype-list.component';
 import { ProducttypeListComponent } from './producttype-list/producttype-list.component';
 import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
 import { UserListComponent } from './user-list/user-list.component';
@@ -24,11 +30,13 @@ import { DeviceStatusListResolver } from './_resolvers/devicestatus-list.resolve
 import { DeviceStatusEditResolver } from './_resolvers/devicestatus-edit.resolver';
 import { DeviceAttributeTypeListResolver } from './_resolvers/deviceattributetype-list.resolver';
 import { DeviceAttributeTypeEditResolver } from './_resolvers/deviceattributetype-edit.resolver';
+import { DeviceDateTypeListResolver } from './_resolvers/devicedatetype-list.resolver';
 import { ManufacturerListResolver } from './_resolvers/manufacturer-list.resolver';
 import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolver';
 import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
+import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -43,10 +51,14 @@ export const appRoutes: Routes = [
             { path: 'deviceattributetypes', component: DeviceattributetypeListComponent, resolve: {deviceattributetypes: DeviceAttributeTypeListResolver}},
             // tslint:disable-next-line:max-line-length
             { path: 'deviceattributetypes/edit/:id', component: DeviceattributetypeEditComponent, resolve: {deviceattributetype: DeviceAttributeTypeEditResolver}},
+            { path: 'devicedatetypes', component: DevicedatetypeListComponent, resolve: {devicedatetypes: DeviceDateTypeListResolver}},
+            // tslint:disable-next-line:max-line-length
+            { path: 'devicedatetypes/edit/:id', component: DevicedatetypeEditComponent, resolve: {devicedatetype: DeviceDateTypeEditResolver}},
             { path: 'devicestatuses', component: DevicestatusListComponent, resolve: {devicestatuses: DeviceStatusListResolver}},
             { path: 'devicestatuses/edit/:id', component: DevicestatusEditComponent, resolve: {devicestatus: DeviceStatusEditResolver}},
             { path: 'manufacturers', component: ManufacturerListComponent, resolve: {manufacturers: ManufacturerListResolver}},
             { path: 'manufacturers/edit/:id', component: ManufacturerEditComponent, resolve: {manufacturer: ManufacturerEditResolver}},
+            { path: 'productmodels', component: ProductmodelListComponent, resolve: {productmodels: ProductModelListResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},
             { path: 'producttypes/edit/:id', component: ProducttypeEditComponent, resolve: {producttype: ProductTypeEditResolver}}
         ]

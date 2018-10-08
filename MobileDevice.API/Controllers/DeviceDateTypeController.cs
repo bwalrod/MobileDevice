@@ -37,7 +37,7 @@ namespace MobileDevice.API.Controllers
 
             var filter = _mapper.Map<DeviceDateTypeQueryResource, MdaDeviceDateTypeQuery>(filterResource);
 
-            var deviceDateTypes = await _repo.GetDeviceDateTypes(filter);
+            var deviceDateTypes = await _repo.GetDeviceDateTypes(filter, false);
 
             Response.AddPagination(deviceDateTypes.CurrentPage, 
                 deviceDateTypes.PageSize, deviceDateTypes.TotalCount, deviceDateTypes.TotalPages);
@@ -68,7 +68,7 @@ namespace MobileDevice.API.Controllers
                 return BadRequest(ModelState);
 
             /* Test for prexistence */                
-            var deviceDateTypeFromRepo = await _repo.GetDeviceDateTypes(new MdaDeviceDateTypeQuery(){Name = deviceDateTypeSaveResource.Name});
+            var deviceDateTypeFromRepo = await _repo.GetDeviceDateTypes(new MdaDeviceDateTypeQuery(){Name = deviceDateTypeSaveResource.Name}, true);
             if(deviceDateTypeFromRepo.Any())
                 return BadRequest($"DateType {deviceDateTypeSaveResource.Name} already exists");
 
@@ -114,7 +114,7 @@ namespace MobileDevice.API.Controllers
                 Name = deviceDateTypeSaveResource.Name,
                 Active = Convert.ToByte(deviceDateTypeSaveResource.Active == true ? 1 : 0)
             };
-            var deviceDateTypeFromRepoExisting = await _repo.GetDeviceDateTypes(filter);
+            var deviceDateTypeFromRepoExisting = await _repo.GetDeviceDateTypes(filter, true);
             if(deviceDateTypeFromRepoExisting.Any())
                 return BadRequest($"DateType {deviceDateTypeSaveResource.Name} already exists");                
 

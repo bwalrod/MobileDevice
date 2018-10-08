@@ -88,6 +88,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add product model");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateProductModel(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var pm = await _repo.GetProductModel(id);
+
+            pm.Active = 0;
+            pm.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            pm.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductModel(int id, [FromBody] ProductModelSaveResource saveResource)
         {
