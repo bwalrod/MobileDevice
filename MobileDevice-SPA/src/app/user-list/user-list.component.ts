@@ -76,4 +76,12 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  resetFilter() {
+    this.userParams.login = '';
+    this.userParams.firstname = '';
+    this.userParams.lastname = '';
+    this.userParams.accesslevel = '';
+    this.filterTable();
+  }
+
 }

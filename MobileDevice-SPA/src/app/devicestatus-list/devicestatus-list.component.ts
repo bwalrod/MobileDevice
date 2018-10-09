@@ -68,5 +68,10 @@ export class DevicestatusListComponent implements OnInit {
         });
     });
   }
+
+  resetFilter() {
+    this.filter = '';
+    this.filterTable();
+  }
 }
 

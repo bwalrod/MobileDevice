@@ -32,8 +32,8 @@ export class ProductmodelListComponent implements OnInit {
     });
 
     this.userParams.name = '';
-    this.userParams.productTypeId = 1;
-    this.userParams.productManufacturerId = 1;
+    this.userParams.productTypeId = 0;
+    this.userParams.productManufacturerId = 0;
   }
 
   loadList() {
@@ -75,7 +75,20 @@ export class ProductmodelListComponent implements OnInit {
   }
 
   filterByType(typeFilter: number) {
-    alert(typeFilter);
+    this.userParams.productTypeId = typeFilter;
+    this.filterTable();
+  }
+
+  filterByManufacturer(manufacturerFilter: number) {
+    this.userParams.productManufacturerId = manufacturerFilter;
+    this.filterTable();
+  }
+
+  clearFilter() {
+    this.userParams.name = '';
+    this.userParams.productTypeId = 0;
+    this.userParams.productManufacturerId = 0;
+    this.filterTable();
   }
 
 }

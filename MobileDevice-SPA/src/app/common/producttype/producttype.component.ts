@@ -11,11 +11,12 @@ import { ProductTypeService } from '../../_services/producttype.service';
   styleUrls: ['./producttype.component.css']
 })
 export class ProducttypeComponent implements OnInit {
+  @Input() selectedProductType: number;
+  @Input() showNoValue: boolean;
   @Output() selectOption = new EventEmitter();
 
   list: ProductType[];
   filter = '';
-  selectedProductType: number;
 
   constructor(private service: ProductTypeService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 

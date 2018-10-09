@@ -1,7 +1,7 @@
 <div class="text-center mt-5 pt-5">
   <h2>Users</h2>
     <div class="container">
-    <table class="table table-striped">
+    <table class="table table-striped table-sm">
       <thead>
       <tr>
         <th><button class="btn btn-link" [routerLink]="['/users/edit/0']" >Add</button></th>
@@ -12,11 +12,11 @@
         <th></th>
       </tr>
       <tr>
-        <th>Filter</th>
-        <th><input type="text" name="fLogin" [(ngModel)]="userParams.login" (keyup)="filterTable()"></th>
-        <th><input type="text" name="fFName" [(ngModel)]="userParams.firstname" (keyup)="filterTable()"></th>
-        <th><input type="text" name="fLName" [(ngModel)]="userParams.lastname" (keyup)="filterTable()"></th>
-        <th><input type="text" name="fAccessLevel" [(ngModel)]="userParams.accesslevel" (keyup)="filterTable()"></th>
+        <th><button class="btn btn-sm btn-default" (click)="resetFilter()">Clear</button></th>
+        <th><input type="text" class="form-control-sm" name="fLogin" [(ngModel)]="userParams.login" (keyup)="filterTable()"></th>
+        <th><input type="text" class="form-control-sm" name="fFName" [(ngModel)]="userParams.firstname" (keyup)="filterTable()"></th>
+        <th><input type="text" class="form-control-sm" name="fLName" [(ngModel)]="userParams.lastname" (keyup)="filterTable()"></th>
+        <th><input type="text" class="form-control-sm" name="fAccessLevel" [(ngModel)]="userParams.accesslevel" (keyup)="filterTable()"></th>
         <th>
           <div class="row">
             <div class="btn-group">

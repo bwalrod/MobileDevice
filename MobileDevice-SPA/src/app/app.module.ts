@@ -1,6 +1,3 @@
-import { ProducttypeComponent } from './common/producttype/producttype.component';
-
-
 
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
@@ -49,7 +46,11 @@ import { DevicedatetypeListComponent } from './devicedatetype-list/devicedatetyp
 import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
 import { ProductmodelListComponent } from './productmodel-list/productmodel-list.component';
 
-
+import { ProducttypeComponent } from './common/producttype/producttype.component';
+import { ManufacturerSelectComponent } from './common/manufacturer-select/manufacturer-select.component';
+import { ProductmodelEditComponent } from './productmodel-edit/productmodel-edit.component';
+import { ProductModelEditResolver } from './_resolvers/productmodel-edit.resolver';
+import { ProductmodelSelectComponent } from './common/productmodel-select/productmodel-select.component';
 
 
 @NgModule({
@@ -72,7 +73,10 @@ import { ProductmodelListComponent } from './productmodel-list/productmodel-list
       DevicedatetypeListComponent,
       DevicedatetypeEditComponent,
       ProductmodelListComponent,
-      ProducttypeComponent
+      ProducttypeComponent,
+      ManufacturerSelectComponent,
+      ProductmodelEditComponent,
+      ProductmodelSelectComponent
    ],
    imports: [
       BrowserModule,
@@ -101,6 +105,7 @@ import { ProductmodelListComponent } from './productmodel-list/productmodel-list
       ManufacturerListResolver,
       ManufacturerEditResolver,
       ProductModelListResolver,
+      ProductModelEditResolver,
       ProductTypeListResolver,
       ProductTypeEditResolver
    ],

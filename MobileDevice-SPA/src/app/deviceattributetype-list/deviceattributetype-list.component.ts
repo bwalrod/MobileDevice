@@ -69,4 +69,8 @@ export class DeviceattributetypeListComponent implements OnInit {
     });
   }
 
+  resetFilter() {
+    this.filter = '';
+    this.filterTable();
+  }
 }

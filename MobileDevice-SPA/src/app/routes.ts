@@ -1,3 +1,5 @@
+import { ProductModelEditResolver } from './_resolvers/productmodel-edit.resolver';
+import { ProductmodelEditComponent } from './productmodel-edit/productmodel-edit.component';
 import { ProductModelListResolver } from './_resolvers/productmodel-list.resolver';
 import { ProductmodelListComponent } from './productmodel-list/productmodel-list.component';
 import { DeviceDateTypeEditResolver } from './_resolvers/devicedatetype-edit.resolver';
@@ -59,6 +61,7 @@ export const appRoutes: Routes = [
             { path: 'manufacturers', component: ManufacturerListComponent, resolve: {manufacturers: ManufacturerListResolver}},
             { path: 'manufacturers/edit/:id', component: ManufacturerEditComponent, resolve: {manufacturer: ManufacturerEditResolver}},
             { path: 'productmodels', component: ProductmodelListComponent, resolve: {productmodels: ProductModelListResolver}},
+            { path: 'productmodels/edit/:id', component: ProductmodelEditComponent, resolve: {productmodel: ProductModelEditResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},
             { path: 'producttypes/edit/:id', component: ProducttypeEditComponent, resolve: {producttype: ProductTypeEditResolver}}
         ]

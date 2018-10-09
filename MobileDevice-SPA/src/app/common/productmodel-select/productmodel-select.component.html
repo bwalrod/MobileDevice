@@ -1,0 +1,4 @@
+<select class="form-control-sm">
+  <option *ngIf="showNoValue" value="0">.: Any :.</option>
+  <option *ngFor="let m of models" [value]="m.id" [select]="(m.id == selectedModelId">{{ m.name }}</option>
+</select>

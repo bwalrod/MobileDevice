@@ -1,0 +1,49 @@
+<div class="container mt-5 pt-5 col-lg-8 col-lg-offset-2" >
+    <div class="row" >
+    <div class="col text-center" >
+      <h4 *ngIf="element.id > 0">Edit {{ elementLabel }}: {{ element.name }}</h4>
+      <h4 *ngIf="element.id == 0">Add {{ elementLabel }}</h4>
+    </div>
+    </div>
+    <div class="row">
+      <div class="col col-lg-3"></div>
+    <div class="col col-lg-6" >
+      <form #editForm="ngForm" id="editForm" (ngSubmit)="submitForm()" >
+        <div *ngIf="element.id > 0" class="row mb-1">
+          <div class="col col-3"><label>Id</label></div>
+          <div class="col col-9"><label>{{ element.id }}</label></div>
+        </div>
+        <div class="row mb-1">
+          <div class="col col-3"><label>Type</label></div>
+          <div class="col-9">
+            <app-producttype [selectedProductType]="element.productTypeId" (selectOption)="setProductType($event)"></app-producttype>
+          </div>
+        </div>
+        <div class="row mb-1">
+          <div class="col col-3"><label>Manufacturer</label></div>
+          <div class="col-9">
+            <app-manufacturer-select [selectedManufacturer]="element.productManufacturerId" (selectOption)="setProductManufacturer($event)"></app-manufacturer-select>
+            <!-- <input type="text" class="form-control-sm" name="productManufacturerId" [(ngModel)]="element.productManufacturerId"> -->
+          </div>
+        </div>
+        <div class="row mb-1">
+            <div class="col col-3"><label for="name">Name</label></div>
+            <div class="col col-9">
+              <input type="text" class="form-control-sm" name="name" [(ngModel)]="element.name">
+            </div>
+          </div>        
+        <div class="row">
+          <div class="col col-3"><label for="active">Active</label></div>
+          <div class="col col-1 checkbox"><input type="checkbox" [disabled]="element.id == 0" class="form-control ml-2" name="active" [(ngModel)]="element.active"></div>
+        </div>
+        <div class="row mt-3">
+          <div class="col text-center">
+          <button class="btn btn-success mr-1" form="editForm" [disabled]="!editForm.dirty">{{ element.id > 0 ? 'Update' : 'Add' }}</button>
+          <button *ngIf="element.id > 0" class="btn btn-danger mr-1" (click)="deactivateElement(element.id,$event)">Delete</button>
+          <button class="btn btn-default" (click)="returnToList($event)">{{ element.id > 0 ? 'Return to List' : 'Cancel'}}</button>
+          </div>
+        </div>
+      </form> 
+    </div>
+  </div>
+  </div>

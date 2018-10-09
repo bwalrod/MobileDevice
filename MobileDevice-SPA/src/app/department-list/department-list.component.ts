@@ -70,4 +70,8 @@ export class DepartmentListComponent implements OnInit {
     });
   }
 
+  resetFilter() {
+    this.filter = '';
+    this.filterTable();
+  }
 }

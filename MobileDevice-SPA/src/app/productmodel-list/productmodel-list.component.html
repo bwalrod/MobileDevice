@@ -5,14 +5,22 @@
         <thead>
           <tr>
             <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/' + pageRoute + '/edit/0']" >Add</button></th>
-            <th scope="col">Name<input type="text" size="40" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
-            <th scope="col">Type<app-producttype (selectOption)="filterByType($event)"></app-producttype></th>
-            <th scope="col">Manufacturer</th>
-            <th scope="col">Members</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Manufacturer</th>
+            <th>Products</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th class="w-20"><button class="btn btn-sm btn-default" (click)="clearFilter()">Clear</button></th>
+            <th scope="col"><input type="text" size="30" name="filter" class="form-control-sm" [(ngModel)]="userParams.name" (keyup)="filterTable()" placeholder="Filter Table"></th>
+            <th scope="col"><app-producttype [showNoValue]=true [selectedProductType]="userParams.productTypeId" (selectOption)="filterByType($event)"></app-producttype></th>
+            <th scope="col"><app-manufacturer-select [showNoValue]=true [selectedManufacturer]="userParams.productManufacturerId" (selectOption)="filterByManufacturer($event)"></app-manufacturer-select></th>
+            <th scope="col"></th>
             <th scope="col" class="w-20">
               <div class="row">
                 <div class="btn-group">
-                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
+                  <button class="btn btn-primary btn-sm" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
                   <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="filterTable()">Inactive</button>
                   <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="filterTable()">All</button>
                 </div>

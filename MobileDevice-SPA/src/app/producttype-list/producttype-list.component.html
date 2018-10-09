@@ -4,9 +4,17 @@
       <table class="table table-condensed table-striped table-sm">
         <thead>
           <tr>
-            <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/' + pageRoute + '/edit/0']" >Add</button></th>
-            <th scope="col">Name<input type="text" size="40" name="filter" class="ml-2" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
-            <th scope="col">Members</th>
+            <th scope="col" class="w-20">
+                <button class="btn btn-link" [routerLink]="['/' + pageRoute + '/edit/0']" >Add</button>
+            </th>
+            <th>Name</th>
+            <th>Models</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th scope="col" class="w-20"><button class="btn btn-sm btn-default" (click)="resetFilter()">Clear</button></th>
+            <th scope="col"><input class="form-control-sm" type="text" size="40" name="filter" [(ngModel)]="filter" (keyup)="filterTable()" placeholder="Filter Table"></th>
+            <th scope="col"></th>
             <th scope="col" class="w-20">
               <div class="row">
                 <div class="btn-group">

@@ -68,4 +68,9 @@ export class ProducttypeListComponent implements OnInit {
         });
     });
   }
+
+  resetFilter() {
+    this.filter = '';
+    this.filterTable();
+  }
 }

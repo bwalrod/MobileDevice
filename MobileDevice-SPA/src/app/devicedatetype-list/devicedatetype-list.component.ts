@@ -68,5 +68,10 @@ export class DevicedatetypeListComponent implements OnInit {
         });
     });
   }
+
+  resetFilter() {
+    this.filter = '';
+    this.filterTable();
+  }
 }
 
