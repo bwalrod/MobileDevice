@@ -33,6 +33,7 @@ namespace MobileDevice.API.Data.ProductCapacity
         {
             var productCapacity = await _context.MdaProductCapacity
             .Include(m => m.ProductModel).ThenInclude(m => m.ProductManufacturer)
+            .Include(m => m.ProductModel).ThenInclude(t => t.ProductType)
             .FirstOrDefaultAsync(pc => pc.Id == id);
             return productCapacity;
         }
@@ -47,6 +48,8 @@ namespace MobileDevice.API.Data.ProductCapacity
         {
             var query = _context.MdaProductCapacity
             .Include(m => m.ProductModel).ThenInclude(m => m.ProductManufacturer)
+            .Include(m => m.ProductModel).ThenInclude(t => t.ProductType)
+            .Include(p => p.MdaProduct)
             // .IgnoreQueryFilters()
             .AsQueryable();
 
@@ -54,7 +57,11 @@ namespace MobileDevice.API.Data.ProductCapacity
             //     filter.PageSize = 10;
 
             if (!string.IsNullOrEmpty(filter.Name))
-                query = query.Where(pc => pc.Name == filter.Name);
+                // query = query.Where(pc => pc.Name == filter.Name);
+                query = query.Where(pc => pc.Name.StartsWith(filter.Name));
+
+            if (filter.ProductTypeId.HasValue)
+                query = query.Where(pc => pc.ProductModel.ProductType.Id == filter.ProductTypeId);
 
             if (filter.ProductModelId.HasValue)
                 query = query.Where(pc => pc.ProductModelId == filter.ProductModelId);

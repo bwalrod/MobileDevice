@@ -2,7 +2,7 @@ import { PaginatedResult } from './../../_models/pagination';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from './../../_services/alertify.service';
 import { ProductmodelService } from './../../_services/productmodel.service';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, SimpleChanges } from '@angular/core';
 import { ProductModel } from '../../_models/productmodel';
 
 @Component({
@@ -22,7 +22,17 @@ export class ProductmodelSelectComponent implements OnInit {
 
   constructor(private service: ProductmodelService, private alertify: AlertifyService, private route: ActivatedRoute) { }
 
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['selectedProductTypeId'] || changes['selectedManufactureId']) {
+      this.filter.productTypeId = this.selectedProductTypeId;
+      this.filter.productManufacturerId = this.selectedManufactureId;
+      this.loadList();
+    }
+  }
+
   ngOnInit() {
+    this.filter.name = '';
     this.filter.productTypeId = this.selectedProductTypeId;
     this.filter.productManufacturerId = this.selectedManufactureId;
     this.loadList();

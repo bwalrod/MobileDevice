@@ -9,6 +9,7 @@ namespace MobileDevice.API.Controllers.Resources.ProductCapacity
     {
         public string Name { get; set; }
         public byte Active { get; set; }
+        public int? ProductTypeId { get; set; }
         public int? ProductModelId { get; set; }   
         public int? ProductManufacturerId { get; set; }
         public string SortBy { get; set; }

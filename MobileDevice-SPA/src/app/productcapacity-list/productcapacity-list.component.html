@@ -1,0 +1,59 @@
+<div class="mt-5 pt-5">
+  <h2 class="text-center">{{ pageLabel }}</h2>
+    <div class="container" style="width:60%;">
+      <table class="table table-condensed table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/' + pageRoute + '/edit/0']" >Add</button></th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Manufacturer</th>
+            <th>Model</th>
+            <th>Products</th>
+            <th></th>
+          </tr>
+          <tr>
+            <th class="w-20"><button class="btn btn-sm btn-default" (click)="clearFilter()">Clear</button></th>
+            <th scope="col"><input type="text" size="30" name="filter" class="form-control-sm" [(ngModel)]="filter.name" (keyup)="filterTable()" placeholder="Starts With"></th>
+            <th scope="col"><app-producttype [showNoValue]=true [selectedProductType]="filter.productTypeId" (selectOption)="filterByType($event)"></app-producttype></th>
+            <th scope="col"><app-manufacturer-select [showNoValue]=true [selectedManufacturer]="filter.productManufacturerId" (selectOption)="filterByManufacturer($event)"></app-manufacturer-select></th>
+            <th scope="col"><app-productmodel-select [showNoValue]=true [selectedProductTypeId]="filter.productTypeId" [selectedManufactureId]="filter.productManufacturerId" [selectedModelId]="0" (selectedOption)="filterByModel($event)"></app-productmodel-select></th>
+            <th scope="col"></th>
+            <th scope="col" class="w-20">
+              <div class="row">
+                <div class="btn-group">
+                  <button class="btn btn-primary btn-sm" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="filterTable()">Inactive</button>
+                  <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="filterTable()">All</button>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let el of list">
+            <th scope="row"><i class="fa fa-trash" (click)="deactivateElement(el.id)" 
+              [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.productCount > 0}"
+              tooltip="{{(el.productCount > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with members.': '' }}" container="" placement=""><span></span></i></th>
+            <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.name }}</a></td>
+            <td>{{ el.productTypeName }}</td>
+            <td>{{ el.productManufacturerName }}</td>
+            <td>{{ el.productModelName }}</td>
+            <td>{{ el.productCount }}</td>
+            <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
+<div class="d-flex justify-content-center">
+    <pagination [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
+    </pagination>
+  </div>
+

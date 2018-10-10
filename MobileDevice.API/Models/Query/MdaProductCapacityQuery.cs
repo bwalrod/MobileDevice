@@ -5,6 +5,7 @@ namespace MobileDevice.API.Models.Query
     public class MdaProductCapacityQuery: IQueryObject
     {
         public string Name { get; set; }
+        public int? ProductTypeId { get; set; }
         public int? ProductModelId { get; set; }
         public int? ProductManufacturerId { get; set; }
         public byte Active { get; set; }        

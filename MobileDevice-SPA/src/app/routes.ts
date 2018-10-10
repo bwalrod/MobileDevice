@@ -1,3 +1,5 @@
+import { ProductcapacityListResolver } from './_resolvers/productcapacity-list.resolver';
+import { ProductcapacityListComponent } from './productcapacity-list/productcapacity-list.component';
 import { ProductModelEditResolver } from './_resolvers/productmodel-edit.resolver';
 import { ProductmodelEditComponent } from './productmodel-edit/productmodel-edit.component';
 import { ProductModelListResolver } from './_resolvers/productmodel-list.resolver';
@@ -60,6 +62,8 @@ export const appRoutes: Routes = [
             { path: 'devicestatuses/edit/:id', component: DevicestatusEditComponent, resolve: {devicestatus: DeviceStatusEditResolver}},
             { path: 'manufacturers', component: ManufacturerListComponent, resolve: {manufacturers: ManufacturerListResolver}},
             { path: 'manufacturers/edit/:id', component: ManufacturerEditComponent, resolve: {manufacturer: ManufacturerEditResolver}},
+            // tslint:disable-next-line:max-line-length
+            { path: 'productcapacities', component: ProductcapacityListComponent, resolve: {productcapacities: ProductcapacityListResolver}},
             { path: 'productmodels', component: ProductmodelListComponent, resolve: {productmodels: ProductModelListResolver}},
             { path: 'productmodels/edit/:id', component: ProductmodelEditComponent, resolve: {productmodel: ProductModelEditResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},

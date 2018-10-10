@@ -87,6 +87,23 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add product capacity.");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateProductCapacity(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var pc = await _repo.GetProductCapacity(id);
+
+            pc.Active = 0;
+            pc.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            pc.ModifiedDate = DateTime.Now;
+
+            await _repo.SaveAll();
+
+            return NoContent();
+        }        
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductCapacity(int id, [FromBody] ProductCapacitySaveResource saveResource)
         {
