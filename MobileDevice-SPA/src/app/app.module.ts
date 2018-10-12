@@ -1,4 +1,5 @@
 
+
 import { FormsModule } from '@angular/forms';
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
 import { AlertifyService } from './_services/alertify.service';
@@ -28,6 +29,8 @@ import { DevicestatusEditComponent } from './devicestatus-edit/devicestatus-edit
 import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit.component';
 import { ManufacturerSelectComponent } from './common/manufacturer-select/manufacturer-select.component';
+import { ProductcapacityListComponent } from './productcapacity-list/productcapacity-list.component';
+import { ProductcapacityEditComponent } from './productcapacity-edit/productcapacity-edit.component';
 import { ProductmodelEditComponent } from './productmodel-edit/productmodel-edit.component';
 import { ProductmodelListComponent } from './productmodel-list/productmodel-list.component';
 import { ProductmodelSelectComponent } from './common/productmodel-select/productmodel-select.component';
@@ -50,12 +53,13 @@ import { DeviceStatusListResolver } from './_resolvers/devicestatus-list.resolve
 import { ManufacturerListResolver } from './_resolvers/manufacturer-list.resolver';
 import { ManufacturerEditResolver } from './_resolvers/manufacturer-edit.resolver';
 import { ProductcapacityListResolver } from './_resolvers/productcapacity-list.resolver';
+import { ProductCapacityEditResolver } from './_resolvers/productcapactity-edit.resolver';
 import { ProductModelEditResolver } from './_resolvers/productmodel-edit.resolver';
 import { ProductModelListResolver } from './_resolvers/productmodel-list.resolver';
 import { ProductTypeListResolver } from './_resolvers/producttype-list.resolver';
 import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
 import { ProducttypeComponent } from './common/producttype/producttype.component';
-import { ProductcapacityListComponent } from './productcapacity-list/productcapacity-list.component';
+
 
 
 @NgModule({
@@ -82,7 +86,8 @@ import { ProductcapacityListComponent } from './productcapacity-list/productcapa
       ManufacturerSelectComponent,
       ProductmodelEditComponent,
       ProductmodelSelectComponent,
-      ProductcapacityListComponent
+      ProductcapacityListComponent,
+      ProductcapacityEditComponent
    ],
    imports: [
       BrowserModule,
@@ -111,6 +116,7 @@ import { ProductcapacityListComponent } from './productcapacity-list/productcapa
       ManufacturerListResolver,
       ManufacturerEditResolver,
       ProductcapacityListResolver,
+      ProductCapacityEditResolver,
       ProductModelListResolver,
       ProductModelEditResolver,
       ProductTypeListResolver,

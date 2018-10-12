@@ -55,7 +55,9 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var productCapacity = await _repo.GetProductCapacity(id);
-            return Ok(productCapacity);
+
+            var productCapacityEdit = _mapper.Map<ProductCapacityForList>(productCapacity);
+            return Ok(productCapacityEdit);
         }
 
         [HttpPost]
@@ -120,7 +122,8 @@ namespace MobileDevice.API.Controllers
 
             var filter = new MdaProductCapacityQuery() {
                 Name = saveResource.Name,
-                ProductModelId = saveResource.ProductModelId
+                ProductModelId = saveResource.ProductModelId,
+                Active = Convert.ToByte(saveResource.Active == true ? 1 : 0)
             };
 
             var productCapacityFromRepoExisting = await _repo.GetProductCapacities(filter);

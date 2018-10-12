@@ -13,6 +13,7 @@ import { ProductTypeService } from '../../_services/producttype.service';
 export class ProducttypeComponent implements OnInit {
   @Input() selectedProductType: number;
   @Input() showNoValue: boolean;
+  @Input() noValueLabel = '.: Any :.';
   @Output() selectOption = new EventEmitter();
 
   list: ProductType[];

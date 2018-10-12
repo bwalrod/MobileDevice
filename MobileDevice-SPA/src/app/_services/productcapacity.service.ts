@@ -33,6 +33,9 @@ export class ProductCapacityService {
 
     if (filter != null) {
       params = params.append('name', filter.name);
+      if (filter.productTypeId > 0) {
+        params = params.append('productTypeId', filter.productTypeId);
+      }
       if (filter.productModelId > 0) {
         params = params.append('productModelId', filter.productModelId);
       }

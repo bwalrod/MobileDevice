@@ -1,4 +1,4 @@
 <select class="form-control-sm" (change)="optionSelected($event.target.value)">
-  <option *ngIf="showNoValue" value="0">.: Any :.</option>
+  <option *ngIf="showNoValue" value="0">{{ noValueLabel }}</option>
   <option *ngFor="let m of models" [value]="m.id" [selected]="(m.id == selectedModelId)">{{ m.name }}</option>
 </select>

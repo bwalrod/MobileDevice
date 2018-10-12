@@ -1,3 +1,4 @@
+import { ProductcapacityEditComponent } from './productcapacity-edit/productcapacity-edit.component';
 import { ProductcapacityListResolver } from './_resolvers/productcapacity-list.resolver';
 import { ProductcapacityListComponent } from './productcapacity-list/productcapacity-list.component';
 import { ProductModelEditResolver } from './_resolvers/productmodel-edit.resolver';
@@ -41,6 +42,7 @@ import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver'
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
+import { ProductCapacityEditResolver } from './_resolvers/productcapactity-edit.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -64,6 +66,8 @@ export const appRoutes: Routes = [
             { path: 'manufacturers/edit/:id', component: ManufacturerEditComponent, resolve: {manufacturer: ManufacturerEditResolver}},
             // tslint:disable-next-line:max-line-length
             { path: 'productcapacities', component: ProductcapacityListComponent, resolve: {productcapacities: ProductcapacityListResolver}},
+            // tslint:disable-next-line:max-line-length
+            { path: 'productcapacities/edit/:id', component: ProductcapacityEditComponent, resolve: {productcapacity: ProductCapacityEditResolver}},
             { path: 'productmodels', component: ProductmodelListComponent, resolve: {productmodels: ProductModelListResolver}},
             { path: 'productmodels/edit/:id', component: ProductmodelEditComponent, resolve: {productmodel: ProductModelEditResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},

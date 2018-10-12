@@ -14,7 +14,7 @@
           </tr>
           <tr>
             <th class="w-20"><button class="btn btn-sm btn-default" (click)="clearFilter()">Clear</button></th>
-            <th scope="col"><input type="text" size="30" name="filter" class="form-control-sm" [(ngModel)]="filter.name" (keyup)="filterTable()" placeholder="Starts With"></th>
+            <th scope="col"><input type="text" size="30" name="filter" class="form-control-sm" [(ngModel)]="filter.name" (keyup)="filterTable($event)" placeholder="Starts With"></th>
             <th scope="col"><app-producttype [showNoValue]=true [selectedProductType]="filter.productTypeId" (selectOption)="filterByType($event)"></app-producttype></th>
             <th scope="col"><app-manufacturer-select [showNoValue]=true [selectedManufacturer]="filter.productManufacturerId" (selectOption)="filterByManufacturer($event)"></app-manufacturer-select></th>
             <th scope="col"><app-productmodel-select [showNoValue]=true [selectedProductTypeId]="filter.productTypeId" [selectedManufactureId]="filter.productManufacturerId" [selectedModelId]="0" (selectedOption)="filterByModel($event)"></app-productmodel-select></th>
@@ -41,6 +41,9 @@
             <td>{{ el.productModelName }}</td>
             <td>{{ el.productCount }}</td>
             <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
+          </tr>
+          <tr *ngIf="list.length == 0">
+            <td colspan="7" class="text-center">No Records</td>
           </tr>
         </tbody>
       </table>

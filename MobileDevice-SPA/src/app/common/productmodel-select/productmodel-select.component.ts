@@ -15,6 +15,7 @@ export class ProductmodelSelectComponent implements OnInit {
   @Input() selectedProductTypeId: number;
   @Input() selectedManufactureId: number;
   @Input() showNoValue: boolean;
+  @Input() noValueLabel = '.: Any :.';
   @Output() selectedOption = new EventEmitter();
 
   models: ProductModel[];

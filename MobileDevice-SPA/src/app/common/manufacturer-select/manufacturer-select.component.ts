@@ -13,6 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ManufacturerSelectComponent implements OnInit {
   @Input() selectedManufacturer: number;
   @Input() showNoValue: boolean;
+  @Input() noValueLabel = '.: Any :.';
   @Output() selectOption = new EventEmitter();
 
   manufacturers: Manufacturer[];
