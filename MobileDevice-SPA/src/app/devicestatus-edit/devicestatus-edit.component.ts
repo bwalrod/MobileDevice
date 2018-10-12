@@ -67,7 +67,9 @@ export class DevicestatusEditComponent implements OnInit {
     }
   }
 
-  deactivateElement(id: number) {
+  deactivateElement(id: number, e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.alertify.confirm('Are you sure you want to delete this ' + this.elementTypeLabel + '?', () => {
       this.service.deactivateDeviceStatus(id)
         .subscribe(() => {
@@ -78,7 +80,9 @@ export class DevicestatusEditComponent implements OnInit {
     });
   }
 
-  returnToList() {
+  returnToList(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.router.navigate(['/devicestatuses']);
   }
 }

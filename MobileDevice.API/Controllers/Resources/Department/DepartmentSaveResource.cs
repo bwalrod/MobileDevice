@@ -8,6 +8,6 @@ namespace MobileDevice.API.Controllers.Resources.Department
         public string Name { get; set; }     
 
         [Required]
-        public byte Active { get; set; }       
+        public bool Active { get; set; }       
     }
 }

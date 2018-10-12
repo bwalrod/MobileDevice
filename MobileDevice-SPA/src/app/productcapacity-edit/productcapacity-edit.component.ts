@@ -28,6 +28,9 @@ export class ProductcapacityEditComponent implements OnInit {
   elementLabel = 'Product Capacity';
   elementTypeLabel = 'product capacity';
   elementRoute = 'productcapacities';
+  originalActiveValue: boolean;
+
+  formInvalid = true;
 
   constructor(private service: ProductCapacityService, private router: Router,
                 private alertify: AlertifyService, private route: ActivatedRoute) { }
@@ -38,6 +41,8 @@ export class ProductcapacityEditComponent implements OnInit {
     this.route.data.subscribe(data => {
       if (data['productcapacity']) {
         this.element = data['productcapacity'];
+        this.isFormValid();
+        this.originalActiveValue = this.element.active;
       }
     });
   }
@@ -110,10 +115,16 @@ export class ProductcapacityEditComponent implements OnInit {
 
   markAsDirty() {
     this.editForm.control.markAsDirty();
+    this.isFormValid();
   }
 
-  setFormInvalid() {
-
-
+  isFormValid() {
+    this.formInvalid = false;
+    if (this.element.productModelId == null) {
+      this.formInvalid = true;
+    }
+    if (this.element.name === '') {
+      this.formInvalid = true;
+    }
   }
 }

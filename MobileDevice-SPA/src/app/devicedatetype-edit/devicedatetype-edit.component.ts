@@ -19,6 +19,7 @@ export class DevicedatetypeEditComponent implements OnInit {
     active: true,
     deviceDateCount: 0
   };
+  originalElement: DeviceDateType;
   elementLabel = 'Device Date Type';
   elementTypeLabel = 'device date type';
   elementRoute = 'devicedatetypes';
@@ -28,10 +29,12 @@ export class DevicedatetypeEditComponent implements OnInit {
 
   ngOnInit() {
     this.element = this.newElement;
+    this.originalElement = this.newElement;
 
     this.route.data.subscribe(data => {
       if (data['devicedatetype']) {
         this.element = data['devicedatetype'];
+        this.updateOriginalElement();
       }
     });
   }
@@ -41,8 +44,10 @@ export class DevicedatetypeEditComponent implements OnInit {
       .subscribe(next => {
         this.editForm.reset(this.element);
         this.alertify.success(this.elementLabel + ' updated successfully');
+        this.updateOriginalElement();
       }, error => {
         this.alertify.error(error);
+        this.editForm.reset(this.originalElement);
       });
   }
 
@@ -66,7 +71,9 @@ export class DevicedatetypeEditComponent implements OnInit {
     }
   }
 
-  deactivateElement(id: number) {
+  deactivateElement(id: number, e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.alertify.confirm('Are you sure you want to delete this ' + this.elementTypeLabel + '?', () => {
       this.service.deactivateDeviceDateType(id)
         .subscribe(() => {
@@ -77,8 +84,15 @@ export class DevicedatetypeEditComponent implements OnInit {
     });
   }
 
-  returnToList() {
+  returnToList(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.router.navigate(['/' + this.elementRoute]);
   }
 
+  updateOriginalElement() {
+    this.originalElement.id = this.element.id;
+    this.originalElement.name = this.element.name;
+    this.originalElement.active = this.element.active;
+  }
 }

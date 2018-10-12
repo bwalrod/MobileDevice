@@ -14,22 +14,31 @@
           <div class="col col-9"><label>{{ department.id }}</label></div>
         </div>
         <div class="row mb-1">
-          <div class="col col-3"><label for="firstName">Name</label></div>
-          <div class="col col-9"><input type="text" class="form-control ml-2" name="firstName" [(ngModel)]="department.name"></div>
+          <div class="col col-3"><label for="name">Name</label></div>
+          <div class="col col-7">
+            <input type="text" class="form-control" name="name" [(ngModel)]="department.name" required>
+          </div>
+          <div class="col col-2">
+            <span class="text-danger" *ngIf="department.name == ''">Required</span>
+          </div>
         </div>
         <div class="row">
           <div class="col col-3"><label for="active">Active</label></div>
-          <div class="col col-1 checkbox"><input type="checkbox" [disabled]="department.id == 0" class="form-control ml-2" name="active" [(ngModel)]="department.active"></div>
+          <div class="col col-1 checkbox"><input type="checkbox" [disabled]="department.id == 0" class="form-control" name="active" [(ngModel)]="department.active"></div>
         </div>
         <div class="row mt-3">
           <div class="col text-center">
-          <button class="btn btn-success mr-1" form="editForm" [disabled]="!editForm.dirty">{{ department.id > 0 ? 'Update' : 'Add' }}</button>
-          <button *ngIf="department.id > 0" class="btn btn-danger mr-1" (click)="$event.stopPropagation()" (click)="deactivateDepartment(department.id)">Delete</button>
-          <button class="btn btn-default" (click)="$event.stopPropagation()" (click)="returnToList()">{{ department.id > 0 ? 'Return to List' : 'Cancel'}}</button>
+          <button class="btn btn-success mr-1" form="editForm" [disabled]="!editForm.dirty || editForm.invalid">{{ department.id > 0 ? 'Update' : 'Add' }}</button>
+          <button *ngIf="department.id > 0 && originalDepartment.active == true" class="btn btn-danger mr-1" (click)="deactivateDepartment(department.id,$event)">Delete</button>
+          <button class="btn btn-default" (click)="returnToList($event)">{{ department.id > 0 ? 'Return to List' : 'Cancel'}}</button>
           </div>
         </div>
       </form> 
     </div>
   </div>
   </div>
-  
+  <!-- <pre>
+  {{ editForm.value | json}}
+  {{ department | json}}
+  {{ originalDepartment | json}}
+</pre> -->

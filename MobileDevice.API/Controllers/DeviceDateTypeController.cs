@@ -112,11 +112,21 @@ namespace MobileDevice.API.Controllers
             /* Test for prexistence */                
             var filter = new MdaDeviceDateTypeQuery() {
                 Name = deviceDateTypeSaveResource.Name,
-                Active = Convert.ToByte(deviceDateTypeSaveResource.Active == true ? 1 : 0)
+                Active = 2
             };
             var deviceDateTypeFromRepoExisting = await _repo.GetDeviceDateTypes(filter, true);
-            if(deviceDateTypeFromRepoExisting.Any())
-                return BadRequest($"DateType {deviceDateTypeSaveResource.Name} already exists");                
+            if(deviceDateTypeFromRepoExisting.Any()){
+                var existingDDT = deviceDateTypeFromRepoExisting.FirstOrDefault();
+                if (existingDDT.Id != id)
+                    return BadRequest($"DateType {deviceDateTypeSaveResource.Name} already exists");                
+                else
+                {
+                    if (existingDDT.Name.ToLower() == deviceDateTypeSaveResource.Name.ToLower()) {
+                        if (existingDDT.Active == Convert.ToByte(deviceDateTypeSaveResource.Active == true ? 1 : 0))
+                            return BadRequest("Nothing has changed");
+                    }
+                }
+            }
 
             var deviceDateTypeFromRepo = await _repo.GetDeviceDateType(id);
 

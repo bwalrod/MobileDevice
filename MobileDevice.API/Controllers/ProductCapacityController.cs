@@ -123,7 +123,7 @@ namespace MobileDevice.API.Controllers
             var filter = new MdaProductCapacityQuery() {
                 Name = saveResource.Name,
                 ProductModelId = saveResource.ProductModelId,
-                Active = Convert.ToByte(saveResource.Active == true ? 1 : 0)
+                Active = 2
             };
 
             var productCapacityFromRepoExisting = await _repo.GetProductCapacities(filter);
@@ -135,8 +135,11 @@ namespace MobileDevice.API.Controllers
                 else    
                 {
                     if (existingProductCapacity.Name.ToLower() == saveResource.Name.ToLower()
-                        && existingProductCapacity.ProductModelId == saveResource.ProductModelId)
-                            return BadRequest("Nothing has changed.");
+                        && existingProductCapacity.ProductModelId == saveResource.ProductModelId) {
+                            if (existingProductCapacity.Active == Convert.ToByte(saveResource.Active == true ? 1 : 0)) {
+                                return BadRequest("Nothing has changed.");
+                            }
+                        }
                 }
             }
 

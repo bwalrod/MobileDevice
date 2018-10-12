@@ -1,6 +1,6 @@
 export class Department {
     id: number;
     name: string;
-    active: number;
+    active: boolean;
     assigneeCount: number;
 }

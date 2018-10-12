@@ -64,7 +64,7 @@ namespace MobileDevice.API.Controllers
                 return BadRequest(ModelState);
 
             /* Test for prexistence */
-            var departmentFromRepo = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name, Active = departmentSaveResource.Active});
+            var departmentFromRepo = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name, Active = Convert.ToByte(departmentSaveResource.Active == true ? 1 : 0)});
             if (departmentFromRepo.Any())
                 return BadRequest($"Department {departmentSaveResource.Name} already exists");
 
@@ -105,15 +105,26 @@ namespace MobileDevice.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            /* Test for prexistence */
-            var departmentFromRepoExisting = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name, Active = departmentSaveResource.Active});
-            if (departmentFromRepoExisting.Any())
-                return BadRequest($"Department {departmentSaveResource.Name} already exists");
-
             var departmentFromRepo  = await _repo.GetDepartment(id);
 
             if (departmentFromRepo == null)
-                return BadRequest($"Department {id} could not be found.");
+                return BadRequest($"Department {id} could not be found.");                
+
+            /* Test for prexistence */
+            var departmentFromRepoExisting = await _repo.GetDepartments(new MdaDepartmentQuery(){Name = departmentSaveResource.Name, Active = 2});
+            if (departmentFromRepoExisting.Any()){
+                var existingDepartment = departmentFromRepoExisting.FirstOrDefault();
+                if (existingDepartment.Id != id)
+                    return BadRequest($"Department {departmentSaveResource.Name} already exists");
+                else
+                {
+                    if (existingDepartment.Name.ToLower() == departmentSaveResource.Name.ToLower()){
+                        if (existingDepartment.Active == Convert.ToByte(departmentSaveResource.Active == true ? 1 : 0))
+                            return BadRequest("Nothing has changed");
+                    }
+                }
+            }
+
 
             _mapper.Map<DepartmentSaveResource, MdaDepartment>(departmentSaveResource, departmentFromRepo);
             departmentFromRepo.ModifiedBy = User.Identity.Name;

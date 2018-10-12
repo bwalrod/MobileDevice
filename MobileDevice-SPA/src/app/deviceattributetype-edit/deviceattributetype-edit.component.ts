@@ -4,6 +4,7 @@ import { DeviceAttributeType } from '../_models/deviceattributetype';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AlertifyService } from '../_services/alertify.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-deviceattributetype-edit',
@@ -22,16 +23,20 @@ export class DeviceattributetypeEditComponent implements OnInit {
   elementLabel = 'Device Attribute Type';
   elementTypeLabel = 'device attribute type';
   elementRoute = 'deviceattributetypes';
+  originalElement: DeviceAttributeType;
 
   constructor(private service: DeviceAttributeTypeService, private router: Router,
                 private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.element = this.newElement;
+    this.originalElement = this.newElement;
+
     this.route.data.subscribe(data => {
       console.log(data['deviceattributetype']);
       if (data['deviceattributetype']) {
         this.element = data['deviceattributetype'];
+        this.populateOriginal();
       }
     });
   }
@@ -41,8 +46,10 @@ export class DeviceattributetypeEditComponent implements OnInit {
       .subscribe(next => {
         this.editForm.reset(this.element);
         this.alertify.success(this.elementLabel + ' updated successfully');
+        this.populateOriginal();
       }, error => {
         this.alertify.error(error);
+        this.editForm.reset(this.originalElement);
       });
   }
 
@@ -53,6 +60,7 @@ export class DeviceattributetypeEditComponent implements OnInit {
         this.element = element;
       }, error => {
         this.alertify.error(error);
+        this.editForm.reset(this.originalElement);
       });
   }
 
@@ -66,7 +74,9 @@ export class DeviceattributetypeEditComponent implements OnInit {
     }
   }
 
-  deactivateElement(id: number) {
+  deactivateElement(id: number, e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.alertify.confirm('Are you sure you want to delete this ' + this.elementTypeLabel + '?', () => {
       this.service.deactivateDeviceAttributeType(id)
         .subscribe(() => {
@@ -77,7 +87,15 @@ export class DeviceattributetypeEditComponent implements OnInit {
     });
   }
 
-  returnToList() {
+  returnToList(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.router.navigate(['/deviceattributetypes']);
+  }
+
+  populateOriginal() {
+    this.originalElement.id = this.element.id;
+    this.originalElement.name = this.element.name;
+    this.originalElement.active = this.element.active;
   }
 }

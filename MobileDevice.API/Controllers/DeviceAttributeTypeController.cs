@@ -106,15 +106,31 @@ namespace MobileDevice.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            /* Test for prexistence */                
-            var deviceAttributeTypeFromRepoExisting = await _repo.GetDeviceAttributeTypes(new MdaDeviceAttributeTypeQuery(){Name = deviceAttributeTypeSaveResource.Name, Active = Convert.ToByte(deviceAttributeTypeSaveResource.Active == true ? 1 : 0)});
-            if(deviceAttributeTypeFromRepoExisting.Any())
-                return BadRequest($"AttributeType {deviceAttributeTypeSaveResource.Name} already exists");                                
-
             var deviceAttributeTypeFromRepo = await _repo.GetDeviceAttributeType(id);
 
             if (deviceAttributeTypeFromRepo == null)
-                return BadRequest($"DeviceAttributeTypeId {id} could not be found");            
+                return BadRequest($"DeviceAttributeTypeId {id} could not be found");                         
+
+            /* Test for prexistence */                
+            var filter = new MdaDeviceAttributeTypeQuery(){
+                Name = deviceAttributeTypeSaveResource.Name, 
+                Active = 2
+            };
+
+            var deviceAttributeTypeFromRepoExisting = await _repo.GetDeviceAttributeTypes(filter);
+            if(deviceAttributeTypeFromRepoExisting.Any()) {
+                var existingElement = deviceAttributeTypeFromRepoExisting.FirstOrDefault();
+                if (existingElement.Id != id)
+                    return BadRequest($"AttributeType {deviceAttributeTypeSaveResource.Name} already exists");                                
+                else
+                {
+                    if (existingElement.Name.ToLower() == deviceAttributeTypeSaveResource.Name.ToLower()) {
+                        if (existingElement.Active == Convert.ToByte(deviceAttributeTypeSaveResource.Active == true ? 1 : 0)) {
+                            return BadRequest("Nothing has changed");
+                        }
+                    }
+                }
+            }
 
             _mapper.Map<DeviceAttributeTypeSaveResource, MdaDeviceAttributeType>(deviceAttributeTypeSaveResource, deviceAttributeTypeFromRepo);
             deviceAttributeTypeFromRepo.ModifiedBy = User.Identity.Name;
