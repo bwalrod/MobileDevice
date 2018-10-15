@@ -19,16 +19,19 @@ export class ManufacturerEditComponent implements OnInit {
     active: true,
     productCount: 0
   };
+  originalElement: Manufacturer;
 
   constructor(private manuService: ManufacturerService, private router: Router,
                 private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.manufacturer = this.newManufacturer;
+    this.originalElement = this.newManufacturer;
 
     this.route.data.subscribe(data => {
       if (data['manufacturer']) {
         this.manufacturer = data['manufacturer'];
+        this.populateOriginal();
       }
     });
   }
@@ -65,7 +68,9 @@ export class ManufacturerEditComponent implements OnInit {
     }
   }
 
-  deactivateManufacturer(id: number) {
+  deactivateManufacturer(id: number, e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.alertify.confirm('Are you sure you want to delete this manufacturer?', () => {
       this.manuService.deactivateManufacturer(id)
         .subscribe(() => {
@@ -76,7 +81,15 @@ export class ManufacturerEditComponent implements OnInit {
     });
   }
 
-  returnToList() {
+  returnToList(e: Event) {
+    e.preventDefault();
+    e.stopPropagation();
     this.router.navigate(['/manufacturers']);
+  }
+
+  populateOriginal () {
+    this.originalElement.id = this.manufacturer.id;
+    this.originalElement.name = this.manufacturer.name;
+    this.originalElement.active = this.manufacturer.active;
   }
 }

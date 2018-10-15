@@ -33,8 +33,11 @@
               tooltip="{{(d.assigneeCount > 0) ? 'You shouldn\'t delete a department with members.': '' }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.name }}</a></td>
             <td>{{ d.assigneeCount }}</td>
-            <td><i [ngClass]="(d.active == 1)?'fa fa-check':''"></i></td>
+            <td><i [ngClass]="(d.active == true)?'fa fa-check':''"></i></td>
           </tr>
+          <tr *ngIf="departments.length == 0">
+              <td colspan="4" class="text-center">No Records</td>
+            </tr>
         </tbody>
       </table>
     </div>

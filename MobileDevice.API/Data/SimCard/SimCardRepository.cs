@@ -64,6 +64,12 @@ namespace MobileDevice.API.Data.SimCard
                 query = query.Where(sc => sc.PhoneNumber.Contains(filter.PhoneNumber));
             if (!string.IsNullOrEmpty(filter.Carrier))
                 query = query.Where(sc => sc.Carrier.Contains(filter.Carrier));
+
+            if (filter.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(d => d.Active == 1);
             
             var columnsMap = new Dictionary<string, Expression<Func<MdaSimCard, object>>>
             {

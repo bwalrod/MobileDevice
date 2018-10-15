@@ -6,7 +6,8 @@ namespace MobileDevice.API.Controllers.Resources.SimCard
         public string Iccid { get; set; }
         public string PhoneNumber { get; set; }
         public string Carrier { get; set; }    
-
+        public byte Active { get; set; }
+        public int DeviceId { get; set; }
         public string SerialNumber { get; set; }
         public string Esn { get; set; }
         public string Os { get; set; }        

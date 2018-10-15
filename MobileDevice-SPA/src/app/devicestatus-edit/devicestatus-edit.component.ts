@@ -22,6 +22,10 @@ export class DevicestatusEditComponent implements OnInit {
   elementLabel = 'Device Status';
   elementTypeLabel = 'device status';
   elementRoute = 'devicestatuses';
+  originalElement: DeviceStatus;
+
+
+  formInvalid = true;
 
 
   constructor(private service: DeviceStatusService, private router: Router,
@@ -29,10 +33,13 @@ export class DevicestatusEditComponent implements OnInit {
 
   ngOnInit() {
     this.element = this.newElement;
+    this.originalElement = this.newElement;
 
     this.route.data.subscribe(data => {
       if (data['devicestatus']) {
         this.element = data['devicestatus'];
+        this.isFormValid();
+        this.populateOriginal();
       }
     });
   }
@@ -84,5 +91,18 @@ export class DevicestatusEditComponent implements OnInit {
     e.preventDefault();
     e.stopPropagation();
     this.router.navigate(['/devicestatuses']);
+  }
+
+  isFormValid() {
+    this.formInvalid = false;
+    if (this.element.name === '') {
+      this.formInvalid = true;
+    }
+  }
+
+  populateOriginal() {
+    this.originalElement.id = this.element.id;
+    this.originalElement.name = this.element.name;
+    this.originalElement.active = this.element.active;
   }
 }

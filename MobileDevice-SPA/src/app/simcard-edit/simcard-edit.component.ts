@@ -1,47 +1,57 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { AlertifyService } from './../_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProductType } from '../_models/ProductType';
-import { ProductTypeService } from '../_services/producttype.service';
+import { Simcard } from '../_models/simcard';
+import { SimcardService } from '../_services/simcard.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-producttype-edit',
-  templateUrl: './producttype-edit.component.html',
-  styleUrls: ['./producttype-edit.component.css']
+  selector: 'app-simcard-edit',
+  templateUrl: './simcard-edit.component.html',
+  styleUrls: ['./simcard-edit.component.css']
 })
-export class ProducttypeEditComponent implements OnInit {
+export class SimcardEditComponent implements OnInit {
   @ViewChild('editForm') editForm: NgForm;
-  element: ProductType;
-  newElement: ProductType = {
+  element: Simcard;
+  newElement: Simcard = {
     id: 0,
-    name: '',
+    iccid: '',
+    phoneNumber: '',
+    carrier: '',
     active: true,
-    productModelCount: 0
+    deviceId: 0,
+    assigneeFirstName: '',
+    assigneeLastName: '',
+    productModelName: ''
   };
-  elementLabel = 'Product Type';
-  elementTypeLabel = 'product type';
-  elementRoute = 'producttypes';
-  originalElement: ProductType;
+  elementLabel = 'Sim Card';
+  elementTypeLabel = 'sim card';
+  elementRoute = 'simcards';
+  originalElement: Simcard;
 
+  formInvalid = true;
 
-  constructor(private service: ProductTypeService, private router: Router,
+  carrierList: string[] = ['AT&T', 'Verizon'];
+
+  constructor(private service: SimcardService, private router: Router,
                 private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.element = this.newElement;
     this.originalElement = this.newElement;
+    // this.carrierList = new Carriers();
 
     this.route.data.subscribe(data => {
-      if (data['producttype']) {
-        this.element = data['producttype'];
+      if (data['simcard']) {
+        this.element = data['simcard'];
+        this.isFormValid();
         this.populateOriginal();
       }
     });
   }
 
   updateElement() {
-    this.service.updateProductType(this.element)
+    this.service.updateSimcard(this.element)
       .subscribe(next => {
         this.editForm.reset(this.element);
         this.alertify.success(this.elementLabel + ' updated successfully');
@@ -51,8 +61,8 @@ export class ProducttypeEditComponent implements OnInit {
   }
 
   insertElement() {
-    this.service.addProductType(this.element)
-      .subscribe((element: ProductType) => {
+    this.service.addSimcard(this.element)
+      .subscribe((element: Simcard) => {
         this.alertify.success(this.elementLabel + ' added successfully');
         this.element = element;
       }, error => {
@@ -71,12 +81,12 @@ export class ProducttypeEditComponent implements OnInit {
   }
 
   deactivateElement(id: number, e: Event) {
-    e.preventDefault();
     e.stopPropagation();
+    e.preventDefault();
     this.alertify.confirm('Are you sure you want to delete this ' + this.elementTypeLabel + '?', () => {
-      this.service.deactivateProductType(id)
+      this.service.deactivateSimcard(id)
         .subscribe(() => {
-          this.router.navigate(['/producttypes']);
+          this.router.navigate(['/' + this.elementRoute]);
         }, error => {
           this.alertify.error('Failed to delete ' + this.elementTypeLabel);
         });
@@ -84,14 +94,28 @@ export class ProducttypeEditComponent implements OnInit {
   }
 
   returnToList(e: Event) {
-    e.preventDefault();
     e.stopPropagation();
-    this.router.navigate(['/producttypes']);
+    e.preventDefault();
+    this.router.navigate(['/' + this.elementRoute]);
+  }
+
+
+  markAsDirty() {
+    this.editForm.control.markAsDirty();
+    this.isFormValid();
+  }
+
+  isFormValid() {
+    this.formInvalid = false;
+    if (this.element.iccid === '' || this.element.phoneNumber === '' || this.element.carrier === '') {
+      this.formInvalid = true;
+    }
   }
 
   populateOriginal() {
     this.originalElement.id = this.element.id;
-    this.originalElement.name = this.element.name;
+    this.originalElement.iccid = this.element.iccid;
     this.originalElement.active = this.element.active;
   }
+
 }

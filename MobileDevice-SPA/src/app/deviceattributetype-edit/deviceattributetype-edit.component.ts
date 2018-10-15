@@ -4,7 +4,6 @@ import { DeviceAttributeType } from '../_models/deviceattributetype';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AlertifyService } from '../_services/alertify.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-deviceattributetype-edit',

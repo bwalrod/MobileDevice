@@ -205,6 +205,7 @@ namespace MobileDevice.API.Helpers
             CreateMap<SimCardSaveResource, MdaSimCard>();
 
             CreateMap<MdaSimCard, SimCardForList>()
+                .ForMember(l => l.DeviceId, opt => opt.MapFrom(s => s.MdaDevice.FirstOrDefault(d => d.Active == 1).Id))
                 .ForMember(l => l.SerialNumber, opt => opt.MapFrom(s => s.MdaDevice.FirstOrDefault(d => d.Active == 1).SerialNumber))
                 .ForMember(l => l.Esn, opt => opt.MapFrom(s => s.MdaDevice.FirstOrDefault(d => d.Active == 1).Esn))
                 .ForMember(l => l.Os, opt => opt.MapFrom(s => s.MdaDevice.FirstOrDefault(d => d.Active == 1).Os))

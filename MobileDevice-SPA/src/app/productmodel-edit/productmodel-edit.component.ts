@@ -26,16 +26,19 @@ export class ProductmodelEditComponent implements OnInit {
   elementLabel = 'Product Model';
   elementTypeLabel = 'product model';
   elementRoute = 'productmodels';
+  originalElement: ProductModel;
 
   constructor(private service: ProductmodelService, private router: Router,
               private alertify: AlertifyService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.element = this.newElement;
+    this.originalElement = this.newElement;
 
     this.route.data.subscribe(data => {
       if (data['productmodel']) {
         this.element = data['productmodel'];
+        this.populateOriginal();
       }
     });
   }
@@ -101,5 +104,11 @@ export class ProductmodelEditComponent implements OnInit {
 
   markAsDirty() {
     this.editForm.control.markAsDirty();
+  }
+
+  populateOriginal() {
+    this.originalElement.id = this.element.id;
+    this.originalElement.name = this.element.name;
+    this.originalElement.active = this.element.active;
   }
 }

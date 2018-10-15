@@ -59,6 +59,10 @@ import { ProductModelListResolver } from './_resolvers/productmodel-list.resolve
 import { ProductTypeListResolver } from './_resolvers/producttype-list.resolver';
 import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
 import { ProducttypeComponent } from './common/producttype/producttype.component';
+import { SimcardListResolver } from './_resolvers/simcard-list.resolver';
+import { SimcardListComponent } from './simcard-list/simcard-list.component';
+import { SimcardEditComponent } from './simcard-edit/simcard-edit.component';
+import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
 
 
 
@@ -87,7 +91,9 @@ import { ProducttypeComponent } from './common/producttype/producttype.component
       ProductmodelEditComponent,
       ProductmodelSelectComponent,
       ProductcapacityListComponent,
-      ProductcapacityEditComponent
+      ProductcapacityEditComponent,
+      SimcardListComponent,
+      SimcardEditComponent
    ],
    imports: [
       BrowserModule,
@@ -120,7 +126,9 @@ import { ProducttypeComponent } from './common/producttype/producttype.component
       ProductModelListResolver,
       ProductModelEditResolver,
       ProductTypeListResolver,
-      ProductTypeEditResolver
+      ProductTypeEditResolver,
+      SimcardListResolver,
+      SimcardEditResolver
    ],
    bootstrap: [
       AppComponent

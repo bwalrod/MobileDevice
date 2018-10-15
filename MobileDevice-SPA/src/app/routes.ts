@@ -1,3 +1,6 @@
+import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
+import { SimcardEditComponent } from './simcard-edit/simcard-edit.component';
+import { SimcardListResolver } from './_resolvers/simcard-list.resolver';
 import { ProductcapacityEditComponent } from './productcapacity-edit/productcapacity-edit.component';
 import { ProductcapacityListResolver } from './_resolvers/productcapacity-list.resolver';
 import { ProductcapacityListComponent } from './productcapacity-list/productcapacity-list.component';
@@ -43,6 +46,7 @@ import { UserListResolver } from './_resolvers/user-list.resolver';
 import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
 import { ProductCapacityEditResolver } from './_resolvers/productcapactity-edit.resolver';
+import { SimcardListComponent } from './simcard-list/simcard-list.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -71,7 +75,9 @@ export const appRoutes: Routes = [
             { path: 'productmodels', component: ProductmodelListComponent, resolve: {productmodels: ProductModelListResolver}},
             { path: 'productmodels/edit/:id', component: ProductmodelEditComponent, resolve: {productmodel: ProductModelEditResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},
-            { path: 'producttypes/edit/:id', component: ProducttypeEditComponent, resolve: {producttype: ProductTypeEditResolver}}
+            { path: 'producttypes/edit/:id', component: ProducttypeEditComponent, resolve: {producttype: ProductTypeEditResolver}},
+            { path: 'simcards', component: SimcardListComponent, resolve: {simcards: SimcardListResolver}},
+            { path: 'simcards/edit/:id', component: SimcardEditComponent, resolve: {simcard: SimcardEditResolver}}
         ]
     },
     { path: '**', redirectTo: '', pathMatch: 'full'}

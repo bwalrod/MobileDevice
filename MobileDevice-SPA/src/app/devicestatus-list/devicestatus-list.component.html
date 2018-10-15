@@ -33,6 +33,9 @@
             <td>{{ el.deviceCount }}</td>
             <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
           </tr>
+          <tr *ngIf="list.length == 0">
+              <td colspan="4" class="text-center">No Records</td>
+            </tr>
         </tbody>
       </table>
     </div>

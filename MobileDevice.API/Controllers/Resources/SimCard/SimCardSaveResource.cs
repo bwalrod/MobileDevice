@@ -8,5 +8,7 @@ namespace MobileDevice.API.Controllers.Resources.SimCard
         public string Iccid { get; set; }
         public string PhoneNumber { get; set; }
         public string Carrier { get; set; }          
+        [Required]
+        public bool Active { get; set; }
     }
 }

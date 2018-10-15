@@ -94,6 +94,11 @@ namespace MobileDevice.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            var simCardFromRepo  = await _repo.GetSimCard(id);
+
+            if (simCardFromRepo == null)
+                return BadRequest($"Sim Card {id} could not be found.");                
+
             /* Test for prexistence */
             var filter = new MdaSimCardQuery(){
                 Iccid = simCardSaveResource.Iccid,
@@ -101,13 +106,19 @@ namespace MobileDevice.API.Controllers
                 Carrier = simCardSaveResource.Carrier
             };
             var simCardFromRepoExisting = await _repo.GetSimCards(filter);
-            if (simCardFromRepoExisting.Any())
-                return BadRequest($"Sim Card with ICCID {simCardSaveResource.Iccid} already exists");
+            if (simCardFromRepoExisting.Any()){
+                var existingSim = simCardFromRepoExisting.FirstOrDefault();
+                if (existingSim.Id != id)
+                    return BadRequest($"Sim Card with ICCID {simCardSaveResource.Iccid} already exists");
+                else {
+                    if (existingSim.PhoneNumber.ToLower() == simCardSaveResource.PhoneNumber.ToLower() && existingSim.Carrier.ToLower() == simCardSaveResource.Carrier.ToLower()) {
+                        if (existingSim.Active == Convert.ToByte(simCardSaveResource.Active == true ? 1 : 0))
+                        return BadRequest("Nothing has changed");
+                    }
+                }
+                
 
-            var simCardFromRepo  = await _repo.GetSimCard(id);
-
-            if (simCardFromRepo == null)
-                return BadRequest($"Sim Card {id} could not be found.");
+            }
 
             _mapper.Map<SimCardSaveResource, MdaSimCard>(simCardSaveResource, simCardFromRepo);
             simCardFromRepo.ModifiedBy = User.Identity.Name;

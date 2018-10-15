@@ -28,7 +28,7 @@ export class ProductcapacityEditComponent implements OnInit {
   elementLabel = 'Product Capacity';
   elementTypeLabel = 'product capacity';
   elementRoute = 'productcapacities';
-  originalActiveValue: boolean;
+  originalElement: ProductCapacity;
 
   formInvalid = true;
 
@@ -37,12 +37,13 @@ export class ProductcapacityEditComponent implements OnInit {
 
   ngOnInit() {
     this.element = this.newElement;
+    this.originalElement = this.newElement;
 
     this.route.data.subscribe(data => {
       if (data['productcapacity']) {
         this.element = data['productcapacity'];
         this.isFormValid();
-        this.originalActiveValue = this.element.active;
+        this.populateOriginal();
       }
     });
   }
@@ -126,5 +127,11 @@ export class ProductcapacityEditComponent implements OnInit {
     if (this.element.name === '') {
       this.formInvalid = true;
     }
+  }
+
+  populateOriginal() {
+    this.originalElement.id = this.element.id;
+    this.originalElement.name = this.element.name;
+    this.originalElement.active = this.element.active;
   }
 }
