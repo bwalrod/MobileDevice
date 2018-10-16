@@ -156,7 +156,11 @@ namespace MobileDevice.API.Helpers
             CreateMap<ProductSaveResource, MdaProduct>();
 
             CreateMap<MdaProduct, ProductForList>()
-                .ForMember(l => l.ProductManufacturerName, opt => opt.MapFrom(s => s.ProductModel.ProductManufacturer.Name));
+                .ForMember(l => l.ProductManufacturerId, opt => opt.MapFrom(s => s.ProductModel.ProductManufacturerId))
+                .ForMember(l => l.ProductManufacturerName, opt => opt.MapFrom(s => s.ProductModel.ProductManufacturer.Name))
+                .ForMember(l => l.ProductTypeId, opt => opt.MapFrom(s => s.ProductModel.ProductTypeId))
+                .ForMember(l => l.ProductTypeName, opt => opt.MapFrom(s => s.ProductModel.ProductType.Name))
+                .ForMember(l => l.DeviceCount, opt => opt.MapFrom(s => s.MdaDevice.Count()));
 
             /*  MdaProductCapacity */
 

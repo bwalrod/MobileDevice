@@ -1,3 +1,4 @@
+import { UtilityService } from './../_services/utility.service';
 import { AlertifyService } from './../_services/alertify.service';
 import { NgForm } from '@angular/forms';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -34,7 +35,7 @@ export class SimcardEditComponent implements OnInit {
   carrierList: string[] = ['AT&T', 'Verizon'];
 
   constructor(private service: SimcardService, private router: Router,
-                private alertify: AlertifyService, private route: ActivatedRoute) { }
+                private alertify: AlertifyService, private route: ActivatedRoute, private util: UtilityService) { }
 
   ngOnInit() {
     this.element = this.newElement;
@@ -72,10 +73,16 @@ export class SimcardEditComponent implements OnInit {
 
   submitForm() {
     if (this.editForm.dirty) {
-      if (this.element.id > 0) {
-        this.updateElement();
+      if (this.haveValuesChanged()) {
+        if (this.element.id > 0) {
+          this.updateElement();
+        } else {
+          this.insertElement();
+        }
       } else {
-        this.insertElement();
+        this.alertify.error('You haven\'t changed anything');
+        this.editForm.control.markAsUntouched();
+        this.editForm.control.markAsPristine();
       }
     }
   }
@@ -115,7 +122,16 @@ export class SimcardEditComponent implements OnInit {
   populateOriginal() {
     this.originalElement.id = this.element.id;
     this.originalElement.iccid = this.element.iccid;
+    this.originalElement.phoneNumber = this.element.phoneNumber;
+    this.originalElement.carrier = this.element.carrier;
     this.originalElement.active = this.element.active;
+  }
+
+  haveValuesChanged() {
+    return this.originalElement.iccid !== this.element.iccid ||
+      this.originalElement.phoneNumber !== this.element.phoneNumber ||
+      this.originalElement.carrier !== this.element.carrier ||
+      this.originalElement.active !== this.element.active;
   }
 
 }

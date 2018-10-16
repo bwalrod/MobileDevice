@@ -29,7 +29,7 @@
       <div class="row mb-1">
         <div class="col col-3"><label>Model</label></div>
         <div class="col-9">
-          <app-productmodel-select [selectedProductTypeId]="element.productTypeId" [selectedManufactureId]="element.productManufacturerId" [selectedModelId]="element.productModelId" [showNoValue]="(element.id == 0 || element.productModelId == null) ? true : false" [noValueLabel]="'Select One'" (selectedOption)="setProductModel($event)"></app-productmodel-select>
+          <app-productmodel-select [selectedProductTypeId]="element.productTypeId" [selectedManufacturerId]="element.productManufacturerId" [selectedModelId]="element.productModelId" [showNoValue]="(element.id == 0 || element.productModelId == null) ? true : false" [noValueLabel]="'Select One'" (selectedOption)="setProductModel($event)"></app-productmodel-select>
           <span class="text-danger ml-2" *ngIf="element.productModelId==null">Required</span>
         </div>
       </div>      

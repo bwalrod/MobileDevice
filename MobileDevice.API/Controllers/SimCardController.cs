@@ -85,6 +85,27 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add Sim Card");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateSimCard(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var sc = await _repo.GetSimCard(id);
+
+            if (sc == null)
+                return BadRequest($"Sim Card {id} could not be found.");
+
+            sc.Active = 0;
+            sc.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            sc.ModifiedDate = DateTime.Now;
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Failed to delete Sim Card");
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSimCard(int id, [FromBody] SimCardSaveResource simCardSaveResource)
         {
@@ -103,7 +124,8 @@ namespace MobileDevice.API.Controllers
             var filter = new MdaSimCardQuery(){
                 Iccid = simCardSaveResource.Iccid,
                 PhoneNumber = simCardSaveResource.PhoneNumber,
-                Carrier = simCardSaveResource.Carrier
+                Carrier = simCardSaveResource.Carrier,
+                Active = 2
             };
             var simCardFromRepoExisting = await _repo.GetSimCards(filter);
             if (simCardFromRepoExisting.Any()){

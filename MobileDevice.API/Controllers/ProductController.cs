@@ -55,13 +55,15 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var product = await _repo.GetProduct(id);
-            return Ok(product);
+
+            var productEdit = _mapper.Map<ProductForList>(product);
+            return Ok(productEdit);
         }
 
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromBody] ProductSaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -69,7 +71,8 @@ namespace MobileDevice.API.Controllers
 
             /* Pre-existence Test */
             var filter = new MdaProductQuery() {
-                PartNum = saveResource.PartNum
+                PartNum = saveResource.PartNum,
+                Active = 2
             };
 
             var productFromRepo = await _repo.GetProducts(filter);
@@ -87,10 +90,31 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add product");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateProduct(int id)
+        {
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+                return NoContent();
+
+            var p = await _repo.GetProduct(id);
+
+            if (p == null)
+                return BadRequest($"Product {id} could not be found.");    
+
+            p.Active = 0;
+            p.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            p.ModifiedDate = DateTime.Now;
+
+            if(await _repo.SaveAll())
+                return NoContent();
+            
+            return BadRequest("Failed to delete product");
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductSaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -136,7 +160,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             var productFromRepo = await _repo.GetProduct(id);

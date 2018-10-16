@@ -61,7 +61,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProductModel([FromBody] ProductModelSaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -108,7 +108,7 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductModel(int id, [FromBody] ProductModelSaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -154,7 +154,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductModel(int id)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
                 return NoContent();
 
             var productModelFromRepo = await _repo.GetProductModel(id);

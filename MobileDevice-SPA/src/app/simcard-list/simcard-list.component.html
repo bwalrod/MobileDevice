@@ -39,7 +39,7 @@
             <tr *ngFor="let el of list">
               <th scope="row"><i class="fa fa-trash" (click)="deactivateElement(el.id)" 
                 [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.deviceId > 0}"
-                tooltip="{{(el.deviceId > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' assigned to a device.': '' }}" container="" placement=""><span></span></i></th>
+                tooltip="{{(el.deviceId > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' assigned to a device.': 'Delete this ' + elementLabel }}" container="" placement=""><span></span></i></th>
               <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]" tooltip="{{ phoneIdentifier(el) }}">{{ el.iccid }}</a></td>
               <td>{{ el.phoneNumber }}</td>
               <td>{{ el.carrier }}</td>

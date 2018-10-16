@@ -1,0 +1,64 @@
+<div class="container mt-5 pt-5 col-lg-8 col-lg-offset-2" >
+  <div class="row" >
+  <div class="col text-center" >
+    <h4 *ngIf="element.id > 0">Edit {{ elementLabel }}: {{ originalElement.partNum }}</h4>
+    <h4 *ngIf="element.id == 0">Add {{ elementLabel }}</h4>
+  </div>
+  </div>
+  <div class="row">
+    <div class="col col-lg-3"></div>
+  <div class="col col-lg-6" >
+    <form #editForm="ngForm" id="editForm" (ngSubmit)="submitForm()" >
+      <div *ngIf="element.id > 0" class="row mb-1">
+        <div class="col col-3"><label>Id</label></div>
+        <div class="col col-9"><label>{{ element.id }}</label></div>
+      </div>
+      <div class="row mb-1">
+        <div class="col col-3"><label>Type</label></div>
+        <div class="col-9">
+          <app-producttype [selectedProductType]="element.productTypeId" (selectOption)="setProductType($event)"></app-producttype>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col col-3"><label>Manufacturer</label></div>
+        <div class="col-9">
+          <app-manufacturer-select [selectedManufacturer]="element.productManufacturerId" (selectOption)="setProductManufacturer($event)"></app-manufacturer-select>
+        </div>
+      </div>
+      <div class="row mb-1">
+        <div class="col col-3"><label>Model</label></div>
+        <div class="col-4"><app-productmodel-select [showNoValue]=true [noValueLabel]="'.: Select One :.'" [selectedModelId]="element.productModelId" [selectedProductTypeId]="element.productTypeId" [selectedManufacturerId]="element.productManufacturerId" (selectedOption)="setProductModel($event)"></app-productmodel-select></div>
+        <div class="col-5"><span *ngIf="element.productModelId==0" class="text-danger">Required</span></div>
+      </div>
+      <div class="row mb-1">
+        <div class="col col-3"><label>Capacity</label></div>
+        <div class="col-4"><app-productcapacity-select [showNoValue]=true [noValueLabel]="'.: Select One :.'" [selectedCapacityId]="element.productCapacityId" [selectedProductTypeId]="element.productTypeId" [selectedManufacturerId]="element.productManufacturerId" [selectedModelId]="element.productModelId" (selectedOption)="setProductCapacity($event)"></app-productcapacity-select></div>
+        <div class="col-5"><span *ngIf="element.productCapacityId==0" class="text-danger">Required</span></div>
+      </div>
+      <div class="row mb-1">
+          <div class="col col-3"><label for="partNum">Part Number</label></div>
+          <div class="col col-4">
+            <input type="text" class="form-control-sm" name="partNum" [(ngModel)]="element.partNum" (keyup)="testFormValidity()" required>
+          </div>
+          <div class="col col-5"><span class="text-danger" *ngIf="element.partNum == ''">Required</span></div>
+        </div>        
+      <div class="row">
+        <div class="col col-3"><label for="active">Active</label></div>
+        <div class="col col-1 checkbox"><input type="checkbox" [disabled]="element.id == 0" class="form-control ml-2" name="active" [(ngModel)]="element.active"></div>
+      </div>
+      <div class="row mt-3">
+        <div class="col text-center">
+        <button class="btn btn-success mr-1" form="editForm" [disabled]="!editForm.dirty || editForm.invalid || formInvalid">{{ element.id > 0 ? 'Update' : 'Add' }}</button>
+        <button *ngIf="element.id > 0 && originalElement.active == true" class="btn btn-danger mr-1" (click)="deactivateElement(element.id,$event)">Delete</button>
+        <button class="btn btn-default" (click)="returnToList($event)">{{ element.id > 0 ? 'Return to List' : 'Cancel'}}</button>
+        </div>
+      </div>
+    </form> 
+  </div>
+</div>
+</div>
+<!-- <pre>
+  {{ element | json}}
+  {{ originalElement | json}}
+  {{ formInvalid }}
+</pre> -->

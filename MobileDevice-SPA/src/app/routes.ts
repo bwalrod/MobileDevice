@@ -1,3 +1,7 @@
+import { ProductEditResolver } from './_resolvers/product-edit.resolver';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductListResolver } from './_resolvers/product-list.resolver';
+import { ProductListComponent } from './product-list/product-list.component';
 import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
 import { SimcardEditComponent } from './simcard-edit/simcard-edit.component';
 import { SimcardListResolver } from './_resolvers/simcard-list.resolver';
@@ -72,6 +76,8 @@ export const appRoutes: Routes = [
             { path: 'productcapacities', component: ProductcapacityListComponent, resolve: {productcapacities: ProductcapacityListResolver}},
             // tslint:disable-next-line:max-line-length
             { path: 'productcapacities/edit/:id', component: ProductcapacityEditComponent, resolve: {productcapacity: ProductCapacityEditResolver}},
+            { path: 'products', component: ProductListComponent, resolve: {products: ProductListResolver}},
+            { path: 'products/edit/:id', component: ProductEditComponent, resolve: {product: ProductEditResolver}},
             { path: 'productmodels', component: ProductmodelListComponent, resolve: {productmodels: ProductModelListResolver}},
             { path: 'productmodels/edit/:id', component: ProductmodelEditComponent, resolve: {productmodel: ProductModelEditResolver}},
             { path: 'producttypes', component: ProducttypeListComponent, resolve: {producttypes: ProductTypeListResolver}},

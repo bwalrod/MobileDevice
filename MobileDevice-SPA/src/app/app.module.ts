@@ -1,14 +1,20 @@
 
-
-import { FormsModule } from '@angular/forms';
-import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
-import { AlertifyService } from './_services/alertify.service';
-import { HttpClientModule } from '@angular/common/http';
-import { WinAuthInterceptorProvider } from './interceptors/WinAuthInterceptor';
-import { RouterModule } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
+/* Modules */
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
+
 import { BsDropdownModule, PaginationModule, ButtonsModule, TooltipModule } from 'ngx-bootstrap';
+
+/* Interceptors */
+import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
+import { WinAuthInterceptorProvider } from './interceptors/WinAuthInterceptor';
+
+/* Services */
+import { AlertifyService } from './_services/alertify.service';
+import { UtilityService } from './_services/utility.service';
 
 import { appRoutes } from './routes';
 
@@ -31,11 +37,13 @@ import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit
 import { ManufacturerSelectComponent } from './common/manufacturer-select/manufacturer-select.component';
 import { ProductcapacityListComponent } from './productcapacity-list/productcapacity-list.component';
 import { ProductcapacityEditComponent } from './productcapacity-edit/productcapacity-edit.component';
+import { ProductcapacitySelectComponent } from './common/productcapacity-select/productcapacity-select.component';
 import { ProductmodelEditComponent } from './productmodel-edit/productmodel-edit.component';
 import { ProductmodelListComponent } from './productmodel-list/productmodel-list.component';
 import { ProductmodelSelectComponent } from './common/productmodel-select/productmodel-select.component';
 import { ProducttypeListComponent } from './producttype-list/producttype-list.component';
 import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
+import { ProducttypeComponent } from './common/producttype/producttype.component';
 
 
 
@@ -58,11 +66,15 @@ import { ProductModelEditResolver } from './_resolvers/productmodel-edit.resolve
 import { ProductModelListResolver } from './_resolvers/productmodel-list.resolver';
 import { ProductTypeListResolver } from './_resolvers/producttype-list.resolver';
 import { ProductTypeEditResolver } from './_resolvers/producttype-edit.resolver';
-import { ProducttypeComponent } from './common/producttype/producttype.component';
 import { SimcardListResolver } from './_resolvers/simcard-list.resolver';
 import { SimcardListComponent } from './simcard-list/simcard-list.component';
 import { SimcardEditComponent } from './simcard-edit/simcard-edit.component';
 import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductListResolver } from './_resolvers/product-list.resolver';
+import { ProductEditResolver } from './_resolvers/product-edit.resolver';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+
 
 
 
@@ -92,8 +104,11 @@ import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
       ProductmodelSelectComponent,
       ProductcapacityListComponent,
       ProductcapacityEditComponent,
+      ProductcapacitySelectComponent,
       SimcardListComponent,
-      SimcardEditComponent
+      SimcardEditComponent,
+      ProductListComponent,
+      ProductEditComponent
    ],
    imports: [
       BrowserModule,
@@ -107,6 +122,7 @@ import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
    ],
    providers: [
       AlertifyService,
+      UtilityService,
       WinAuthInterceptorProvider,
       ErrorInterceptorProvider,
       UserEditResolver,
@@ -121,6 +137,8 @@ import { SimcardEditResolver } from './_resolvers/simcard-edit.resolver';
       DeviceStatusEditResolver,
       ManufacturerListResolver,
       ManufacturerEditResolver,
+      ProductListResolver,
+      ProductEditResolver,
       ProductcapacityListResolver,
       ProductCapacityEditResolver,
       ProductModelListResolver,

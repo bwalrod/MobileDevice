@@ -13,7 +13,7 @@ import { ProductModel } from '../../_models/productmodel';
 export class ProductmodelSelectComponent implements OnInit {
   @Input() selectedModelId: number;
   @Input() selectedProductTypeId: number;
-  @Input() selectedManufactureId: number;
+  @Input() selectedManufacturerId: number;
   @Input() showNoValue: boolean;
   @Input() noValueLabel = '.: Any :.';
   @Output() selectedOption = new EventEmitter();
@@ -25,9 +25,9 @@ export class ProductmodelSelectComponent implements OnInit {
 
   // tslint:disable-next-line:use-life-cycle-interface
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['selectedProductTypeId'] || changes['selectedManufactureId']) {
+    if (changes['selectedProductTypeId'] || changes['selectedManufacturerId']) {
       this.filter.productTypeId = this.selectedProductTypeId;
-      this.filter.productManufacturerId = this.selectedManufactureId;
+      this.filter.productManufacturerId = this.selectedManufacturerId;
       this.loadList();
     }
   }
@@ -35,7 +35,7 @@ export class ProductmodelSelectComponent implements OnInit {
   ngOnInit() {
     this.filter.name = '';
     this.filter.productTypeId = this.selectedProductTypeId;
-    this.filter.productManufacturerId = this.selectedManufactureId;
+    this.filter.productManufacturerId = this.selectedManufacturerId;
     this.loadList();
   }
 

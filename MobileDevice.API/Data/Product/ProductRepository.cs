@@ -50,7 +50,9 @@ namespace MobileDevice.API.Data.Product
         {
             var query = _context.MdaProduct
             .Include(m => m.ProductModel).ThenInclude(m => m.ProductManufacturer)
+            .Include(m => m.ProductModel).ThenInclude(m => m.ProductType)
             .Include(c => c.ProductCapacity)
+            .Include(d => d.MdaDevice)
             .IgnoreQueryFilters()
             .AsQueryable();
 
@@ -65,6 +67,18 @@ namespace MobileDevice.API.Data.Product
 
             if (filter.ProductModelId.HasValue)
                 query = query.Where(pm => pm.ProductModelId == filter.ProductModelId);
+            
+            if (filter.ProductManufacturerId.HasValue)
+                query = query.Where(pmf => pmf.ProductModel.ProductManufacturer.Id == filter.ProductManufacturerId);
+
+            if (filter.ProductTypeId.HasValue)
+                query = query.Where(pt => pt.ProductModel.ProductType.Id == filter.ProductTypeId);
+
+            if (filter.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(d => d.Active == 1);                
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaProduct, object>>>
             {
