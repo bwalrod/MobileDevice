@@ -6,6 +6,8 @@ namespace MobileDevice.API.Helpers
     {
         bool IsValidUser(ClaimsPrincipal user);
 
-        bool IsAdmin(ClaimsPrincipal user);         
+        bool IsSuperAdmin(ClaimsPrincipal user);         
+        bool IsAppAdmin(ClaimsPrincipal user);         
+        int GetUserAccessLevel(ClaimsPrincipal user);
     }
 }

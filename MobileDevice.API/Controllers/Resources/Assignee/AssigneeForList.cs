@@ -7,5 +7,8 @@ namespace MobileDevice.API.Controllers.Resources.Assignee
         public string LastName { get; set; }
         public int DepartmentId { get; set; }        
         public string DepartmentName { get; set; }
+        public byte Active { get; set; }
+        public int AssignmentCount { get; set; }
+
     }
 }

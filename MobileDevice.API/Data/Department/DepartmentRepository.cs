@@ -59,10 +59,13 @@ namespace MobileDevice.API.Data.Department
             if (filter.Active == 1)
                 query = query.Where(d => d.Active == 1);
 
+            filter.IsSortAscending = true;
+            filter.SortBy = "name";
+
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaDepartment, object>>>
             {
-
+                ["name"] = a => a.Name
             };
 
             query = query.ApplyOrdering(filter, columnsMap);

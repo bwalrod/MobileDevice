@@ -1,0 +1,32 @@
+tbody>tr:hover>th>i {
+    visibility: visible;
+}
+
+tbody>tr>th>i {
+    visibility: hidden;
+}
+
+th.w-10 {
+    width: 10%;
+}
+
+th.w-70 {
+    width: 70%;
+}
+
+th.w-20 {
+    width: 20%;
+}
+
+.fa {
+    color: blue;
+}
+
+.fa-trash {
+    cursor: pointer;
+    zoom: 125%;
+}
+
+.badge-warning {
+    color: black;
+}

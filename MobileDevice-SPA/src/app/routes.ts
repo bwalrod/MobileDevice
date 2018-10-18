@@ -1,3 +1,5 @@
+import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
+import { AssigneeListComponent } from './assignee-list/assignee-list.component';
 import { ProductEditResolver } from './_resolvers/product-edit.resolver';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductListResolver } from './_resolvers/product-list.resolver';
@@ -57,6 +59,7 @@ export const appRoutes: Routes = [
     {
         path: '',
         children: [
+            { path: 'assignees', component: AssigneeListComponent, resolve: {assignees: AssigneeListResolver}},
             { path: 'users', component: UserListComponent, resolve: {users: UserListResolver}},
             { path: 'users/edit/:id', component: UserEditComponent, resolve: {user: UserEditResolver}},
             { path: 'departments', component: DepartmentListComponent, resolve: {departments: DepartmentListResolver}},

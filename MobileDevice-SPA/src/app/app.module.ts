@@ -26,6 +26,7 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { DepartmentEditComponent } from './department-edit/department-edit.component';
 import { DepartmentListComponent } from './department-list/department-list.component';
+import { DepartmentSelectComponent } from './common/department-select/department-select.component';
 import { DeviceattributetypeListComponent } from './deviceattributetype-list/deviceattributetype-list.component';
 import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/deviceattributetype-edit.component';
 import { DevicedatetypeListComponent } from './devicedatetype-list/devicedatetype-list.component';
@@ -44,6 +45,7 @@ import { ProductmodelSelectComponent } from './common/productmodel-select/produc
 import { ProducttypeListComponent } from './producttype-list/producttype-list.component';
 import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
 import { ProducttypeComponent } from './common/producttype/producttype.component';
+import { AssigneeListComponent } from './assignee-list/assignee-list.component';
 
 
 
@@ -74,6 +76,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListResolver } from './_resolvers/product-list.resolver';
 import { ProductEditResolver } from './_resolvers/product-edit.resolver';
 import { ProductEditComponent } from './product-edit/product-edit.component';
+import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 
 
 
@@ -87,6 +90,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
       UserEditComponent,
       DepartmentListComponent,
       DepartmentEditComponent,
+      DepartmentSelectComponent,
       ManufacturerListComponent,
       ManufacturerEditComponent,
       ProducttypeListComponent,
@@ -108,7 +112,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
       SimcardListComponent,
       SimcardEditComponent,
       ProductListComponent,
-      ProductEditComponent
+      ProductEditComponent,
+      AssigneeListComponent
    ],
    imports: [
       BrowserModule,
@@ -125,6 +130,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
       UtilityService,
       WinAuthInterceptorProvider,
       ErrorInterceptorProvider,
+      AssigneeListResolver,
       UserEditResolver,
       UserListResolver,
       DepartmentListResolver,

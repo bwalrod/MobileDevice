@@ -41,6 +41,9 @@ namespace MobileDevice.API.Controllers
             if(!_auth.IsValidUser(User))
                 return NoContent();
 
+            if (filterResource.PageSize == 0)
+                filterResource.PageSize = 10;                
+
             var filter = _mapper.Map<AssigneeQueryResource, MdaAssigneeQuery>(filterResource);
 
             var assignees = await _repo.GetAssignees(filter);
@@ -82,6 +85,8 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Assignee could not be added");
             
         }
+
+        
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAssignee(int id, AssigneeSaveResource assigneeUpdateResource)

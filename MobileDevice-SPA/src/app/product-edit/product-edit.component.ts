@@ -56,6 +56,11 @@ export class ProductEditComponent implements OnInit {
         this.alertify.success(this.elementLabel + ' updated successfully');
       }, error => {
         this.alertify.error(error);
+        setTimeout(() => {
+          this.alertify.confirm('Would you like to restore the original values?', () => {
+            this.restoreOriginal();
+          });
+        }, 2000);
       });
   }
 
@@ -170,5 +175,14 @@ export class ProductEditComponent implements OnInit {
       this.originalElement.productTypeId !== this.element.productTypeId ||
       this.originalElement.productModelId !== this.element.productModelId ||
       this.originalElement.active !== this.element.active;
+  }
+
+  restoreOriginal() {
+    this.element.partNum = this.originalElement.partNum;
+    this.element.productCapacityId = this.originalElement.productCapacityId;
+    this.element.productManufacturerId = this.originalElement.productManufacturerId;
+    this.element.productTypeId = this.originalElement.productTypeId;
+    this.element.productModelId = this.originalElement.productModelId;
+    this.element.active = this.originalElement.active;
   }
 }

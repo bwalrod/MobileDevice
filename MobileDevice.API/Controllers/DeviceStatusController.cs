@@ -58,7 +58,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDeviceStatus([FromBody] DeviceStatusSaveResource deviceStatusSaveResource)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost("{id}/deactivate")]
         public async Task<IActionResult> DeactivateDeviceStatus(int id)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var ds = await _repo.GetDeviceStatus(id);
@@ -103,7 +103,7 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceStatus(int id, [FromBody] DeviceStatusSaveResource deviceStatusSaveResource)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -136,7 +136,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDeviceStatus(int id)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();            
 
             var deviceStatusFromRepo = await _repo.GetDeviceStatus(id);

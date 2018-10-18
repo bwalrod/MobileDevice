@@ -58,7 +58,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddSimCard([FromBody] SimCardSaveResource simCardSaveResource)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -88,7 +88,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost("{id}/deactivate")]
         public async Task<IActionResult> DeactivateSimCard(int id)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var sc = await _repo.GetSimCard(id);
@@ -109,7 +109,7 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateSimCard(int id, [FromBody] SimCardSaveResource simCardSaveResource)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -156,7 +156,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteSimCard(int id)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var simCardFromRepo = await _repo.GetSimCard(id);

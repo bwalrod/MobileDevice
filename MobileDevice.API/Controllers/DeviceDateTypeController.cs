@@ -61,7 +61,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddDeviceDateType([FromBody] DeviceDateTypeSaveResource deviceDateTypeSaveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -86,7 +86,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost("{id}/deactivate")]
         public async Task<IActionResult> DeactivateDeviceDateType(int id)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var ddt = await _repo.GetDeviceDateType(id);
@@ -103,7 +103,7 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceDateType(int id, [FromBody] DeviceDateTypeSaveResource deviceDateTypeSaveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -146,7 +146,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDeviceDateType(int id)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var deviceDateTypeFromRepo = await _repo.GetDeviceDateType(id);

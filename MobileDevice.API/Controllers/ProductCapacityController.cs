@@ -63,7 +63,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProductCapacity([FromBody] ProductCapacitySaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -92,7 +92,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost("{id}/deactivate")]
         public async Task<IActionResult> DeactivateProductCapacity(int id)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var pc = await _repo.GetProductCapacity(id);
@@ -109,7 +109,7 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProductCapacity(int id, [FromBody] ProductCapacitySaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -156,7 +156,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProductCapacity(int id)
         {
-            if (!_auth.IsValidUser(User))
+            if (!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var productCapacityFromRepo = await _repo.GetProductCapacity(id);

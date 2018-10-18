@@ -68,7 +68,8 @@ namespace MobileDevice.API.Helpers
 
             CreateMap<AssigneeSaveResource, MdaDeviceAssignee>();
 
-            CreateMap<MdaDeviceAssignee, AssigneeForList>();            
+            CreateMap<MdaDeviceAssignee, AssigneeForList>()
+                .ForMember(l => l.AssignmentCount, opt => opt.MapFrom(s => s.MdaDeviceAssignments.Count()));            
 
             /*  MdaDeviceAssignment */
 

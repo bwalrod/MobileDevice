@@ -41,7 +41,7 @@
             <td>{{ el.productTypeName }}</td>
             <td>{{ el.productManufacturerName }}</td>
             <td>{{ el.productModelName }}</td>
-            <td>{{ el.productCapacityName}}</td>
+            <td class="text-right">{{ el.productCapacityName}}</td>
             <td class="text-right pr-3">{{ el.deviceCount }}</td>
             <td class="text-center"><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
           </tr>
@@ -59,6 +59,7 @@
       [itemsPerPage]="pagination.itemsPerPage"
       [(ngModel)]="pagination.currentPage"
       (pageChanged)="pageChanged($event)"
+      [maxSize]=10
       previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;">
     </pagination>
   </div>

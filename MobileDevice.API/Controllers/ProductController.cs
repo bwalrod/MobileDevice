@@ -63,7 +63,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddProduct([FromBody] ProductSaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -93,7 +93,7 @@ namespace MobileDevice.API.Controllers
         [HttpPost("{id}/deactivate")]
         public async Task<IActionResult> DeactivateProduct(int id)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var p = await _repo.GetProduct(id);
@@ -114,7 +114,7 @@ namespace MobileDevice.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateProduct(int id, [FromBody] ProductSaveResource saveResource)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             if (!ModelState.IsValid)
@@ -128,7 +128,8 @@ namespace MobileDevice.API.Controllers
 
             /* Pre-existence Test */
             var filter = new MdaProductQuery() {
-                PartNum = saveResource.PartNum
+                PartNum = saveResource.PartNum,
+                Active = 2
             };
 
             var productFromRepoExisting = await _repo.GetProducts(filter);
@@ -141,8 +142,11 @@ namespace MobileDevice.API.Controllers
                     {
                         if (existingProduct.PartNum == saveResource.PartNum 
                             && existingProduct.ProductModelId == saveResource.ProductModelId
-                            && existingProduct.ProductCapacityId == saveResource.ProductCapacityId)
-                            return BadRequest("Nothing was changed.");
+                            && existingProduct.ProductCapacityId == saveResource.ProductCapacityId){
+                                if (existingProduct.Active == Convert.ToByte(saveResource.Active == true ? 1 : 0)) {
+                                    return BadRequest("Nothing was changed.");
+                                }
+                            }
                     }
             }
 
@@ -160,7 +164,7 @@ namespace MobileDevice.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
-            if(!_auth.IsValidUser(User) || !_auth.IsAdmin(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
 
             var productFromRepo = await _repo.GetProduct(id);
