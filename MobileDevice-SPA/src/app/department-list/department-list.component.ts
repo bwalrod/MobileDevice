@@ -17,6 +17,8 @@ export class DepartmentListComponent implements OnInit {
   filter = '';
   status = 'Active';
   $: any;
+  sub;
+  qDepartmentName;
 
   constructor(private departmentService: DepartmentService, private alertify: AlertifyService
     , private router: Router, private route: ActivatedRoute) { }
@@ -26,10 +28,18 @@ export class DepartmentListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.departments = data['departments'].result;
       this.pagination = data['departments'].pagination;
-      this.filter = null;
+      // this.filter = null;
       // this.status = 1;
+      this.sub = this.route.queryParams.subscribe(params => {
+        this.qDepartmentName = params['name'] || '';
+        console.log(this.qDepartmentName);
+      });
     });
+
+    this.filter = this.qDepartmentName;
   }
+
+  // this.filter = this.qDepartmentName;
 
 
   pageChanged(event: any): void {

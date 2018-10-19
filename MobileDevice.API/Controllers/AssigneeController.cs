@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -62,7 +63,9 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var assignee = await _repo.GetAssignee(id);
-            return Ok(assignee);
+
+            var assigneeItem = _mapper.Map<AssigneeForList>(assignee);
+            return Ok(assigneeItem);
         }
 
         [HttpPost]
@@ -86,18 +89,70 @@ namespace MobileDevice.API.Controllers
             
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateAssignee(int id)
+        {
+            if(!_auth.IsAppAdmin(User))
+                return NoContent();
+
+            var a = await _repo.GetAssignee(id);
+
+            if (a == null)
+                return BadRequest($"Assignee {id} could not be found");
+
+            a.Active = 0;
+            a.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            a.ModifiedDate = DateTime.Now;
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Failed to delete assignee");
+        }
+
         
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAssignee(int id, AssigneeSaveResource assigneeUpdateResource)
         {
-            if(!_auth.IsValidUser(User))
+            if(!_auth.IsAppAdmin(User))
                 return NoContent();
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var assigneeFromRepo = await _repo.GetAssignee(id);
 
             if (assigneeFromRepo == null)
                 return BadRequest($"AssigneeId {id} could not be found");
+
+            if (assigneeUpdateResource.DepartmentId == 0)
+                assigneeUpdateResource.DepartmentId = null;
+
+
+            var filter = new MdaAssigneeQuery() {
+                FirstName = assigneeUpdateResource.FirstName,
+                LastName = assigneeUpdateResource.LastName,
+                Active = 2
+            };
+
+            var assigneeFromRepoExisting = await _repo.GetAssignees(filter);
+            if (assigneeFromRepoExisting.Any())
+            {
+                var existingAssignee = assigneeFromRepoExisting.FirstOrDefault();
+                if (existingAssignee.Id != id)
+                    return BadRequest($"Assignee {assigneeUpdateResource.FirstName + ' ' + assigneeUpdateResource.LastName} already exists.");
+                else {
+                    if (existingAssignee.FirstName == assigneeUpdateResource.FirstName
+                            && existingAssignee.LastName == assigneeUpdateResource.LastName
+                            && existingAssignee.DepartmentId == assigneeUpdateResource.DepartmentId){
+                                if (existingAssignee.Active == Convert.ToByte(assigneeUpdateResource.Active == true ? 1 : 0)) {
+                                    return BadRequest("Nothing was changed");
+                                }
+                            }
+
+                }
+            }
 
             _mapper.Map(assigneeUpdateResource, assigneeFromRepo);
             assigneeFromRepo.ModifiedBy = User.Identity.Name;
@@ -106,7 +161,7 @@ namespace MobileDevice.API.Controllers
             if (await _repo.SaveAll())
                 return NoContent();
 
-            return BadRequest("Could not update assignee");
+            return BadRequest("Failed to update assignee");
         }
 
         [HttpDelete("{id}")]

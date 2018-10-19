@@ -21,6 +21,8 @@ export class AssigneeListComponent implements OnInit {
   elementLabel = 'assignee';
   pageLabel = 'Assignees';
   pageRoute = 'assignees';
+  sub;
+  qDepartmentId = -1;
 
   constructor(private service: AssigneeService, private alertify: AlertifyService,
                 private router: Router, private route: ActivatedRoute) { }
@@ -29,11 +31,17 @@ export class AssigneeListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.list = data['assignees'].result;
       this.pagination = data['assignees'].pagination;
+
+      this.sub = this.route.queryParams.subscribe(params => {
+        this.qDepartmentId = +params['departmentId'] || 0;
+        console.log(this.qDepartmentId);
+      });
     });
+
 
     this.filter.firstName = '';
     this.filter.lastName = '';
-    this.filter.departmentId = 0;
+    this.filter.departmentId = this.qDepartmentId;
   }
 
   loadList() {
@@ -55,7 +63,7 @@ export class AssigneeListComponent implements OnInit {
 
   filterTable() {
     this.pagination.currentPage = 1;
-    this.pagination.itemsPerPage = 5;
+    this.pagination.itemsPerPage = 10;
     this.loadList();
   }
 
@@ -66,7 +74,7 @@ export class AssigneeListComponent implements OnInit {
 
   deactivateElement(id: number) {
     this.alertify.confirm('Are you sure you want to delete this ' + this.elementLabel + '?', () => {
-      this.service.deativateAssignee(id)
+      this.service.deactivateAssignee(id)
         .subscribe(() => {
           this.loadList();
         }, error => {

@@ -33,7 +33,7 @@
               container="" placement=""
               ><span></span></i></th>
             <td><a [routerLink]="['/manufacturers/edit/', m.id]">{{ m.name }}</a></td>
-            <td>{{ m.productCount }}</td>
+            <td><a [routerLink]="['/productmodels']" [queryParams]="{manufacturerId: m.id}" routerLinkActive="router-link-active" >{{ m.productCount }}</a></td>
             <td><i [ngClass]="(m.active == true)?'fa fa-check':''"></i></td>
           </tr>
           <tr *ngIf="manufacturers.length == 0">

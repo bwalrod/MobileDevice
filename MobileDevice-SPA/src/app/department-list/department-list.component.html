@@ -32,7 +32,7 @@
               [ngClass]="{'invisible':d.active != 1, 'badge badge-warning':d.assigneeCount > 0}"
               tooltip="{{(d.assigneeCount > 0) ? 'You shouldn\'t delete a department with members.': '' }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/departments/edit/', d.id]">{{ d.name }}</a></td>
-            <td>{{ d.assigneeCount }}</td>
+            <td><a [routerLink]="['/assignees']" [queryParams]="{departmentId: d.id}" tooltip="View Assignees" >{{ d.assigneeCount }}</a></td>
             <td><i [ngClass]="(d.active == true)?'fa fa-check':''"></i></td>
           </tr>
           <tr *ngIf="departments.length == 0">

@@ -40,6 +40,8 @@ export class AssigneeService {
       }
     }
 
+    console.log('assignee-service: ' + params);
+
     return this.http.get<Assignee[]>(this.baseUrl + this.controllerPath, { observe: 'response', params})
     .pipe(
       map(response => {
@@ -60,7 +62,7 @@ export class AssigneeService {
     return this.http.put(this.baseUrl + this.controllerPath + '/' + element.id, element);
   }
 
-  deativateAssignee(id: number) {
+  deactivateAssignee(id: number) {
     return this.http.post(this.baseUrl + this.controllerPath + '/' + id + '/deactivate', {});
   }
 

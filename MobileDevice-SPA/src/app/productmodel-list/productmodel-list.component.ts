@@ -20,6 +20,8 @@ export class ProductmodelListComponent implements OnInit {
   elementLabel = 'product model';
   pageLabel = 'Product Models';
   pageRoute = 'productmodels';
+  sub;
+  qManufacturerId = 0;
 
   constructor(private service: ProductmodelService, private alertify: AlertifyService
                 , private router: Router, private route: ActivatedRoute) { }
@@ -28,12 +30,16 @@ export class ProductmodelListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.list = data['productmodels'].result;
       this.pagination = data['productmodels'].pagination;
-      this.filter = null;
+      // this.filter = null;
+      this.sub = this.route.queryParams.subscribe(params => {
+        this.qManufacturerId = params['manufacturerId'] || 0;
+        console.log('productModelList - ' + this.qManufacturerId.toString());
+      });
     });
 
     this.userParams.name = '';
     this.userParams.productTypeId = 0;
-    this.userParams.productManufacturerId = 0;
+    this.userParams.productManufacturerId = this.qManufacturerId;
   }
 
   loadList() {

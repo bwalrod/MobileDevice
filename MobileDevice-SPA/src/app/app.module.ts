@@ -1,4 +1,5 @@
 
+
 /* Modules */
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -46,6 +47,7 @@ import { ProducttypeListComponent } from './producttype-list/producttype-list.co
 import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.component';
 import { ProducttypeComponent } from './common/producttype/producttype.component';
 import { AssigneeListComponent } from './assignee-list/assignee-list.component';
+import { AssigneeEditComponent } from './assignee-edit/assignee-edit.component';
 
 
 
@@ -77,7 +79,7 @@ import { ProductListResolver } from './_resolvers/product-list.resolver';
 import { ProductEditResolver } from './_resolvers/product-edit.resolver';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
-
+import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
 
 
 
@@ -113,7 +115,8 @@ import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
       SimcardEditComponent,
       ProductListComponent,
       ProductEditComponent,
-      AssigneeListComponent
+      AssigneeListComponent,
+      AssigneeEditComponent
    ],
    imports: [
       BrowserModule,
@@ -131,6 +134,7 @@ import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
       WinAuthInterceptorProvider,
       ErrorInterceptorProvider,
       AssigneeListResolver,
+      AssigneeEditResolver,
       UserEditResolver,
       UserListResolver,
       DepartmentListResolver,

@@ -1,3 +1,4 @@
+import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeListComponent } from './assignee-list/assignee-list.component';
 import { ProductEditResolver } from './_resolvers/product-edit.resolver';
@@ -53,6 +54,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
 import { ProductCapacityEditResolver } from './_resolvers/productcapactity-edit.resolver';
 import { SimcardListComponent } from './simcard-list/simcard-list.component';
+import { AssigneeEditComponent } from './assignee-edit/assignee-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -60,6 +62,7 @@ export const appRoutes: Routes = [
         path: '',
         children: [
             { path: 'assignees', component: AssigneeListComponent, resolve: {assignees: AssigneeListResolver}},
+            { path: 'assignees/edit/:id', component: AssigneeEditComponent, resolve: {assignee: AssigneeEditResolver}},
             { path: 'users', component: UserListComponent, resolve: {users: UserListResolver}},
             { path: 'users/edit/:id', component: UserEditComponent, resolve: {user: UserEditResolver}},
             { path: 'departments', component: DepartmentListComponent, resolve: {departments: DepartmentListResolver}},

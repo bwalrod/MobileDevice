@@ -35,7 +35,7 @@
               tooltip="{{(el.assignmentCount > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with assignments.': 'Delete this ' + elementLabel }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.firstName }}</a></td>
             <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.lastName }}</a></td>
-            <td>{{ el.departmentName }}</td>
+            <td><a [routerLink]="['/departments']" [queryParams]="{name: el.departmentName}" tooltip="View Department" >{{ el.departmentName }}</a></td>
 
             <td class="text-right pr-3">{{ el.assignmentCount }}</td>
             <td class="text-center"><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>

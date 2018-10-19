@@ -15,7 +15,14 @@ export class AssigneeListResolver implements Resolve<Assignee[]> {
     constructor(private service: AssigneeService, private route: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Assignee[]> {
-        return this.service.getAssignees(this.pageNumber, this.pageSize, null, this.status).pipe(
+        console.log('resolve - assignee-list');
+        console.log(route.queryParams['departmentId']);
+        const filter = {
+            firstName: '',
+            lastName: '',
+            departmentId: route.queryParams['departmentId'] || 0 };
+        console.log(filter);
+        return this.service.getAssignees(this.pageNumber, this.pageSize, filter, this.status).pipe(
             catchError(() => {
                 this.alertify.error('Problem retrieving data');
                 this.route.navigate(['/home']);

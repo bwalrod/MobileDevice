@@ -15,7 +15,8 @@ export class DepartmentListResolver implements Resolve<Department[]> {
     constructor(private departmentService: DepartmentService, private route: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Department[]> {
-        return this.departmentService.getDepartments(this.pageNumber, this.pageSize, null , this.status).pipe(
+        const filter = route.queryParams['name'] || '';
+        return this.departmentService.getDepartments(this.pageNumber, this.pageSize, filter , this.status).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.route.navigate(['/home']);
