@@ -32,7 +32,7 @@
               [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.productModelCount > 0}"
               tooltip="{{(el.productModelCount > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with members.': '' }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.name }}</a></td>
-            <td>{{ el.productModelCount }}</td>
+            <td><a [routerLink]="['/productmodels']" [queryParams]="{productTypeId: el.id}" >{{ el.productModelCount }}</a></td>
             <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
           </tr>
           <tr *ngIf="list.length == 0">

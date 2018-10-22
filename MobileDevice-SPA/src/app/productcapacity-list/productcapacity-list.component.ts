@@ -25,6 +25,8 @@ export class ProductcapacityListComponent implements OnInit {
   elementLabel = 'product capacity';
   pageLabel = 'Product Capacities';
   pageRoute = 'productcapacities';
+  sub;
+  qCapacityName = '';
 
   constructor(private service: ProductCapacityService, private alertify: AlertifyService
                 , private router: Router, private route: ActivatedRoute) { }
@@ -33,9 +35,13 @@ export class ProductcapacityListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.list = data['productcapacities'].result;
       this.pagination = data['productcapacities'].pagination;
+
+      this.sub = this.route.queryParams.subscribe(params => {
+        this.qCapacityName = params['name'] || '';
+      });
     });
 
-    this.filter.name = '';
+    this.filter.name = this.qCapacityName;
     this.filter.productModelId = 0;
     this.filter.productManufacturerId = 0;
     this.filter.productTypeId = 0;

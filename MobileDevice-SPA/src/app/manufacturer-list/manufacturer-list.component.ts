@@ -16,6 +16,8 @@ export class ManufacturerListComponent implements OnInit {
   pagination: Pagination;
   filter = '';
   status = 'Active';
+  sub;
+  qManufacturerName = '';
 
   constructor(private manuService: ManufacturerService, private alertify: AlertifyService
       , private router: Router, private route: ActivatedRoute) { }
@@ -24,7 +26,12 @@ export class ManufacturerListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.manufacturers = data['manufacturers'].result;
       this.pagination = data['manufacturers'].pagination;
-      this.filter = null;
+      // this.filter = null;
+      this.sub = this.route.queryParams.subscribe(params => {
+        this.qManufacturerName = params['manufacturerName'] || '';
+        this.filter = this.qManufacturerName;
+        console.log('manufacturer - ' + this.qManufacturerName.toString());
+      });
     });
   }
 

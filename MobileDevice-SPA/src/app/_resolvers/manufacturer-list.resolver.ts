@@ -15,7 +15,8 @@ export class ManufacturerListResolver implements Resolve<Manufacturer[]> {
     constructor(private manuService: ManufacturerService, private route: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Manufacturer[]> {
-        return this.manuService.getManufacturers(this.pageNumber, this.pageSize, null, this.status).pipe(
+        const filter = route.queryParams['manufacturerName'] || '';
+        return this.manuService.getManufacturers(this.pageNumber, this.pageSize, filter, this.status).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.route.navigate(['/home']);

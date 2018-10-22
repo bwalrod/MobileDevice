@@ -15,7 +15,10 @@ export class ProductcapacityListResolver implements Resolve<ProductCapacity[]> {
     constructor(private service: ProductCapacityService, private route: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<ProductCapacity[]> {
-        return this.service.getProductCapacities(this.pageNumber, this.pageSize, null , this.status).pipe(
+        const filter = {
+            name: route.queryParams['name'] || ''
+        };
+        return this.service.getProductCapacities(this.pageNumber, this.pageSize, filter , this.status).pipe(
             catchError(() => {
                 this.alertify.error('Problem retrieving data');
                 this.route.navigate(['/home']);

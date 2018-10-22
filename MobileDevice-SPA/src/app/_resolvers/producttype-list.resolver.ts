@@ -15,7 +15,8 @@ export class ProductTypeListResolver implements Resolve<ProductType[]> {
     constructor(private productTypeService: ProductTypeService, private route: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<ProductType[]> {
-        return this.productTypeService.getProductTypes(this.pageNumber, this.pageSize, null , this.status).pipe(
+        const filter = route.queryParams['productTypeName'] || '';
+        return this.productTypeService.getProductTypes(this.pageNumber, this.pageSize, filter , this.status).pipe(
             catchError(() => {
                 this.alertify.error('Problem retrieving data');
                 this.route.navigate(['/home']);

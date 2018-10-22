@@ -38,10 +38,10 @@
               [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.deviceCount > 0}"
               tooltip="{{(el.deviceCount > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with devices.': 'Delete this ' + elementLabel }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.partNum }}</a></td>
-            <td>{{ el.productTypeName }}</td>
-            <td>{{ el.productManufacturerName }}</td>
-            <td>{{ el.productModelName }}</td>
-            <td class="text-right">{{ el.productCapacityName}}</td>
+            <td><a [routerLink]="['/producttypes']" [queryParams]="{productTypeName: el.productTypeName}" >{{ el.productTypeName }}</a></td>
+            <td><a [routerLink]="['/manufacturers']" [queryParams]="{manufacturerName: el.productManufacturerName}" >{{ el.productManufacturerName }}</a></td>
+            <td><a [routerLink]="['/productmodels']" [queryParams]="{name: el.productModelName}">{{ el.productModelName }}</a></td>
+            <td class="text-right"><a [routerLink]="['/productcapacities']" [queryParams]="{name: el.productCapacityName}" >{{ el.productCapacityName}}</a></td>
             <td class="text-right pr-3">{{ el.deviceCount }}</td>
             <td class="text-center"><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
           </tr>

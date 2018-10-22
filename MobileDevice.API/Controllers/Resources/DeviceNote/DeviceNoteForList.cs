@@ -13,7 +13,7 @@ namespace MobileDevice.API.Controllers.Resources.DeviceNote
         public int ProductId { get; set; }
         public int AssignmentType { get; set; }
         public int AssigneeId { get; set; }
-        public string AssingeeLastName { get; set; }
+        public string assigneeLastName { get; set; }
         public string AssigneeFirstName { get; set; }
         public string AssigneeDepartmentName { get; set; }
         

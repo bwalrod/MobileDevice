@@ -1,3 +1,5 @@
+import { DeviceListResolver } from './_resolvers/device-list.resolver';
+import { DeviceListComponent } from './device-list/device-list.component';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeListComponent } from './assignee-list/assignee-list.component';
@@ -67,6 +69,7 @@ export const appRoutes: Routes = [
             { path: 'users/edit/:id', component: UserEditComponent, resolve: {user: UserEditResolver}},
             { path: 'departments', component: DepartmentListComponent, resolve: {departments: DepartmentListResolver}},
             { path: 'departments/edit/:id', component: DepartmentEditComponent, resolve: {department: DepartmentEditResolver}},
+            { path: 'devices', component: DeviceListComponent, resolve: {devices: DeviceListResolver}},
             // tslint:disable-next-line:max-line-length
             { path: 'deviceattributetypes', component: DeviceattributetypeListComponent, resolve: {deviceattributetypes: DeviceAttributeTypeListResolver}},
             // tslint:disable-next-line:max-line-length

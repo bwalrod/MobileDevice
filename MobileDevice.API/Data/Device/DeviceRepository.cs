@@ -76,8 +76,27 @@ namespace MobileDevice.API.Data.Device
             if (!String.IsNullOrEmpty(queryObj.Os))
                 query = query.Where(o => o.Os.Contains(queryObj.Os));
             if (queryObj.DeviceStatusId.HasValue)
-                query = query.Where(s => s.DeviceStatusId == queryObj.DeviceStatusId);                
+                query = query.Where(s => s.DeviceStatusId == queryObj.DeviceStatusId);             
+            if (queryObj.AssignmentTypeId.HasValue)
+                query = query.Where (a => a.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active ==1).AssignmentType == queryObj.AssignmentTypeId);
+            if (queryObj.AssigneeId.HasValue)
+                query = query.Where (asn => asn.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).AssigneeId == queryObj.AssigneeId);
+            if (queryObj.AssigneeDepartmentId.HasValue)
+                query = query.Where (asd => asd.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).MdaDeviceAssignee.DepartmentId == queryObj.AssigneeDepartmentId);
+            if (queryObj.ProductCapacityId.HasValue)
+                query = query.Where (cp => cp.Product.ProductCapacityId == queryObj.ProductCapacityId);
+            if (queryObj.ProductModelId.HasValue)
+                query = query.Where (pm => pm.Product.ProductModelId == queryObj.ProductModelId);
+            if (queryObj.ProductManufacturerId.HasValue)
+                query = query.Where (pmf => pmf.Product.ProductModel.ProductManufacturerId == queryObj.ProductManufacturerId);
+            
 
+            if (queryObj.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (queryObj.Active == 1)
+                query = query.Where(d => d.Active == 1);              
+            
             var columnsMap = new Dictionary<string, Expression<Func<MdaDevice, object>>>
             {
 

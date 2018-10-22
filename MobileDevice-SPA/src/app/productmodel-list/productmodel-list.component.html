@@ -34,9 +34,9 @@
               [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.productCount > 0}"
               tooltip="{{(el.productCount > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with members.': '' }}" container="" placement=""><span></span></i></th>
             <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.name }}</a></td>
-            <td>{{ el.productTypeName }}</td>
-            <td>{{ el.productManufacturerName }}</td>
-            <td>{{ el.productCount }}</td>
+            <td><a [routerLink]="['/producttypes']" [queryParams]="{productTypeName: el.productTypeName}" >{{ el.productTypeName }}</a></td>
+            <td><a [routerLink]="['/manufacturers']" [queryParams]="{manufacturerName: el.productManufacturerName}" >{{ el.productManufacturerName }}</a></td>
+            <td><a [routerLink]="['/products']" [queryParams]="{productModelId: el.id}" >{{ el.productCount }}</a></td>
             <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
           </tr>
           <tr *ngIf="list.length == 0">

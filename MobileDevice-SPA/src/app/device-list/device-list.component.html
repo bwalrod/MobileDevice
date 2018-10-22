@@ -1,0 +1,77 @@
+<div class="mt-5 pt-5">
+    <h2 class="text-center">{{ pageLabel }}</h2>
+      <div class="container-fluid">
+        <table class="table table-condensed table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col" class="w-20"><button class="btn btn-link" [routerLink]="['/' + pageRoute + '/edit/0']" >Add</button></th>
+              <th>Serial Number</th>
+              <th>ESN</th>
+              <th>OS</th>
+              <!-- <th>Type</th> -->
+              <th>Manufacturer</th>
+              <th>Model</th>
+              <th>Capacity</th>
+              <th>Department</th>
+              <th>Assigneed To</th>
+              <!-- <th>Products</th> -->
+              <th></th>
+            </tr>
+            <tr>
+              <th class="w-20"><button class="btn btn-sm btn-default" (click)="clearFilter()">Clear</button></th>
+              <th scope="col"><input type="text" size="20" name="serialNumber" class="form-control-sm" [(ngModel)]="userParams.serialNumber" (keyup)="filterTable()" placeholder="Filter Table"></th>
+              <th scope="col"><input type="text" size="20" name="esn" class="form-control-sm" [(ngModel)]="userParams.esn" (keyup)="filterTable()" placeholder="Filter Table"></th>
+              <th scope="col"><input type="text" size="20" name="os" class="form-control-sm" [(ngModel)]="userParams.os" (keyup)="filterTable()" placeholder="Filter Table"></th>
+              <!-- <th scope="col"><app-producttype [showNoValue]=true [selectedProductType]="userParams.productTypeId" (selectOption)="filterByType($event)"></app-producttype></th> -->
+              <th scope="col"><app-manufacturer-select [showNoValue]=true [selectedManufacturer]="userParams.productManufacturerId" (selectOption)="filterByManufacturer($event)"></app-manufacturer-select></th>
+              <th scope="col"><app-productmodel-select [showNoValue]=true [selectedProductTypeId]="userParams.productTypeId" [selectedManufacturerId]="userParams.productManufacturerId" [selectedModelId]="userParams.productModelId" (selectedOption)="filterByModel($event)"></app-productmodel-select></th>
+              <th scope="col"><app-productcapacity-select [showNoValue]=true [selectedProductTypeId]="userParams.productTypeId" [selectedManufacturerId]="userParams.productManufacturerId" [selectedModelId]="userParams.productModelId" [selectedCapacityId]="userParams.productCapacityId" (selectedOption)="filterByCapacity($event)"></app-productcapacity-select></th>
+              <th scope="col"><app-department-select [showNoValue]=true [selectedDepartment]="userParams.departmentId" (selectOption)="filterByDepartment($event)"></app-department-select></th>
+              <th scope="col"><app-assignee-select [showNoValue]=true [selectedAssignee]="userParams.assigneeId" (selectOption)="filterByAssignee($event)"></app-assignee-select></th>
+              <th scope="col" class="w-20">
+                <div class="row">
+                  <div class="btn-group">
+                    <button class="btn btn-primary btn-sm" [(ngModel)]="status" btnRadio="Active" (click)="filterTable()">Active</button>
+                    <button class="btn btn-primary" [(ngModel)]="status" btnRadio="Inactive" (click)="filterTable()">Inactive</button>
+                    <button class="btn btn-primary" [(ngModel)]="status" btnRadio="All" (click)="filterTable()">All</button>
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let el of list">
+              <th scope="row"><i class="fa fa-trash" (click)="deactivateElement(el.id)" 
+                [ngClass]="{'invisible':el.active != true, 'badge badge-warning':el.id > 0}"
+                tooltip="{{(el.id > 0) ? 'You shouldn\'t delete a ' + elementLabel + ' with members.': '' }}" container="" placement=""><span></span></i></th>
+              <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.serialNumber }}</a></td>
+              <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.esn }}</a></td>
+              <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.os }}</a></td>
+              <!-- <td><a [routerLink]="['/producttypes']" [queryParams]="{productTypeName: el.productTypeName}" >{{ el.productTypeName }}</a></td> -->
+              <td><a [routerLink]="['/manufacturers']" [queryParams]="{manufacturerName: el.productManufacturerName}" >{{ el.productManufacturerName }}</a></td>
+              <td><a [routerLink]="['/productmodels']" [queryParams]="{name: el.productModelName}">{{ el.productModelName }}</a></td>              
+              <!-- <td><a [routerLink]="['/products']" [queryParams]="{productModelId: el.id}" >{{ el.productCount }}</a></td> -->
+              <td class="text-right"><a [routerLink]="['/productcapacities']" [queryParams]="{name: el.productCapacityName}" >{{ el.productCapacityName}}</a></td>
+              <td><a [routerLink]="['/departments']" [queryParams]="{name: el.assigneeDepartmentName}" tooltip="View Department" >{{ el.assigneeDepartmentName }}</a></td>
+              <td>{{ makeAssigneeName(el.assigneeLastName, el.assigneeFirstName) }}</td>
+              <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
+            </tr>
+            <tr *ngIf="list.length == 0">
+                <td colspan="9" class="text-center">No Records</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  
+  <div class="d-flex justify-content-center">
+      <pagination [boundaryLinks]="true"
+        [totalItems]="pagination.totalItems"
+        [itemsPerPage]="pagination.itemsPerPage"
+        [(ngModel)]="pagination.currentPage"
+        (pageChanged)="pageChanged($event)"
+        previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="10">
+      </pagination>
+    </div>
+  
+  

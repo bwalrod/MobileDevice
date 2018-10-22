@@ -19,6 +19,7 @@ export class ProducttypeListComponent implements OnInit {
   elementLabel = 'product type';
   pageLabel = 'Product Types';
   pageRoute = 'producttypes';
+  sub;
 
   constructor(private service: ProductTypeService, private alertify: AlertifyService
                 , private router: Router, private route: ActivatedRoute) { }
@@ -27,7 +28,10 @@ export class ProducttypeListComponent implements OnInit {
     this.route.data.subscribe(data => {
       this.list = data['producttypes'].result;
       this.pagination = data['producttypes'].pagination;
-      this.filter = null;
+      // this.filter = null;
+      this.sub = this.route.queryParams.subscribe(params => {
+        this.filter = params['productTypeName'] || '';
+      });
     });
   }
 

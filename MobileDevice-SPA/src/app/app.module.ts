@@ -1,5 +1,6 @@
 
 
+
 /* Modules */
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -48,6 +49,8 @@ import { ProducttypeEditComponent } from './producttype-edit/producttype-edit.co
 import { ProducttypeComponent } from './common/producttype/producttype.component';
 import { AssigneeListComponent } from './assignee-list/assignee-list.component';
 import { AssigneeEditComponent } from './assignee-edit/assignee-edit.component';
+import { AssigneeSelectComponent } from './common/assignee-select/assignee-select.component';
+
 
 
 
@@ -56,6 +59,7 @@ import { UserEditResolver } from './_resolvers/user-edit.resolver';
 import { UserListResolver } from './_resolvers/user-list.resolver';
 import { DepartmentListResolver } from './_resolvers/department-list.resolver';
 import { DepartmentEditResolver } from './_resolvers/department-edit.resolver';
+import { DeviceListResolver } from './_resolvers/device-list.resolver';
 import { DeviceAttributeTypeEditResolver } from './_resolvers/deviceattributetype-edit.resolver';
 import { DeviceAttributeTypeListResolver } from './_resolvers/deviceattributetype-list.resolver';
 import { DeviceDateTypeListResolver } from './_resolvers/devicedatetype-list.resolver';
@@ -80,6 +84,7 @@ import { ProductEditResolver } from './_resolvers/product-edit.resolver';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
+import { DeviceListComponent } from './device-list/device-list.component';
 
 
 
@@ -116,7 +121,9 @@ import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
       ProductListComponent,
       ProductEditComponent,
       AssigneeListComponent,
-      AssigneeEditComponent
+      AssigneeEditComponent,
+      AssigneeSelectComponent,
+      DeviceListComponent
    ],
    imports: [
       BrowserModule,
@@ -139,6 +146,7 @@ import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
       UserListResolver,
       DepartmentListResolver,
       DepartmentEditResolver,
+      DeviceListResolver,
       DeviceAttributeTypeListResolver,
       DeviceAttributeTypeEditResolver,
       DeviceDateTypeListResolver,

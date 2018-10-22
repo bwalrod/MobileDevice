@@ -16,8 +16,9 @@ export class ProductModelListResolver implements Resolve<ProductModel[]> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<ProductModel[]> {
         const filter = {
-            name: '',
-            productManufacturerId: route.queryParams['manufacturerId'] || ''
+            name: route.queryParams['name'] || '',
+            productManufacturerId: route.queryParams['manufacturerId'] || '',
+            productTypeId: route.queryParams['productTypeId'] || ''
         };
         return this.productTypeService.getProductModels(this.pageNumber, this.pageSize, filter , this.status).pipe(
             catchError(() => {
