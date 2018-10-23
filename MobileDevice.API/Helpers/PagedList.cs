@@ -27,12 +27,10 @@ namespace MobileDevice.API.Helpers
         {
             if (pageNumber <= 0)
                 pageNumber = 1;
-            if (pageSize < 0)
+            if (pageSize <= 0)
                 pageSize = 10;
             if (pageSize > 50)
                 pageSize = 50;
-            if (pageSize == 0)
-                pageSize = 500;                
 
             var count = await source.CountAsync();
             if (pageSize > count)

@@ -56,6 +56,21 @@ namespace MobileDevice.API.Controllers
             return Ok(assigneesList);
         }
 
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllAssignees([FromQuery] AssigneeQueryResource filterResource)
+        {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
+            var filter = _mapper.Map<MdaAssigneeQuery>(filterResource);
+
+            var assignees = await _repo.GetAllAssignees(filter);
+
+            var assigneeLookup = _mapper.Map<IEnumerable<AssigneeForLookup>>(assignees);
+
+            return Ok(assigneeLookup);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetAssignee(int id)
         {

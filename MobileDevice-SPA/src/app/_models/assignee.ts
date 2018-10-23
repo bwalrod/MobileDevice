@@ -6,4 +6,5 @@ export class Assignee {
     departmentName: string;
     active: boolean;
     assignmentCount: number;
+    fullNameLF: string;
 }

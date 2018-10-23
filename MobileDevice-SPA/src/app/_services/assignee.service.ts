@@ -17,6 +17,32 @@ export class AssigneeService {
 
   constructor(private http: HttpClient) { }
 
+  getAllAssignees(filter?: any, status?: number): Observable<Assignee[]> {
+    let results: Assignee[];
+    let params = new HttpParams();
+
+    if (status != null) {
+      params = params.append('active', status.toString());
+    }
+
+    if (filter != null) {
+      params = params.append('firstName', filter.firstName);
+      params = params.append('lastName', filter.lastName);
+
+      if (filter.departmentId > 0) {
+        params = params.append('departmentId', filter.departmentId);
+      }
+    }
+
+    return this.http.get<Assignee[]>(this.baseUrl + this.controllerPath + '/all', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        results = response.body;
+        return results;
+      })
+    );
+  }
+
   getAssignees(page?: number, itemsPerPage?: number, filter?: any, status?: number): Observable<PaginatedResult<Assignee []>> {
     const paginatedResult: PaginatedResult<Assignee []> = new PaginatedResult<Assignee []>();
 

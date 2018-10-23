@@ -56,6 +56,43 @@ namespace MobileDevice.API.Data.Assignee
             return assignees;
         }
 
+        public async Task<IEnumerable<MdaDeviceAssignee>> GetAllAssignees(MdaAssigneeQuery queryObj)
+        {
+            var query = _context.MdaDeviceAssignee
+                .AsQueryable();
+
+            if (!String.IsNullOrEmpty(queryObj.FirstName))
+                //query = query.Where(f => f.FirstName == queryObj.FirstName);
+                query = query.Where(f => f.FirstName.Contains(queryObj.FirstName));
+
+            if (!String.IsNullOrEmpty(queryObj.LastName))
+                // query = query.Where(l => l.LastName == queryObj.LastName);
+                query = query.Where(l => l.LastName.Contains(queryObj.LastName));
+
+            if (queryObj.DepartmentId.HasValue)
+                query = query.Where(d => d.DepartmentId == queryObj.DepartmentId);
+
+            if (queryObj.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (queryObj.Active == 1)
+                query = query.Where(d => d.Active == 1);                  
+
+            queryObj.SortBy = "lastname";
+            queryObj.IsSortAscending = true;
+            
+            var columnsMap = new Dictionary<string, Expression<Func<MdaDeviceAssignee, object>>>
+            {
+                ["firstname"] = a => a.FirstName,
+                ["lastname"] = a => a.LastName,
+                ["department"] = a => a.Department
+            };
+
+            query = query.ApplyOrdering(queryObj, columnsMap);
+
+            return await query.ToListAsync();            
+        }
+
         public async Task<PagedList<MdaDeviceAssignee>> GetAssignees(MdaAssigneeQuery queryObj)
         {
             var query = _context.MdaDeviceAssignee

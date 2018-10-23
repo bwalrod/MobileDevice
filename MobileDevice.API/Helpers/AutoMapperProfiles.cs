@@ -71,7 +71,10 @@ namespace MobileDevice.API.Helpers
             CreateMap<AssigneeSaveResource, MdaDeviceAssignee>();
 
             CreateMap<MdaDeviceAssignee, AssigneeForList>()
-                .ForMember(l => l.AssignmentCount, opt => opt.MapFrom(s => s.MdaDeviceAssignments.Count()));            
+                .ForMember(l => l.AssignmentCount, opt => opt.MapFrom(s => s.MdaDeviceAssignments.Count()));     
+
+            CreateMap<MdaDeviceAssignee, AssigneeForLookup>()
+                .ForMember(l => l.FullNameLF, opt => opt.MapFrom(s => string.Format("{0}, {1}",s.LastName,s.FirstName)));
 
             /*  MdaDeviceAssignment */
 

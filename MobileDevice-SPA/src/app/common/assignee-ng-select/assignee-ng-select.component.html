@@ -1,0 +1,8 @@
+<ng-select [items]="assignees"
+           bindLabel="fullNameLF"
+           bindValue="id"
+           [(ngModel)]="selectedAssigneeId"
+           (change)="optionSelected($event.id)">
+</ng-select>
+<!-- 
+<pre>{{ selectedAssigneeId }}</pre> -->

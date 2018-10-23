@@ -1,4 +1,3 @@
-import { PaginatedResult } from 'src/app/_models/pagination';
 import { AssigneeService } from './../../_services/assignee.service';
 import { Assignee } from './../../_models/assignee';
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
@@ -27,9 +26,13 @@ export class AssigneeSelectComponent implements OnInit {
   }
 
   loadList() {
-    this.service.getAssignees(1, 0, this.filter, 1)
-      .subscribe((res: PaginatedResult<Assignee[]>) => {
-        this.assignees = res.result;
+    // this.service.getAssignees(1, 0, this.filter, 1)
+    //   .subscribe((res: PaginatedResult<Assignee[]>) => {
+    //     this.assignees = res.result;
+    //   });
+    this.service.getAllAssignees(this.filter, 1)
+      .subscribe((res: Assignee[]) => {
+        this.assignees = res;
       });
   }
 

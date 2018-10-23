@@ -14,6 +14,7 @@ namespace MobileDevice.API.Data.Assignee
 
          Task<bool> SaveAll();
          Task<IEnumerable<MdaDeviceAssignee>> GetAssignees();
+         Task<IEnumerable<MdaDeviceAssignee>> GetAllAssignees(MdaAssigneeQuery filter);
 
          Task<PagedList<MdaDeviceAssignee>> GetAssignees(MdaAssigneeQuery filter);
          

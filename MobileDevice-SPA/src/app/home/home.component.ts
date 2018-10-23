@@ -34,4 +34,7 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  showSelected(assigneeFilter: number) {
+    alert(assigneeFilter);
+  }
 }

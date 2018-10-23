@@ -1,6 +1,7 @@
 
 
 
+
 /* Modules */
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -8,7 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import { BsDropdownModule, PaginationModule, ButtonsModule, TooltipModule } from 'ngx-bootstrap';
+import { BsDropdownModule, PaginationModule, ButtonsModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 /* Interceptors */
 import { ErrorInterceptorProvider } from './interceptors/ErrorInterceptor';
@@ -50,7 +52,8 @@ import { ProducttypeComponent } from './common/producttype/producttype.component
 import { AssigneeListComponent } from './assignee-list/assignee-list.component';
 import { AssigneeEditComponent } from './assignee-edit/assignee-edit.component';
 import { AssigneeSelectComponent } from './common/assignee-select/assignee-select.component';
-
+import { AssigneeTypeaheadComponent } from './common/assignee-typeahead/assignee-typeahead.component';
+import { AssigneeNgSelectComponent } from './common/assignee-ng-select/assignee-ng-select.component';
 
 
 
@@ -85,6 +88,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
 import { DeviceListComponent } from './device-list/device-list.component';
+
 
 
 
@@ -123,6 +127,8 @@ import { DeviceListComponent } from './device-list/device-list.component';
       AssigneeListComponent,
       AssigneeEditComponent,
       AssigneeSelectComponent,
+      AssigneeTypeaheadComponent,
+      AssigneeNgSelectComponent,
       DeviceListComponent
    ],
    imports: [
@@ -133,7 +139,9 @@ import { DeviceListComponent } from './device-list/device-list.component';
       BsDropdownModule.forRoot(),
       ButtonsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
-      TooltipModule.forRoot()
+      TooltipModule.forRoot(),
+      TypeaheadModule.forRoot(),
+      NgSelectModule
    ],
    providers: [
       AlertifyService,
