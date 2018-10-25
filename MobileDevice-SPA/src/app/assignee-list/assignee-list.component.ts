@@ -23,6 +23,8 @@ export class AssigneeListComponent implements OnInit {
   pageRoute = 'assignees';
   sub;
   qDepartmentId = -1;
+  qFirstName = '';
+  qLastName = '';
 
   constructor(private service: AssigneeService, private alertify: AlertifyService,
                 private router: Router, private route: ActivatedRoute) { }
@@ -33,14 +35,16 @@ export class AssigneeListComponent implements OnInit {
       this.pagination = data['assignees'].pagination;
 
       this.sub = this.route.queryParams.subscribe(params => {
+        this.qFirstName = params['firstName'] || '';
+        this.qLastName = params['lastName'] || '';
         this.qDepartmentId = +params['departmentId'] || 0;
         console.log(this.qDepartmentId);
       });
     });
 
 
-    this.filter.firstName = '';
-    this.filter.lastName = '';
+    this.filter.firstName = this.qFirstName;
+    this.filter.lastName = this.qLastName;
     this.filter.departmentId = this.qDepartmentId;
   }
 

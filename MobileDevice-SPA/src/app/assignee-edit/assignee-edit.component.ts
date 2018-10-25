@@ -20,7 +20,8 @@ export class AssigneeEditComponent implements OnInit {
     departmentId: 0,
     departmentName: '',
     active: true,
-    assignmentCount: 0
+    assignmentCount: 0,
+    fullNameLF: ''
   };
   elementLabel = 'Assignee';
   elementTypeLabel = 'assignee';

@@ -4,6 +4,7 @@ export class Device {
     esn: string;
     os: string;
     productId: number;
+    partNum: string;
     assignmentType: number;
     assigneeId: number;
     assigneeFirstName: string;

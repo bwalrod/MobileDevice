@@ -9,6 +9,7 @@ namespace MobileDevice.API.Controllers.Resources.Device
         public string Os { get; set; }        
         public byte Active { get; set; }
         public int ProductId { get; set; }
+        public string PartNum { get; set; }
         public int AssignmentType { get; set; }
         public int AssigneeId { get; set; }
         public string assigneeLastName { get; set; }

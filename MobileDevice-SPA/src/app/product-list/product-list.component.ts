@@ -23,6 +23,7 @@ export class ProductListComponent implements OnInit {
   sub;
   qProductModelId = 0;
   qProductCapacityId = 0;
+  qPartNum = '';
 
   constructor(private service: ProductService, private alertify: AlertifyService,
                 private router: Router, private route: ActivatedRoute) { }
@@ -33,12 +34,13 @@ export class ProductListComponent implements OnInit {
       this.pagination = data['products'].pagination;
 
       this.sub = this.route.queryParams.subscribe(params => {
+        this.qPartNum = params['partNum'] || '';
         this.qProductModelId = params['productModelId'] || 0;
         this.qProductCapacityId = params['productCapacityId'] || 0;
       });
     });
 
-    this.filter.partNum = '';
+    this.filter.partNum = this.qPartNum;
     this.filter.productTypeId = 0;
     this.filter.productModelId = this.qProductModelId;
     this.filter.productManufacturerId = 0;

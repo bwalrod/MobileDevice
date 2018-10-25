@@ -17,7 +17,7 @@ export class ProductListResolver implements Resolve<Product[]> {
 
     resolve(route: ActivatedRouteSnapshot): Observable<Product[]> {
         const filter = {
-            partNum: '',
+            partNum: route.queryParams['partNum'] || '',
             productModelId: route.queryParams['productModelId'] || '',
             productCapacityId: route.queryParams['productCapacityId'] || ''
         };

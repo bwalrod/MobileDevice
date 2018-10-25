@@ -34,9 +34,14 @@ export class AssigneeNgSelectComponent implements OnInit {
       });
   }
 
-  optionSelected(val: number) {
-    this.selectedAssigneeId = val;
+  optionSelected(e: Event) {
+    // console.log(e);
+    if (e != null) {
+      this.selectedAssigneeId = e.id;
+    } else {
+      this.selectedAssigneeId = 0;
+    }
     this.selectOption.emit(this.selectedAssigneeId);
-    console.log(this.selectedAssigneeId);
+    // console.log(this.selectedAssigneeId);
   }
 }

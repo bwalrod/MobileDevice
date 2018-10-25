@@ -1,8 +1,10 @@
-<ng-select [items]="assignees"
+<ng-select class="ng-select-mda"
+            [items]="assignees"
            bindLabel="fullNameLF"
            bindValue="id"
            [(ngModel)]="selectedAssigneeId"
-           (change)="optionSelected($event.id)">
+           (change)="optionSelected($event)"
+           (clearEvent)="optionSelected(0)">
 </ng-select>
 <!-- 
 <pre>{{ selectedAssigneeId }}</pre> -->

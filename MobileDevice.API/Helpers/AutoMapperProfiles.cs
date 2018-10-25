@@ -49,6 +49,7 @@ namespace MobileDevice.API.Helpers
             .ForMember(d => d.MdaDeviceDate, opt => opt.Ignore());
 
             CreateMap<MdaDevice, DeviceForList>()
+                .ForMember(l => l.PartNum, opt => opt.MapFrom(s => s.Product.PartNum))
                 .ForMember(l => l.ProductModelId, opt => opt.MapFrom(s => s.Product.ProductModelId))
                 .ForMember(l => l.ProductModelName, opt => opt.MapFrom(s => s.Product.ProductModel.Name))
                 .ForMember(l => l.ProductCapacityId, opt => opt.MapFrom(s => s.Product.ProductCapacityId))

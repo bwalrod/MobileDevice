@@ -8,6 +8,7 @@
               <th>Serial Number</th>
               <th>ESN</th>
               <th>OS</th>
+              <th>Product</th>
               <!-- <th>Type</th> -->
               <th>Manufacturer</th>
               <th>Model</th>
@@ -22,6 +23,7 @@
               <th scope="col"><input type="text" size="20" name="serialNumber" class="form-control-sm" [(ngModel)]="userParams.serialNumber" (keyup)="filterTable()" placeholder="Filter Table"></th>
               <th scope="col"><input type="text" size="20" name="esn" class="form-control-sm" [(ngModel)]="userParams.esn" (keyup)="filterTable()" placeholder="Filter Table"></th>
               <th scope="col"><input type="text" size="20" name="os" class="form-control-sm" [(ngModel)]="userParams.os" (keyup)="filterTable()" placeholder="Filter Table"></th>
+              <th scope="col"></th>
               <!-- <th scope="col"><app-producttype [showNoValue]=true [selectedProductType]="userParams.productTypeId" (selectOption)="filterByType($event)"></app-producttype></th> -->
               <th scope="col"><app-manufacturer-select [showNoValue]=true [selectedManufacturer]="userParams.productManufacturerId" (selectOption)="filterByManufacturer($event)"></app-manufacturer-select></th>
               <th scope="col"><app-productmodel-select [showNoValue]=true [selectedProductTypeId]="userParams.productTypeId" [selectedManufacturerId]="userParams.productManufacturerId" [selectedModelId]="userParams.productModelId" (selectedOption)="filterByModel($event)"></app-productmodel-select></th>
@@ -48,13 +50,14 @@
               <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.serialNumber }}</a></td>
               <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.esn }}</a></td>
               <td><a [routerLink]="['/' + pageRoute + '/edit/', el.id]">{{ el.os }}</a></td>
+              <td class="text-center"><a [routerLink]="['/products']" [queryParams]="{partNum: el.partNum}"><i class="fa fa-mobile fa-2x" title="{{ el.partNum }}"></i></a></td>
               <!-- <td><a [routerLink]="['/producttypes']" [queryParams]="{productTypeName: el.productTypeName}" >{{ el.productTypeName }}</a></td> -->
               <td><a [routerLink]="['/manufacturers']" [queryParams]="{manufacturerName: el.productManufacturerName}" >{{ el.productManufacturerName }}</a></td>
               <td><a [routerLink]="['/productmodels']" [queryParams]="{name: el.productModelName}">{{ el.productModelName }}</a></td>              
               <!-- <td><a [routerLink]="['/products']" [queryParams]="{productModelId: el.id}" >{{ el.productCount }}</a></td> -->
               <td class="text-right"><a [routerLink]="['/productcapacities']" [queryParams]="{name: el.productCapacityName}" >{{ el.productCapacityName}}</a></td>
               <td><a [routerLink]="['/departments']" [queryParams]="{name: el.assigneeDepartmentName}" tooltip="View Department" >{{ el.assigneeDepartmentName }}</a></td>
-              <td>{{ makeAssigneeName(el.assigneeLastName, el.assigneeFirstName) }}</td>
+              <td><a [routerLink]="['/assignees']" [queryParams]="{firstName: el.assigneeFirstName, lastName: el.assigneeLastName}" >{{ makeAssigneeName(el.assigneeLastName, el.assigneeFirstName) }}</a></td>
               <td><i [ngClass]="(el.active == true)?'fa fa-check':''"></i></td>
             </tr>
             <tr *ngIf="list.length == 0">
