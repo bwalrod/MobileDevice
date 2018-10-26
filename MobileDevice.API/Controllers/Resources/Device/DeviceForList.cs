@@ -11,6 +11,8 @@ namespace MobileDevice.API.Controllers.Resources.Device
         public int ProductId { get; set; }
         public string PartNum { get; set; }
         public int AssignmentType { get; set; }
+        public int DeviceStatusId { get; set; }
+        public string DeviceStatusName { get; set; }
         public int AssigneeId { get; set; }
         public string assigneeLastName { get; set; }
         public string AssigneeFirstName { get; set; }
@@ -22,6 +24,8 @@ namespace MobileDevice.API.Controllers.Resources.Device
         public int ProductCapacityId { get; set; }
         public string ProductCapacityName { get; set; }
         public string ProductManufacturerName { get; set; }
+        public int ProductTypeId { get; set; }
+        public string ProductTypeName { get; set; }
 
         public int SimId { get; set; }
         public string SimIccid { get; set; }

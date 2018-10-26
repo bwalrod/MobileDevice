@@ -56,6 +56,8 @@ namespace MobileDevice.API.Data.Device
             .ThenInclude(p => p.ProductModel).ThenInclude(m => m.ProductManufacturer)
             .Include(d => d.Product)
             .ThenInclude(c => c.ProductCapacity)
+            .Include(d => d.Product)
+            .ThenInclude(p => p.ProductModel).ThenInclude(t => t.ProductType)
             .Include(assignment => assignment.MdaDeviceAssignment).ThenInclude(assignee => assignee.MdaDeviceAssignee)
             .ThenInclude(d => d.Department).IgnoreQueryFilters()
             .Include(sim => sim.Sim)

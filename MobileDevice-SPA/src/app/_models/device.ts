@@ -6,6 +6,8 @@ export class Device {
     productId: number;
     partNum: string;
     assignmentType: number;
+    deviceStatusId: number;
+    deviceStatusName: string;
     assigneeId: number;
     assigneeFirstName: string;
     assigneeLastName: string;
@@ -14,6 +16,8 @@ export class Device {
     productModelName: string;
     productCapacityName: string;
     productManufacturerName: string;
+    productTypeId: number;
+    productTypeName: string;
     simId: number;
     simICCId: string;
     simCarrier: string;

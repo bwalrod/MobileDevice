@@ -48,6 +48,7 @@ export class DeviceListComponent implements OnInit {
     this.userParams.productTypeId = this.qProductTypeId;
     this.userParams.productManufacturerId = this.qManufacturerId;
     this.userParams.assigneeId = this.qAssigneeId;
+    this.userParams.statusId = 0;
   }
 
   loadList() {
@@ -118,6 +119,11 @@ export class DeviceListComponent implements OnInit {
     this.filterTable();
   }
 
+  filterByStatus(statusFilter: number) {
+    this.userParams.statusId = statusFilter;
+    this.filterTable();
+  }
+
   clearFilter() {
     this.userParams.serialNumber = '';
     this.userParams.esn = '';
@@ -128,6 +134,7 @@ export class DeviceListComponent implements OnInit {
     this.userParams.assigneeDepartmentId = 0;
     this.userParams.productCapacityId = 0;
     this.userParams.assigneeId = 0;
+    this.userParams.statusId = 0;
     this.filterTable();
   }
 
@@ -137,6 +144,36 @@ export class DeviceListComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  makeDeviceIcon(deviceTypeId: number) {
+    let reply = 'fa fa-question-circle fa-2x';
+    switch (deviceTypeId) {
+        case 1: {
+          reply = 'fa fa-mobile-alt fa-2x';
+          break;
+        }
+        case 2: {
+          reply = 'fa fa-tablet-alt fa-2x';
+          break;
+        }
+        case 3: {
+          reply = 'fa fa-broadcast-tower fa-2x';
+          break;
+        }
+        case 4: {
+          reply = 'fa fa-wifi fa-2x';
+          break;
+        }
+      /*
+mobile-alt
+tablet-alt
+wifi
+broadcast-tower
+desktop
+      */
+    }
+    return reply;
   }
 
 }

@@ -51,6 +51,9 @@ export class DeviceService {
       if (filter.assigneeId > 0) {
         params = params.append('assigneeId', filter.assigneeId);
       }
+      if (filter.statusId > 0) {
+        params = params.append('deviceStatusid', filter.statusId);
+      }
     }
 
     return this.http.get<Device[]>(this.baseUrl + this.controllerPath, { observe: 'response', params})

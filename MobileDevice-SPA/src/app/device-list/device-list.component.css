@@ -18,3 +18,7 @@ tbody>tr>th>i {
 .badge-warning {
     color: black;
 }
+
+tbody>tr>td {
+    font-size: 1rem;
+}

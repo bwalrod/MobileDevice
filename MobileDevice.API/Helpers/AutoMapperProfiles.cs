@@ -55,6 +55,8 @@ namespace MobileDevice.API.Helpers
                 .ForMember(l => l.ProductCapacityId, opt => opt.MapFrom(s => s.Product.ProductCapacityId))
                 .ForMember(l => l.ProductCapacityName, opt => opt.MapFrom(s => s.Product.ProductCapacity.Name))
                 .ForMember(l => l.ProductManufacturerName, opt => opt.MapFrom(s => s.Product.ProductModel.ProductManufacturer.Name))
+                .ForMember(l => l.ProductTypeId, opt => opt.MapFrom(s => s.Product.ProductModel.ProductType.Id))
+                .ForMember(l => l.ProductTypeName, opt => opt.MapFrom(s => s.Product.ProductModel.ProductType.Name))
                 .ForMember(l => l.AssignmentType, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active ==1).AssignmentType))
                 .ForMember(l => l.AssigneeId, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active ==1).AssigneeId))
                 .ForMember(l => l.assigneeLastName, opt => opt.MapFrom(s => s.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).MdaDeviceAssignee.LastName))

@@ -1,7 +1,5 @@
 
 
-
-
 /* Modules */
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
@@ -37,6 +35,7 @@ import { DevicedatetypeListComponent } from './devicedatetype-list/devicedatetyp
 import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
 import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list.component';
 import { DevicestatusEditComponent } from './devicestatus-edit/devicestatus-edit.component';
+import { DevicestatusSelectComponent } from './common/devicestatus-select/devicestatus-select.component';
 import { ManufacturerListComponent } from './manufacturer-list/manufacturer-list.component';
 import { ManufacturerEditComponent } from './manufacturer-edit/manufacturer-edit.component';
 import { ManufacturerSelectComponent } from './common/manufacturer-select/manufacturer-select.component';
@@ -108,6 +107,7 @@ import { DeviceListComponent } from './device-list/device-list.component';
       ProducttypeEditComponent,
       DevicestatusListComponent,
       DevicestatusEditComponent,
+      DevicestatusSelectComponent,
       DeviceattributetypeListComponent,
       DeviceattributetypeEditComponent,
       DevicedatetypeListComponent,
