@@ -21,6 +21,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/MobileDevice.API",
             "stopAtEntry": false,
+            "requireExactSource": false,
             "internalConsoleOptions": "openOnSessionStart",
             "launchBrowser": {
                 "enabled": true,

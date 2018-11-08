@@ -1,3 +1,4 @@
+import { DeviceEditResolver } from './_resolvers/device-edit.resolver';
 import { DeviceListResolver } from './_resolvers/device-list.resolver';
 import { DeviceListComponent } from './device-list/device-list.component';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
@@ -57,6 +58,7 @@ import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetyp
 import { ProductCapacityEditResolver } from './_resolvers/productcapactity-edit.resolver';
 import { SimcardListComponent } from './simcard-list/simcard-list.component';
 import { AssigneeEditComponent } from './assignee-edit/assignee-edit.component';
+import { DeviceEditComponent } from './device-edit/device-edit.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -70,6 +72,7 @@ export const appRoutes: Routes = [
             { path: 'departments', component: DepartmentListComponent, resolve: {departments: DepartmentListResolver}},
             { path: 'departments/edit/:id', component: DepartmentEditComponent, resolve: {department: DepartmentEditResolver}},
             { path: 'devices', component: DeviceListComponent, resolve: {devices: DeviceListResolver}},
+            { path: 'devices/edit/:id', component: DeviceEditComponent, resolve: {device: DeviceEditResolver}},
             // tslint:disable-next-line:max-line-length
             { path: 'deviceattributetypes', component: DeviceattributetypeListComponent, resolve: {deviceattributetypes: DeviceAttributeTypeListResolver}},
             // tslint:disable-next-line:max-line-length

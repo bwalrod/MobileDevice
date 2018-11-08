@@ -53,6 +53,8 @@ import { AssigneeEditComponent } from './assignee-edit/assignee-edit.component';
 import { AssigneeSelectComponent } from './common/assignee-select/assignee-select.component';
 import { AssigneeTypeaheadComponent } from './common/assignee-typeahead/assignee-typeahead.component';
 import { AssigneeNgSelectComponent } from './common/assignee-ng-select/assignee-ng-select.component';
+import { DeviceListComponent } from './device-list/device-list.component';
+import { DeviceEditComponent } from './device-edit/device-edit.component';
 
 
 
@@ -86,7 +88,7 @@ import { ProductEditResolver } from './_resolvers/product-edit.resolver';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
-import { DeviceListComponent } from './device-list/device-list.component';
+import { DeviceEditResolver } from './_resolvers/device-edit.resolver';
 
 
 
@@ -129,7 +131,8 @@ import { DeviceListComponent } from './device-list/device-list.component';
       AssigneeSelectComponent,
       AssigneeTypeaheadComponent,
       AssigneeNgSelectComponent,
-      DeviceListComponent
+      DeviceListComponent,
+      DeviceEditComponent
    ],
    imports: [
       BrowserModule,
@@ -155,6 +158,7 @@ import { DeviceListComponent } from './device-list/device-list.component';
       DepartmentListResolver,
       DepartmentEditResolver,
       DeviceListResolver,
+      DeviceEditResolver,
       DeviceAttributeTypeListResolver,
       DeviceAttributeTypeEditResolver,
       DeviceDateTypeListResolver,

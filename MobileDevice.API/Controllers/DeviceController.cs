@@ -59,7 +59,10 @@ namespace MobileDevice.API.Controllers
                 return NoContent();
 
             var device = await _repo.GetDevice(id);
-            return Ok(device);
+
+            var deviceEdit = _mapper.Map<DeviceForList>(device);
+
+            return Ok(deviceEdit);
         }
 
         [HttpPost]
