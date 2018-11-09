@@ -46,6 +46,34 @@ namespace MobileDevice.API.Data.Product
             return products;
         }
 
+        public async Task<IEnumerable<MdaProduct>> GetAllProducts(MdaProductQuery filter)
+        {
+            var query = _context.MdaProduct
+                .Include(m => m.ProductModel).ThenInclude(m => m.ProductManufacturer)
+                .Include(m => m.ProductModel).ThenInclude(m => m.ProductType)
+                .Include(c => c.ProductCapacity)            
+                .AsQueryable();
+
+            if (filter.ProductTypeId.HasValue)
+                query = query.Where(l => l.ProductModel.ProductTypeId == filter.ProductTypeId);
+
+            if (filter.Active == 0)
+                query = query.Where(d => d.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(d => d.Active == 1);   
+
+            var columnsMap = new Dictionary<string, Expression<Func<MdaProduct, object>>>
+            {
+                ["productManufacturerName"] = a => a.ProductModel.ProductManufacturer.Name,
+                ["productModelName"] = a => a.ProductModel.Name
+            };
+
+            query = query.ApplyOrdering(filter, columnsMap);                
+
+            return await query.ToListAsync();
+        }
+
         public async Task<PagedList<MdaProduct>> GetProducts(MdaProductQuery filter)
         {
             var query = _context.MdaProduct

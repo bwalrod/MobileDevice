@@ -89,6 +89,7 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
 import { DeviceEditResolver } from './_resolvers/device-edit.resolver';
+import { ProductSelectComponent } from './common/product-select/product-select.component';
 
 
 
@@ -126,6 +127,7 @@ import { DeviceEditResolver } from './_resolvers/device-edit.resolver';
       SimcardEditComponent,
       ProductListComponent,
       ProductEditComponent,
+      ProductSelectComponent,
       AssigneeListComponent,
       AssigneeEditComponent,
       AssigneeSelectComponent,

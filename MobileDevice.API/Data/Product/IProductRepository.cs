@@ -15,6 +15,8 @@ namespace MobileDevice.API.Data.Product
          Task<bool> SaveAll();
          Task<IEnumerable<MdaProduct>> GetProducts();
 
+        Task<IEnumerable<MdaProduct>> GetAllProducts(MdaProductQuery filter);
+
          Task<PagedList<MdaProduct>> GetProducts(MdaProductQuery filter);
          
          Task<MdaProduct> GetProduct(int id);            

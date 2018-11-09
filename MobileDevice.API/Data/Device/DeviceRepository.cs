@@ -32,13 +32,23 @@ namespace MobileDevice.API.Data.Device
         public async Task<MdaDevice> GetDevice(int id)
         {
             var device = await _context.MdaDevice
+            // .Include(assignment => assignment.MdaDeviceAssignment).ThenInclude(assignee => assignee.MdaDeviceAssignee)
+            // .Include(attribute => attribute.MdaDeviceAttribute)
+            // .Include(date => date.MdaDeviceDate).ThenInclude(datetype => datetype.DateType)
+            // .Include(note => note.MdaDeviceNote)
+            // .Include(product => product.Product).ThenInclude(model => model.ProductModel).ThenInclude(capacity => capacity.MdaProductCapacity)
+            // .Include(sim => sim.Sim)
+            // .Include(status => status.DeviceStatus)
+            .Include(d => d.Product)
+            .ThenInclude(p => p.ProductModel).ThenInclude(m => m.ProductManufacturer)
+            .Include(d => d.Product)
+            .ThenInclude(c => c.ProductCapacity)
+            .Include(d => d.Product)
+            .ThenInclude(p => p.ProductModel).ThenInclude(t => t.ProductType)
             .Include(assignment => assignment.MdaDeviceAssignment).ThenInclude(assignee => assignee.MdaDeviceAssignee)
-            .Include(attribute => attribute.MdaDeviceAttribute)
-            .Include(date => date.MdaDeviceDate).ThenInclude(datetype => datetype.DateType)
-            .Include(note => note.MdaDeviceNote)
-            .Include(product => product.Product).ThenInclude(model => model.ProductModel).ThenInclude(capacity => capacity.MdaProductCapacity)
+            .ThenInclude(d => d.Department).IgnoreQueryFilters()
             .Include(sim => sim.Sim)
-            .Include(status => status.DeviceStatus)
+            .Include(status => status.DeviceStatus)            
             .FirstOrDefaultAsync(d => d.Id == id);
             return device;
         }

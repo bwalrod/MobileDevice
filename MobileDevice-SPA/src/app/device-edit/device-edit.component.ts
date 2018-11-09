@@ -73,6 +73,9 @@ export class DeviceEditComponent implements OnInit {
     this.originalElement.assigneeId = this.element.assigneeId;
     this.originalElement.simId = this.element.simId;
     this.originalElement.active = this.originalElement.active;
+    this.originalElement.productCapacityName = this.element.productCapacityName;
+    this.originalElement.productManufacturerName = this.element.productManufacturerName;
+    this.originalElement.productModelName = this.element.productModelName;
   }
 
   updateElement() {
@@ -141,10 +144,10 @@ export class DeviceEditComponent implements OnInit {
   }
 
   setProductType(productType: number) {
-    // this.element.productTypeId = productType;
-    // this.resetSelectables();
-    // this.markAsDirty();
-    // this.testFormValidity();
+    this.element.productTypeId = productType;
+    this.resetSelectables();
+    this.markAsDirty();
+    this.testFormValidity();
   }
 
   setProductManufacturer(productManufacturer: number) {
@@ -165,6 +168,12 @@ export class DeviceEditComponent implements OnInit {
     // this.element.productCapacityId = productCapacity;
     // this.markAsDirty();
     // this.testFormValidity();
+  }
+
+  setProduct(product: number) {
+    this.element.productId = product;
+    this.markAsDirty();
+    this.testFormValidity();
   }
 
   markAsDirty() {

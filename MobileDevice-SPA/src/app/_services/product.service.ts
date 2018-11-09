@@ -16,6 +16,27 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  getAllProducts(filter?: any, status?: number): Observable<Product[]> {
+    let results: Product[];
+    let params = new HttpParams();
+
+    if (status != null) {
+      params = params.append('active', status.toString());
+    }
+
+    if (filter != null) {
+      params = params.append('productTypeId', filter.productTypeId);
+    }
+
+    return this.http.get<Product[]>(this.baseUrl + this.controllerPath + '/all', { observe: 'response', params})
+    .pipe(
+      map(response => {
+        results = response.body;
+        return results;
+      })
+    );
+  }
+
   getProducts(page?: number, itemsPerPage?: number, filter?: any, status?: number): Observable<PaginatedResult<Product []>> {
     const paginatedResult: PaginatedResult<Product []> = new PaginatedResult<Product []>();
 

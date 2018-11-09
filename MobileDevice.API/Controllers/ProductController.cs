@@ -48,6 +48,21 @@ namespace MobileDevice.API.Controllers
             return Ok(productsList);
         }
 
+        [HttpGet("all")]
+        public async Task<IActionResult> GetAllProducts([FromQuery] ProductQueryResource filterResource)
+        {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
+            var filter = _mapper.Map<ProductQueryResource, MdaProductQuery>(filterResource);            
+
+            var products = await _repo.GetAllProducts(filter);
+
+            var productLookup = _mapper.Map<IEnumerable<ProductForList>>(products);
+
+            return Ok(productLookup);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(int id)
         {
