@@ -93,6 +93,9 @@ namespace MobileDevice.API.Data.Product
             if (filter.ProductCapacityId.HasValue)
                 query = query.Where(pc => pc.ProductCapacityId == filter.ProductCapacityId);
 
+            if (!string.IsNullOrEmpty(filter.ProductCapacityName))
+                query = query.Where(pc => pc.ProductCapacity.Name == filter.ProductCapacityName);
+
             if (filter.ProductModelId.HasValue)
                 query = query.Where(pm => pm.ProductModelId == filter.ProductModelId);
             

@@ -7,6 +7,7 @@ namespace MobileDevice.API.Models.Query
         public string PartNum { get; set; }
         public int? ProductModelId { get; set; }
         public int? ProductCapacityId { get; set; }
+        public string ProductCapacityName { get; set; }
         public int? ProductManufacturerId { get; set; }
         public int? ProductTypeId { get; set; }
         public byte Active { get; set; }        
