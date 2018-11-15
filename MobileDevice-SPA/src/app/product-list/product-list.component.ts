@@ -101,8 +101,8 @@ export class ProductListComponent implements OnInit {
     this.filterTable();
   }
 
-  filterByCapacity(capacityFilter: number) {
-    this.filter.productCapacityId = capacityFilter;
+  filterByCapacity(capacityFilter: string) {
+    this.filter.productCapacityName = capacityFilter;
     this.filterTable();
   }
 
@@ -112,6 +112,7 @@ export class ProductListComponent implements OnInit {
     this.filter.productManufacturerId = 0;
     this.filter.productModelId = 0;
     this.filter.productCapacityId = 0;
+    this.filter.productCapacityName = '';
     this.filterTable();
   }
 }

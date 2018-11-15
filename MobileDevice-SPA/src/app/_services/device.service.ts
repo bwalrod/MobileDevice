@@ -48,6 +48,9 @@ export class DeviceService {
       if (filter.productCapacityId > 0) {
         params = params.append('productCapacityId', filter.productCapacityId);
       }
+      if (filter.productCapacityName != null) {
+        params = params.append('productCapacityName', filter.productCapacityName);
+      }
       if (filter.assigneeId > 0) {
         params = params.append('assigneeId', filter.assigneeId);
       }

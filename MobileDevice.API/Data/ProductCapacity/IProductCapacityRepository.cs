@@ -16,7 +16,7 @@ namespace MobileDevice.API.Data.ProductCapacity
          Task<IEnumerable<MdaProductCapacity>> GetProductCapacities();
 
          Task<PagedList<MdaProductCapacity>> GetProductCapacities(MdaProductCapacityQuery filter);
-         
+
          Task<MdaProductCapacity> GetProductCapacity(int id);            
     }
 }

@@ -101,6 +101,8 @@ namespace MobileDevice.API.Helpers
 
             CreateMap<DeviceAttributeSaveResource, MdaDeviceAttribute>();
 
+            CreateMap<MdaDeviceAttribute, DeviceAttributeForList>();
+
             /*  MdaDeviceAttributeType */
 
             CreateMap<DeviceAttributeTypeQueryResource, MdaDeviceAttributeTypeQuery>();
@@ -115,6 +117,8 @@ namespace MobileDevice.API.Helpers
             CreateMap<DeviceDateQueryResource, MdaDeviceDateQuery>();
 
             CreateMap<DeviceDateSaveResource, MdaDeviceDate>();
+
+            CreateMap<MdaDeviceDate, DeviceDateForList>();
 
             /*  MdaDeviceDateType */
 

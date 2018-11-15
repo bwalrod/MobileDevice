@@ -109,8 +109,8 @@ export class DeviceListComponent implements OnInit {
     this.filterTable();
   }
 
-  filterByCapacity(capacityFilter: number) {
-    this.userParams.productCapacityId = capacityFilter;
+  filterByCapacity(capacityFilter: string) {
+    this.userParams.productCapacityName = capacityFilter;
     this.filterTable();
   }
 
@@ -133,6 +133,7 @@ export class DeviceListComponent implements OnInit {
     this.userParams.productModelId = 0;
     this.userParams.assigneeDepartmentId = 0;
     this.userParams.productCapacityId = 0;
+    this.userParams.productCapacityName = '';
     this.userParams.assigneeId = 0;
     this.userParams.statusId = 0;
     this.filterTable();

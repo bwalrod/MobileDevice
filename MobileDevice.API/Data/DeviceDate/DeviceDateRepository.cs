@@ -43,7 +43,9 @@ namespace MobileDevice.API.Data.DeviceDate
 
         public async Task<PagedList<MdaDeviceDate>> GetDeviceDates(MdaDeviceDateQuery filter)
         {
-            var query = _context.MdaDeviceDate.AsQueryable();
+            var query = _context.MdaDeviceDate
+            .Include(dt => dt.DateType)
+            .AsQueryable();
 
             // if (filter.PageSize == 0)
             //     filter.PageSize = 10;

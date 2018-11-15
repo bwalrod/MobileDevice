@@ -1,4 +1,9 @@
-<select class="form-control-sm" (change)="optionSelected($event.target.value)">
+<select *ngIf="!showDistinctValues" class="form-control-sm" (change)="optionSelected($event.target.value)">
   <option *ngIf="showNoValue" value="0">{{ noValueLabel }}</option>
   <option *ngFor="let c of capacities" [value]="c.id" [selected]="(c.id == selectedCapacityId)">{{ c.name }}</option>
+</select>
+
+<select *ngIf="showDistinctValues" class="form-control-sm" (change)="optionSelectedValue($event.target.value)">
+  <option *ngIf="showNoValue" value="">{{ noValueLabel }}</option>
+  <option *ngFor="let c of capacityNames" [value]="c" [selected]="(c == selectedCapacityName)">{{ c }}</option>
 </select>

@@ -10,14 +10,17 @@ import { ProductCapacity } from 'src/app/_models/productcapacity';
 })
 export class ProductcapacitySelectComponent implements OnInit {
   @Input() selectedCapacityId: number;
+  @Input() selectedCapacityName: string;
   @Input() selectedProductTypeId: number;
   @Input() selectedManufacturerId: number;
   @Input() selectedModelId: number;
   @Input() showNoValue: boolean;
   @Input() noValueLabel = '.: Any :.';
+  @Input() showDistinctValues = false;
   @Output() selectedOption = new EventEmitter();
 
   capacities: ProductCapacity[];
+  capacityNames: string[];
   filter: any = {};
 
   constructor(private service: ProductCapacityService) { }
@@ -45,9 +48,25 @@ export class ProductcapacitySelectComponent implements OnInit {
   loadlist() {
     this.service.getProductCapacities(1, 100, this.filter, 1)
       .subscribe((res: PaginatedResult<ProductCapacity[]>) => {
-        this.capacities = res.result;
+          this.capacities = res.result;
+          this.capacityNames = this.getDistinct(this.capacities);
+          console.log('capacities.length: ' + this.capacities.length);
+          console.log('capacityNames.length: ' + this.capacityNames.length);
       });
   }
+
+  getDistinct(array: ProductCapacity[]) {
+    const unique = {};
+    const distinct = [];
+    array.forEach(function (x) {
+      if (!unique[x.name]) {
+        distinct.push(x.name);
+        unique[x.name] = true;
+      }
+    });
+    return distinct;
+  }
+
 
   optionSelected(val: number) {
     this.selectedCapacityId = val;
@@ -55,4 +74,9 @@ export class ProductcapacitySelectComponent implements OnInit {
     console.log(this.selectedCapacityId);
   }
 
+  optionSelectedValue(val: string) {
+    this.selectedCapacityName = val;
+    this.selectedOption.emit(this.selectedCapacityName);
+    console.log('Product Capacity Select Name: ' + this.selectedCapacityName);
+  }
 }

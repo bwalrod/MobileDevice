@@ -19,7 +19,7 @@
             <th scope="col"><app-producttype [showNoValue]=true [selectedProductType]="filter.productTypeId" (selectOption)="filterByType($event)"></app-producttype></th>
             <th scope="col"><app-manufacturer-select [showNoValue]=true [selectedManufacturer]="filter.productManufacturerId" (selectOption)="filterByManufacturer($event)"></app-manufacturer-select></th>
             <th scope="col"><app-productmodel-select [showNoValue]=true [selectedProductTypeId]="filter.productTypeId" [selectedManufacturerId]="filter.productManufacturerId" [selectedModelId]="filter.productModelId" (selectedOption)="filterByModel($event)"></app-productmodel-select></th>
-            <th scope="col"><app-productcapacity-select [showNoValue]=true [selectedProductTypeId]="filter.productTypeId" [selectedManufacturerId]="filter.productManufacturerId" [selectedModelId]="filter.productModelId" [selectedCapacityId]="filter.productCapacityId" (selectedOption)="filterByCapacity($event)"></app-productcapacity-select></th>
+            <th scope="col"><app-productcapacity-select [showNoValue]=true [showDistinctValues]=true [selectedProductTypeId]="filter.productTypeId" [selectedManufacturerId]="filter.productManufacturerId" [selectedModelId]="filter.productModelId" [selectedCapacityName]="filter.productCapacityName" (selectedOption)="filterByCapacity($event)"></app-productcapacity-select></th>
             <th scope="col"></th>
             <th scope="col" class="w-20">
               <div class="row">

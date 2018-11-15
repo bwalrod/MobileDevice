@@ -12,6 +12,7 @@ namespace MobileDevice.API.Controllers.Resources.Device
         public int? AssigneeId { get; set; }
         public int? AssigneeDepartmentId { get; set; }
         public int? ProductCapacityId { get; set; }
+        public string ProductCapacityName { get; set; }
         public int? ProductModelId { get; set; }
         public int? ProductManufacturerId { get; set; }
         public byte Active { get; set; }

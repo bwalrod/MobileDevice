@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -39,7 +41,9 @@ namespace MobileDevice.API.Controllers
             Response.AddPagination(devices.CurrentPage,
                             devices.PageSize, devices.TotalCount, devices.TotalPages);
 
-            return Ok(devices);
+            var deviceDateList = _mapper.Map<IEnumerable<DeviceDateForList>>(devices);
+
+            return Ok(deviceDateList);
         }
 
 

@@ -97,6 +97,8 @@ namespace MobileDevice.API.Data.Device
                 query = query.Where (asd => asd.MdaDeviceAssignment.FirstOrDefault(mda => mda.Active == 1).MdaDeviceAssignee.DepartmentId == queryObj.AssigneeDepartmentId);
             if (queryObj.ProductCapacityId.HasValue)
                 query = query.Where (cp => cp.Product.ProductCapacityId == queryObj.ProductCapacityId);
+            if (!String.IsNullOrEmpty(queryObj.ProductCapacityName))
+                query = query.Where (cp => cp.Product.ProductCapacity.Name == queryObj.ProductCapacityName);
             if (queryObj.ProductModelId.HasValue)
                 query = query.Where (pm => pm.Product.ProductModelId == queryObj.ProductModelId);
             if (queryObj.ProductManufacturerId.HasValue)

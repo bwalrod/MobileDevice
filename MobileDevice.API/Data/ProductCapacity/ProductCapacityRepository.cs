@@ -77,7 +77,7 @@ namespace MobileDevice.API.Data.ProductCapacity
 
             var columnsMap = new Dictionary<string, Expression<Func<MdaProductCapacity, object>>>
             {
-
+                ["name"] = a => a.Name
             };
 
             query = query.ApplyOrdering(filter, columnsMap);
