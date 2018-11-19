@@ -1,0 +1,30 @@
+<div class="mt-5 pt-5">
+  <div class="container">
+    <table class="table table-condensed table-striped table-sm">
+      <thead>
+        <tr>
+          <th><button class="btn btn-link">Add</button></th>
+          <th>Type</th>
+          <th>Date</th>
+          <th>Active</th>
+        </tr>
+        <tr>
+          <th><button class="btn btn-sm btn-default">Clear</button></th>
+          <th><input type="text" class="form-control-sm" name="dateTypeId" [(ngModel)]="userParams.dateTypeId"></th>
+          <th><input type="text" class="form-control-sm" name="dateValue" [(ngModel)]="userParams.dateValue"></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of list; let i = index">
+          <td colspan="4">
+          <!-- <td></td>
+          <td>{{ item.dateTypeName }} <input type="text" class="form-control-sm" name="dateTypeName" [id]="'dateTypeName' + i" value="{{ item.dateTypeName }}"></td>
+          <td>{{ item.dateValue | date:'MM/dd/yyyy' }} <input type="text" class="form-control-sm" name="dateValue" value="{{ item.dateValue | date:'MM/dd/yyyy' }}"></td> -->
+            <app-devicedate-editable-row [deviceDate]="item"></app-devicedate-editable-row>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

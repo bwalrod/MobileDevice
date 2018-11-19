@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import { BsDropdownModule, PaginationModule, ButtonsModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
+import { BsDropdownModule, BsDatepickerModule, PaginationModule, ButtonsModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 /* Interceptors */
@@ -90,6 +90,8 @@ import { AssigneeListResolver } from './_resolvers/assignee-list.resolver';
 import { AssigneeEditResolver } from './_resolvers/assignee-edit.resolver';
 import { DeviceEditResolver } from './_resolvers/device-edit.resolver';
 import { ProductSelectComponent } from './common/product-select/product-select.component';
+import { DeviceDateListComponent } from './devicedate-list/devicedate-list.component';
+import { DevicedateEditableRowComponent } from './devicedate-editable-row/devicedate-editable-row.component';
 
 
 
@@ -134,7 +136,9 @@ import { ProductSelectComponent } from './common/product-select/product-select.c
       AssigneeTypeaheadComponent,
       AssigneeNgSelectComponent,
       DeviceListComponent,
-      DeviceEditComponent
+      DeviceEditComponent,
+      DeviceDateListComponent,
+      DevicedateEditableRowComponent
    ],
    imports: [
       BrowserModule,
@@ -142,6 +146,7 @@ import { ProductSelectComponent } from './common/product-select/product-select.c
       FormsModule,
       PaginationModule.forRoot(),
       BsDropdownModule.forRoot(),
+      BsDatepickerModule.forRoot(),
       ButtonsModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       TooltipModule.forRoot(),
