@@ -1,23 +1,14 @@
-<div class="container-fluid" *ngIf="!editStatus">
+<div class="container-fluid" style="border: 1px solid blue;">
   <div class="row">
-    <div class="col-lg-2"><button class="btn btn-link" (click)="onEdit($event)">Edit</button>
-    <div class="col-lg-4">
-        {{ deviceDate.dateTypeName }}</div>
-    <div class="col-lg-4">
-        {{ deviceDate.dateValue | date:'MM/dd/yyyy' }}
+    <div class="col-sm-2"><button class="btn btn-link" (click)="this.editState = !this.editState">{{ editState ? 'Cancel' : 'Edit' }}</button></div>
+    <div class="col-sm-4">
+      <span [hidden]="editState">{{ deviceDate.dateTypeName }}</span>
+      <span [hidden]="!editState"><input type="text" [(ngModel)]="deviceDate.dateTypeName" class="form-control-sm"></span>
     </div>
-    <div class="col-lg-2"></div>
+    <div class="col-sm-4">
+        <span [hidden]="editState">{{ deviceDate.dateValue | date:'MM/dd/yyyy' }}</span>
+        <span [hidden]="!editState"><input type="text" bsDatepicker [(ngModel)]="deviceDateDate" class="form-control-sm"></span>
+    </div>
+    <div class="col-sm-2">1</div>
   </div>
-</div>
-<div class="container-fluid" *ngIf="!editStatus">
-    <div class="row" >
-        <div class="col-lg-2"><button class="btn btn-link" (click)="onEdit($event)">Cancel</button>
-        <div class="col-lg-4">
-          <input type="text" [(ngModel)]="deviceDate.dateTypeName" class="form-control-sm">
-        </div>
-        <div class="col-lg-4">
-          <!-- <input type="text" [ngModel]="deviceDate.dateValue | date:'MM/dd/yyyy'" (ngModelChange)="deviceDate.dateValue=$event" class="form-control-sm"> -->
-          <input type="text" bsDatepicker [(ngModel)]="deviceDateDate" class="form-control-sm">
-        <div class="col-lg-2"></div>
-      </div>
 </div>

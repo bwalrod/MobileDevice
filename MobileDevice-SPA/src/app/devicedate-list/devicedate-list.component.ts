@@ -4,6 +4,7 @@ import { Pagination, PaginatedResult } from './../_models/pagination';
 import { DeviceDate } from './../_models/devicedate';
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-devicedate-list',
@@ -21,9 +22,10 @@ export class DeviceDateListComponent implements OnInit {
   pageRoute = 'devicedates';
   pageNumber = 1;
   pageSize = 5;
+  pageInitialized = false;
 
   constructor(private service: DevicedateService, private alertify: AlertifyService
-                , private router: Router, private route: ActivatedRoute) { }
+                , private router: Router, private route: ActivatedRoute, private datePipe: DatePipe) { }
 
   ngOnInit() {
     // this.userParams.dateValue = '0001-01-01';
@@ -32,7 +34,10 @@ export class DeviceDateListComponent implements OnInit {
     .subscribe((res: PaginatedResult<DeviceDate[]>) => {
       this.list = res.result;
       this.pagination = res.pagination;
+      this.pageInitialized = true;
     });
+
+
     // this.userParams.deviceId = this.deviceId;
     // this.pagination = new Pagination();
     // this.pagination.currentPage = 1;
@@ -57,6 +62,29 @@ export class DeviceDateListComponent implements OnInit {
           this.list = res.result;
           this.pagination = res.pagination;
         });
+  }
+
+  filterTable() {
+    this.pagination.currentPage = 1;
+    this.pagination.itemsPerPage = 10;
+    this.loadList();
+  }
+
+  onValueChange(value: Date): void {
+    const pickedDate = this.datePipe.transform(value, 'MM/dd/yyyy');
+    // alert(pickedDate);
+    // alert(this.pageInitialized);
+    this.userParams.dateValue = pickedDate;
+    if (this.pageInitialized) {
+      this.filterTable();
+      alert(this.userParams.dateValue);
+    }
+  }
+
+  clearFilter() {
+    this.userParams.dateValue = null;
+    this.userParams.dateTypeId = 0;
+    this.filterTable();
   }
 
 }

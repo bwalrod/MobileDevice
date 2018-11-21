@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 
 
 /* Modules */
@@ -183,7 +184,8 @@ import { DevicedateEditableRowComponent } from './devicedate-editable-row/device
       ProductTypeListResolver,
       ProductTypeEditResolver,
       SimcardListResolver,
-      SimcardEditResolver
+      SimcardEditResolver,
+      DatePipe
    ],
    bootstrap: [
       AppComponent

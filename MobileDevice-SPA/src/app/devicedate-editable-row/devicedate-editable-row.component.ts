@@ -21,9 +21,7 @@ export class DevicedateEditableRowComponent implements OnInit {
     this.deviceDateDate = new Date(this.deviceDate.dateValue);
   }
 
-  onEdit (e: Event) {
-    e.stopPropagation();
-    e.preventDefault();
+  onEdit () {
     this.editState = !this.editState;
   }
 

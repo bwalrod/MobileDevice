@@ -9,9 +9,16 @@
           <th>Active</th>
         </tr>
         <tr>
-          <th><button class="btn btn-sm btn-default">Clear</button></th>
-          <th><input type="text" class="form-control-sm" name="dateTypeId" [(ngModel)]="userParams.dateTypeId"></th>
-          <th><input type="text" class="form-control-sm" name="dateValue" [(ngModel)]="userParams.dateValue"></th>
+          <th><button class="btn btn-sm btn-default" (click)="clearFilter()">Clear</button></th>
+          <th><input type="text" class="form-control-sm" name="dateTypeId" [(ngModel)]="userParams.dateTypeId" (keyup)="filterTable()"></th>
+          <th>
+            <input type="text" class="form-control-sm" #dateFilter
+            name="dateValue" 
+            [(ngModel)]="userParams.dateValue" 
+            bsDatepicker 
+            placement="top"
+            (bsValueChange)="onValueChange($event)"
+            [bsConfig]="{containerClass: 'theme-dark-blue'}"></th>
           <th></th>
         </tr>
       </thead>
