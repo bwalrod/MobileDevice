@@ -8,7 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 
-import { BsDropdownModule, BsDatepickerModule, PaginationModule, ButtonsModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
+// tslint:disable-next-line:max-line-length
+import { BsDropdownModule, BsDatepickerModule, PaginationModule, ButtonsModule, ModalModule, TooltipModule, TypeaheadModule } from 'ngx-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 /* Interceptors */
@@ -149,6 +150,7 @@ import { DevicedateEditableRowComponent } from './devicedate-editable-row/device
       BsDropdownModule.forRoot(),
       BsDatepickerModule.forRoot(),
       ButtonsModule.forRoot(),
+      ModalModule.forRoot(),
       RouterModule.forRoot(appRoutes),
       TooltipModule.forRoot(),
       TypeaheadModule.forRoot(),

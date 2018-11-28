@@ -57,6 +57,12 @@ namespace MobileDevice.API.Data.DeviceDate
             if (filter.DateValue > DateTime.MinValue)
                 query = query.Where(d => d.DateValue == filter.DateValue);
 
+            if (filter.Active == 0)
+                query = query.Where(dd => dd.Active == 0);
+
+            if (filter.Active == 1)
+                query = query.Where(dd => dd.Active == 1);
+
             var columnsMap = new Dictionary<string, Expression<Func<MdaDevice, object>>>
             {
 

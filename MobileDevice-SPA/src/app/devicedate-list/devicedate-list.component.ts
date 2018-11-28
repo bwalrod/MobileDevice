@@ -2,7 +2,7 @@ import { AlertifyService } from './../_services/alertify.service';
 import { DevicedateService } from './../_services/devicedate.service';
 import { Pagination, PaginatedResult } from './../_models/pagination';
 import { DeviceDate } from './../_models/devicedate';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 })
 export class DeviceDateListComponent implements OnInit {
   @Input() deviceId: number;
+  @ViewChild('dateFilter') dateFilter: ElementRef;
   list: DeviceDate[];
   pagination: Pagination;
   userParams: any = {};
@@ -83,7 +84,8 @@ export class DeviceDateListComponent implements OnInit {
 
   clearFilter() {
     this.userParams.dateValue = null;
-    this.userParams.dateTypeId = 0;
+    this.userParams.dateTypeId = null;
+    this.dateFilter.nativeElement.value = '';
     this.filterTable();
   }
 

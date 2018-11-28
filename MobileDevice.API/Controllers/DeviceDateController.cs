@@ -74,6 +74,27 @@ namespace MobileDevice.API.Controllers
             return BadRequest("Failed to add device date");
         }
 
+        [HttpPost("{id}/deactivate")]
+        public async Task<IActionResult> DeactivateDeviceDate(int id)
+        {
+            if(!_auth.IsAppAdmin(User))
+                return NoContent();
+            
+            var dd = await _repo.GetDeviceDate(id);
+
+            if (dd == null)
+                return BadRequest($"Device Date {id} could not be found");
+
+            dd.Active = 0;
+            dd.ModifiedBy = User.Identity.Name.Replace("\\\\","\\");
+            dd.ModifiedDate = DateTime.Now;
+
+            if(await _repo.SaveAll())
+                return NoContent();
+
+            return BadRequest("Failed to delete device date");
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDeviceDate(int id, [FromBody] DeviceDateSaveResource deviceDateSaveResource)
         {

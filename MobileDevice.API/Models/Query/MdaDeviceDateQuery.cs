@@ -8,6 +8,7 @@ namespace MobileDevice.API.Models.Query
         public int? DeviceId { get; set; }
         public int? DateTypeId { get; set; }
         public DateTime DateValue { get; set; }        
+        public byte Active { get; set; }  
         public string SortBy { get; set; }
         public bool IsSortAscending { get; set; }
         public int Page { get; set; }

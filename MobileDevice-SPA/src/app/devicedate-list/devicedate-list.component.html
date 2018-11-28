@@ -3,7 +3,7 @@
     <table class="table table-condensed table-striped table-sm">
       <thead>
         <tr>
-          <th><button class="btn btn-link">Add</button></th>
+          <th><button class="btn btn-link" (click)="staticModal.show()">Add</button></th>
           <th>Type</th>
           <th>Date</th>
           <th>Active</th>
@@ -14,7 +14,7 @@
           <th>
             <input type="text" class="form-control-sm" #dateFilter
             name="dateValue" 
-            [(ngModel)]="userParams.dateValue" 
+            (value)="userParams.dateValue" 
             bsDatepicker 
             placement="top"
             (bsValueChange)="onValueChange($event)"
@@ -28,10 +28,28 @@
           <!-- <td></td>
           <td>{{ item.dateTypeName }} <input type="text" class="form-control-sm" name="dateTypeName" [id]="'dateTypeName' + i" value="{{ item.dateTypeName }}"></td>
           <td>{{ item.dateValue | date:'MM/dd/yyyy' }} <input type="text" class="form-control-sm" name="dateValue" value="{{ item.dateValue | date:'MM/dd/yyyy' }}"></td> -->
-            <app-devicedate-editable-row [deviceDate]="item"></app-devicedate-editable-row>
+            <app-devicedate-editable-row [deviceDate]="item" (recordDeleted)="filterTable()"></app-devicedate-editable-row>
           </td>
         </tr>
+        <tr *ngIf="list?.length == 0"><td colspan="4">No Records</td></tr>
       </tbody>
     </table>
+  </div>
+</div>
+
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 id="dialog-static-name" class="modal-title pull-left">Add Device Date</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <app-devicedate-editable-row></app-devicedate-editable-row>
+      </div>
+    </div>
   </div>
 </div>

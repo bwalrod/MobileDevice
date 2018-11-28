@@ -1,13 +1,25 @@
 <div class="container-fluid" style="border: 1px solid blue;">
   <div class="row">
-    <div class="col-sm-2"><button class="btn btn-link" (click)="this.editState = !this.editState">{{ editState ? 'Cancel' : 'Edit' }}</button></div>
+    <div class="col-sm-2 pl-1">
+      <button class="btn btn-link pr-1" (click)="this.editState = !this.editState" [title]="editState ? 'Cancel' : 'Edit'">
+        <i [ngClass]="(editState) ? 'fa fa-times': 'fa fa-edit'"></i>
+      </button>
+      <button class="btn btn-link pl-1" (click)="onUpdate()" [hidden]="!editState" title="Save"><i class="fa fa-save"></i></button>      
+      <button class="btn btn-link pl-1" (click)="onDelete()" [hidden]="editState" title="Delete"><i class="fa fa-trash"></i></button>      
+    </div>
     <div class="col-sm-4">
       <span [hidden]="editState">{{ deviceDate.dateTypeName }}</span>
-      <span [hidden]="!editState"><input type="text" [(ngModel)]="deviceDate.dateTypeName" class="form-control-sm"></span>
+      <span [hidden]="!editState"><input type="text" [(ngModel)]="deviceDate.dateTypeName" class="form-control-md"></span>
     </div>
     <div class="col-sm-4">
         <span [hidden]="editState">{{ deviceDate.dateValue | date:'MM/dd/yyyy' }}</span>
-        <span [hidden]="!editState"><input type="text" bsDatepicker [(ngModel)]="deviceDateDate" class="form-control-sm"></span>
+        <span [hidden]="!editState">
+          <input type="text" bsDatepicker 
+          placement="top"
+          (bsValueChange)="onValueChange($event)"
+          [bsConfig]="{containerClass: 'theme-dark-blue'}"
+          [(ngModel)]="deviceDateDate" 
+          class="form-control-sm"></span>
     </div>
     <div class="col-sm-2">1</div>
   </div>
