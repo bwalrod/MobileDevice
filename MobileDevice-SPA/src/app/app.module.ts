@@ -1,8 +1,8 @@
-import { DatePipe } from '@angular/common';
 
 
 /* Modules */
 import { NgModule } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -35,6 +35,7 @@ import { DeviceattributetypeListComponent } from './deviceattributetype-list/dev
 import { DeviceattributetypeEditComponent } from './deviceattributetype-edit/deviceattributetype-edit.component';
 import { DevicedatetypeListComponent } from './devicedatetype-list/devicedatetype-list.component';
 import { DevicedatetypeEditComponent } from './devicedatetype-edit/devicedatetype-edit.component';
+import { DevicedatetypeSelectComponent } from './common/devicedatetype-select/devicedatetype-select.component';
 import { DevicestatusListComponent } from './devicestatus-list/devicestatus-list.component';
 import { DevicestatusEditComponent } from './devicestatus-edit/devicestatus-edit.component';
 import { DevicestatusSelectComponent } from './common/devicestatus-select/devicestatus-select.component';
@@ -94,6 +95,7 @@ import { DeviceEditResolver } from './_resolvers/device-edit.resolver';
 import { ProductSelectComponent } from './common/product-select/product-select.component';
 import { DeviceDateListComponent } from './devicedate-list/devicedate-list.component';
 import { DevicedateEditableRowComponent } from './devicedate-editable-row/devicedate-editable-row.component';
+import { DevicedateAddComponent } from './devicedate-add/devicedate-add.component';
 
 
 
@@ -119,6 +121,7 @@ import { DevicedateEditableRowComponent } from './devicedate-editable-row/device
       DeviceattributetypeEditComponent,
       DevicedatetypeListComponent,
       DevicedatetypeEditComponent,
+      DevicedatetypeSelectComponent,
       ProductmodelListComponent,
       ProducttypeComponent,
       ManufacturerSelectComponent,
@@ -140,7 +143,8 @@ import { DevicedateEditableRowComponent } from './devicedate-editable-row/device
       DeviceListComponent,
       DeviceEditComponent,
       DeviceDateListComponent,
-      DevicedateEditableRowComponent
+      DevicedateEditableRowComponent,
+      DevicedateAddComponent
    ],
    imports: [
       BrowserModule,

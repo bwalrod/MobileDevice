@@ -41,6 +41,13 @@ namespace MobileDevice.API.Data.DeviceDateType
             return deviceDateTypes;
         }
 
+        public async Task<IEnumerable<MdaDeviceDateType>> GetAvailableDeviceDateTypes(int deviceId)
+        {
+            var device = _context.makeSqlParameter("@deviceId", deviceId);
+            var deviceDateTypes = await _context.MdaDeviceDateType.FromSql("EXEC proc_MDA_Device_Date_Available_By_DeviceId @deviceId", device).ToListAsync();
+            return deviceDateTypes;
+        }            
+
         public async Task<PagedList<MdaDeviceDateType>> GetDeviceDateTypes(MdaDeviceDateTypeQuery filter, bool exactMatch = false)
         {
             var query = _context.MdaDeviceDateType

@@ -9,9 +9,15 @@
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/']" >Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item" routerLinkActive="active">
+      <li class="nav-item active">
+        <a class="nav-link" *ngIf="user.accessLevel==10" [routerLink]="['/devices']">Devices</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" *ngIf="user.accessLevel==10" [routerLink]="['/assignees']">Assignees</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link" *ngIf="user.accessLevel==10" [routerLink]="['/users']">Users</a>
       </li>
       <!-- <li class="nav-item">
@@ -25,9 +31,9 @@
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
                   role="menu" aria-labelledby="button-basic">
-                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/assignees']" routerLinkActive="router-link-active" >Assignees</a></li>
+                <!-- <li role="menuitem"><a class="dropdown-item" [routerLink]="['/assignees']" routerLinkActive="router-link-active" >Assignees</a></li> -->
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/departments']" >Departments</a></li>
-                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/devices']" >Devices</a></li>
+                <!-- <li role="menuitem"><a class="dropdown-item" [routerLink]="['/devices']" >Devices</a></li> -->
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/deviceattributetypes']" >Device Attribute Types</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/devicedatetypes']" >Device Date Types</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/devicestatuses']" >Device Statuses</a></li>
@@ -37,8 +43,8 @@
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/productmodels']" >Product Models</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/producttypes']" >Product Types</a></li>
                 <li role="menuitem"><a class="dropdown-item" [routerLink]="['/simcards']" >Sim Cards</a></li>
-                <li class="divider dropdown-divider"></li>
-                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users']" *ngIf="user.accessLevel==10">Users</a></li>
+                <!-- <li class="divider dropdown-divider"></li>
+                <li role="menuitem"><a class="dropdown-item" [routerLink]="['/users']" *ngIf="user.accessLevel==10">Users</a></li> -->
               </ul>
             </div>
       </li>

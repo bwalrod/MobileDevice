@@ -58,6 +58,16 @@ namespace MobileDevice.API.Controllers
             return Ok(deviceDateType);
         }        
 
+        [HttpGet("{deviceId}/available")]
+        public async Task<IActionResult> GetAvailableDeviceDateType(int deviceId)
+        {
+            if(!_auth.IsValidUser(User))
+                return NoContent();
+
+            var deviceDateType = await _repo.GetAvailableDeviceDateTypes(deviceId);
+            return Ok(deviceDateType);
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddDeviceDateType([FromBody] DeviceDateTypeSaveResource deviceDateTypeSaveResource)
         {

@@ -1,0 +1,4 @@
+<select class="form-control-sm" (change)="optionSelected($event.target.value)">
+  <option *ngIf="showNoValue" value="0">{{ noValueLabel }}</option>
+  <option *ngFor="let ddt of deviceDateTypes" [value]="ddt.id" [selected]="(ddt.id == selectedDeviceDateTypeId)">{{ ddt.name }}</option>
+</select>

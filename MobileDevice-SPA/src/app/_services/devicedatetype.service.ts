@@ -52,6 +52,10 @@ export class DeviceDateTypeService {
     return this.http.get(this.baseUrl + this.controllerPath + '/' + id);
   }
 
+  getAvailableDeviceDateType(deviceId) {
+    return this.http.get<DeviceDateType[]>(this.baseUrl + this.controllerPath + '/' + deviceId + '/available');
+  }
+
   updateDeviceDateType(element: DeviceDateType) {
     return this.http.put(this.baseUrl + this.controllerPath + '/' + element.id, element);
   }

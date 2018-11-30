@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -757,6 +758,11 @@ namespace MobileDevice.API.Models
                     .HasColumnName("Modified_Date")
                     .HasColumnType("datetime");
             });            
+        }
+
+        public SqlParameter makeSqlParameter(string paramName, int paramValue)         
+        {
+            return new SqlParameter(paramName, paramValue);
         }
     }
 }
