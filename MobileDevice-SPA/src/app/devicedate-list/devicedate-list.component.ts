@@ -78,14 +78,23 @@ export class DeviceDateListComponent implements OnInit {
     this.userParams.dateValue = pickedDate;
     if (this.pageInitialized) {
       this.filterTable();
-      alert(this.userParams.dateValue);
+      // alert(this.userParams.dateValue);
     }
+  }
+
+  selectDateType(dateType: number) {
+    this.userParams.dateTypeId = dateType;
+    this.filterTable();
   }
 
   clearFilter() {
     this.userParams.dateValue = null;
     this.userParams.dateTypeId = null;
     this.dateFilter.nativeElement.value = '';
+    this.filterTable();
+  }
+
+  modalClosed() {
     this.filterTable();
   }
 

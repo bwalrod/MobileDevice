@@ -53,4 +53,8 @@ export class DevicedateEditableRowComponent implements OnInit {
     const pickedDate = this.datePipe.transform(value, 'MM/dd/yyyy');
     this.deviceDate.dateValue = value;
   }
+
+  selectDateType(value: number) {
+    this.deviceDate.dateTypeId = value;
+  }
 }

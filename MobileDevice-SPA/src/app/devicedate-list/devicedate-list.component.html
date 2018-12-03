@@ -4,15 +4,18 @@
       <thead>
         <tr>
           <th><button class="btn btn-link" (click)="staticModal.show()">Add</button></th>
-          <th>Type</th>
-          <th>Date</th>
+          <th class="text-center">Type</th>
+          <th class="text-center">Date</th>
           <th>Active</th>
         </tr>
         <tr>
           <th><button class="btn btn-sm btn-default" (click)="clearFilter()">Clear</button></th>
-          <th><input type="text" class="form-control-sm" name="dateTypeId" [(ngModel)]="userParams.dateTypeId" (keyup)="filterTable()"></th>
-          <th>
-            <input type="text" class="form-control-sm" #dateFilter
+          <th class="text-center">
+            <!-- <input type="text" class="form-control-sm" name="dateTypeId" [(ngModel)]="userParams.dateTypeId" (keyup)="filterTable()"> -->
+            <app-devicedatetype-select [deviceId]="0" [showNoValue]=true  (selectedOption)="selectDateType($event)"></app-devicedatetype-select>
+          </th>
+          <th class="text-center">
+            <input type="text" class="form-control-sm text-right" #dateFilter
             name="dateValue" 
             (value)="userParams.dateValue" 
             bsDatepicker 
@@ -39,7 +42,7 @@
 
 <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
      tabindex="-1" role="dialog" aria-labelledby="dialog-static-name">
-  <div class="modal-dialog modal-lg">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="dialog-static-name" class="modal-title pull-left">Add Device Date</h4>
@@ -48,7 +51,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <app-devicedate-add [deviceId]="deviceId"></app-devicedate-add>
+        <app-devicedate-add [deviceId]="deviceId" (closeModal)="modalClosed();staticModal.hide()"></app-devicedate-add>
       </div>
     </div>
   </div>
